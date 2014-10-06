@@ -16,14 +16,10 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            // bower:js
-            // endbower
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-ui-select2/src/select2.js',
-            'src/module.coffee',
-            'src/templates/templates.js',
-            'src/**/*.coffee',
+            'dist/angular-form.min.js',
             'test/unit/**/*.coffee'
         ],
 

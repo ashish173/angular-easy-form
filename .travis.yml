@@ -8,4 +8,5 @@ before_script:
   - bower install
 
 script:
+  - grunt build
   - grunt test

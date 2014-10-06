@@ -5,7 +5,7 @@
         "Everett Qin <everett.qyf@gmail.com>"
     ],
     "description": "a form build extend for angularjs",
-    "main": "dist/angular-form.js",
+    "main": "dist/angular-form.min.js",
     "keywords": [
         "angularjs",
         "form",

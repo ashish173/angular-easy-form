@@ -66,7 +66,7 @@ describe "easy.form", ->
         formElement = element
         wrapperElement = element.find('easy-input').eq(0)
         inputElement = element.find('input').eq(0)
-        labelElement = element.find('.control-label').eq(0)
+        labelElement = element.find('label').eq(0)
 
         wrapperScope = wrapperElement.isolateScope()
         inputScope = inputElement.isolateScope()
@@ -156,8 +156,6 @@ describe "easy.form", ->
                                       """
           $compile(element)($scope)
           $scope.$apply()
-
-          console.log element
 
           formElement = element
           wrapperElement = element.find('easy-input').eq(0)
