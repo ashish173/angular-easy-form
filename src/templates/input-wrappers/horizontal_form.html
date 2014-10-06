@@ -1,0 +1,9 @@
+<ng-form name="formIn">
+    <div ng-class="{'has-error': formIn.inputIn.$invalid}">
+        <label class="control-label" ng-class="labelClassArr" ng-show="label">{{label}}</label>
+        <div ng-class="controlClassArr">
+            <easy-input-field></easy-input-field>
+            <ng-transclude></ng-transclude>
+        </div>
+    </div>
+</ng-form>

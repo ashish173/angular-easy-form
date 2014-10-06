@@ -1,0 +1,30 @@
+{
+    "name": "angular-form",
+    "version": "0.0.0",
+    "authors": [
+        "Everett Qin <everett.qyf@gmail.com>"
+    ],
+    "description": "a form build extend for angularjs",
+    "main": "dist/angular-form.js",
+    "keywords": [
+        "angularjs",
+        "form",
+        "input",
+        "validation"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": ">= 1.2.0",
+        "angular-ui-select2": "0.0.5"
+    },
+    "devDependencies": {
+        "angular-mocks": ">= 1.2.0"
+    }
+}

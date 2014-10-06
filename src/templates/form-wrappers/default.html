@@ -1,0 +1,8 @@
+<ng-form role="form">
+    <easy-input ng-repeat="field in fields">
+    </easy-input>
+    <button type="submit"
+            ng-hide="options.hideSubmit">
+        {{options.submitCopy || "Submit"}}
+    </button>
+</ng-form>

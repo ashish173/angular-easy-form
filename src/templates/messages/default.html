@@ -1,0 +1,9 @@
+<div>
+    <div class="alert alert-success" ng-if="ngModel.notice">
+        {{ngModel.notice}}
+    </div>
+    <div class="alert alert-danger" ng-if="ngModel.error || ngModel.errors">
+        {{ngModel.error}}
+        {{ngModel.errors}}
+    </div>
+</div>
