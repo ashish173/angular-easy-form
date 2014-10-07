@@ -21,7 +21,7 @@ module.exports = function (config) {
             'bower_components/angular-ui-select2/src/select2.js',
             'src/module.coffee',
             'src/**/*.coffee',
-            'tmp/angular-form.templates.js',
+            'tmp/angular-easy-form.templates.js',
             'test/unit/**/*.coffee'
         ],
 

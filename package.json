@@ -1,11 +1,11 @@
 {
-  "name": "angular-form",
+  "name": "angular-easy-form",
   "version": "0.0.0",
   "description": "AngularJS Form Builder Tools.",
-  "homepage": "",
+  "homepage": "https://github.com/n-iq/angular-easy-form",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/n-iq/angular-easy-form"
   },
   "keywords": [
     "AngularJS",
@@ -29,7 +29,7 @@
     }
   ],
   "bugs": {
-    "url": ""
+    "url": "https://github.com/n-iq/angular-easy-form/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

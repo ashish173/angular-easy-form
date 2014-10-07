@@ -1,33 +1,32 @@
 module.exports = (grunt) ->
-
   grunt.config.init
     coffee:
       source:
         files:
-          'tmp/angular-form.js': ['src/module.coffee'
-                                  'src/providers/*.coffee'
-                                  'src/directives/*.coffee'
-                                  'src/components/*.coffee'
-                                  'src/default/*.coffee']
+          'tmp/angular-easy-form.js': ['src/module.coffee'
+                                       'src/providers/*.coffee'
+                                       'src/directives/*.coffee'
+                                       'src/components/*.coffee'
+                                       'src/default/*.coffee']
 
     concat:
       options:
         separator: ';'
       dist:
-        src: ['tmp/angular-form.js', 'tmp/angular-form.templates.js']
-        dest: 'dist/angular-form.js'
+        src: ['tmp/angular-easy-form.js', 'tmp/angular-easy-form.templates.js']
+        dest: 'dist/angular-easy-form.js'
 
     ngAnnotate:
       options:
         singleQuotes: true
       dist:
         files:
-          'dist/angular-form.js': ['dist/angular-form.js']
+          'dist/angular-easy-form.js': ['dist/angular-easy-form.js']
 
     uglify:
       build:
         files:
-          'dist/angular-form.min.js': 'dist/angular-form.js'
+          'dist/angular-easy-form.min.js': 'dist/angular-easy-form.js'
 
     watch:
       coffee:
@@ -45,7 +44,7 @@ module.exports = (grunt) ->
           return 'easy-form' + '/' + moduleName + '.html'
       default:
         src: ['src/templates/**/*.html']
-        dest: 'tmp/angular-form.templates.js'
+        dest: 'tmp/angular-easy-form.templates.js'
 
     connect:
       server:

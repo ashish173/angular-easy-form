@@ -1,11 +1,11 @@
 {
-    "name": "angular-form",
+    "name": "angular-easy-form",
     "version": "0.0.0",
     "authors": [
         "Everett Qin <everett.qyf@gmail.com>"
     ],
     "description": "a form build extend for angularjs",
-    "main": "dist/angular-form.min.js",
+    "main": "dist/angular-easy-form.min.js",
     "keywords": [
         "angularjs",
         "form",
