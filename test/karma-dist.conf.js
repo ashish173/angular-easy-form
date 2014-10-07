@@ -19,7 +19,7 @@ module.exports = function (config) {
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-ui-select2/src/select2.js',
-            'dist/angular-form.min.js',
+            'dist/angular-easy-form.min.js',
             'test/unit/**/*.coffee'
         ],
 
