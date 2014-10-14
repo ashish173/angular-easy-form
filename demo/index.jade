@@ -1,0 +1,19 @@
+doctype html
+html(lang="en", ng-app='demoApp')
+head
+    title Angular Easy Validation
+    link(rel='stylesheet', href='demo.css')
+body(ng-controller='DemoCtrl')
+    h3 Demo
+    ng-form.form
+        .form-group
+            easy-input.col-xs-6(type='text', ng-model='model1')
+            pre
+    // bower:js
+    script(src='../bower_components/jquery/dist/jquery.js')
+    script(src='../bower_components/angular/angular.js')
+    script(src='../bower_components/select2/select2.js')
+    script(src='../bower_components/angular-ui-select2/src/select2.js')
+    // endbower
+    script(src='../dist/angular-easy-form.min.js')
+    script(src='demo.js')

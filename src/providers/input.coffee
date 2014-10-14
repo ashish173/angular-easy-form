@@ -1,3 +1,13 @@
+'use strict'
+
+###*
+ # @ngdoc service
+ # @name easy.form.providers:$easyInput
+ # @description
+ # # $easyInput
+ #
+###
+
 angular.module 'easy.form.providers'
 
 .provider '$easyInput', ->
@@ -34,8 +44,14 @@ angular.module 'easy.form.providers'
   # public functions
   # ----------------------------------------
   @convertInputMapping = (name, object = {}) =>
-    ###
-    Convert the input mapping object.
+    ###*
+     # @ngdoc function
+     # @name easy.form.providers:$easyInput#convertInputMapping
+     # @methodOf easy.form.providers:$easyInput
+     #
+     # @description
+     # Convert the input mapping object.
+     #
     ###
     {
     name: name

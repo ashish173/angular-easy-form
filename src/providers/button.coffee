@@ -1,3 +1,14 @@
+'use strict'
+
+###*
+ # @ngdoc service
+ # @name easy.form.providers:$easyButton
+ # @description
+ # # $easyButton
+ #
+ # $easyButton provider a set of function and setting for button
+###
+
 angular.module 'easy.form.providers'
 
 .provider '$easyButton', ->

@@ -1,7 +1,35 @@
+'use strict'
+
+###*
+ # @ngdoc directive
+ # @name easy.form.directives:easyInput
+ #
+ # @restrict AE
+ #
+ # @requires $log
+ # @requires $q
+ # @requires $timeout
+ # @requires $compile
+ # @requires easy.form.providers:$easyInput
+ # @requires easy.form.$easyValidation
+ #
+ # @description
+ # # easyInput
+ #
+ #
+ # @example
+   <example module="easy.form.directives">
+     <file name="index.html">
+         <easy-input type='text' ng-model="model1">
+     </file>
+   </example>
+ #
+###
+
 angular.module('easy.form.directives')
 .directive "easyInput", ($log, $q, $timeout, $compile, $easyInput, $easyValidation) ->
 
-  ###*
+  ###
   Compile dynamic template in runtime
   @param element
   @param scope

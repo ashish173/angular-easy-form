@@ -1,4 +1,14 @@
 (function() {
+  'use strict';
+
+  /**
+    * @ngdoc overview
+    * @name easy.form
+    * @description
+    * # easy.form
+    *
+    * Main module of the application.
+   */
   angular.module('easy.form', ['ui.select2', 'easy.form.directives', 'easy.form.components', 'easy.form.providers', 'easy.form.templates', 'easy.form.default']);
 
   angular.module('easy.form.directives', []);
@@ -10,8 +20,17 @@
   angular.module('easy.form.default', []);
 
 }).call(this);
+;(function() {
+  'use strict';
 
-(function() {
+  /**
+    * @ngdoc service
+    * @name easy.form.providers:$easyButton
+    * @description
+    * # $easyButton
+    *
+    * $easyButton provider a set of function and setting for button
+   */
   angular.module('easy.form.providers').provider('$easyButton', function() {
     var $injector, $q, $timeout;
     $injector = null;
@@ -30,8 +49,16 @@
   });
 
 }).call(this);
+;(function() {
+  'use strict';
 
-(function() {
+  /**
+    * @ngdoc service
+    * @name easy.form.providers:$easyForm
+    * @description
+    * # $easyForm
+    *
+   */
   angular.module('easy.form.providers').provider('$easyForm', function() {
     var $injector, $q, $timeout;
     $injector = null;
@@ -50,8 +77,16 @@
   });
 
 }).call(this);
+;(function() {
+  'use strict';
 
-(function() {
+  /**
+    * @ngdoc service
+    * @name easy.form.providers:$easyInput
+    * @description
+    * # $easyInput
+    *
+   */
   angular.module('easy.form.providers').provider('$easyInput', function() {
     var $http, $injector, $q, $templateCache, $timeout;
     $injector = null;
@@ -76,8 +111,14 @@
           object = {};
         }
 
-        /*
-        Convert the input mapping object.
+        /**
+          * @ngdoc function
+          * @name easy.form.providers:$easyInput#convertInputMapping
+          * @methodOf easy.form.providers:$easyInput
+          *
+          * @description
+          * Convert the input mapping object.
+          *
          */
         return {
           name: name,
@@ -210,13 +251,20 @@
   });
 
 }).call(this);
-
-(function() {
+;(function() {
 
 
 }).call(this);
+;(function() {
+  'use strict';
 
-(function() {
+  /**
+    * @ngdoc service
+    * @name easy.form.providers:$easyValidation
+    * @description
+    * # $easyValidation
+    *
+   */
   angular.module('easy.form.providers').provider('$easyValidation', function() {
     var $http, $injector, $q, $scope, $timeout, _this;
     $injector = null;
@@ -424,8 +472,7 @@
   });
 
 }).call(this);
-
-(function() {
+;(function() {
   var Controller, Directive;
 
   Controller = (function() {
@@ -462,13 +509,39 @@
   angular.module('easy.form.directives').directive("easyForm", Directive);
 
 }).call(this);
+;(function() {
+  'use strict';
 
-(function() {
+  /**
+    * @ngdoc directive
+    * @name easy.form.directives:easyInput
+    *
+    * @restrict AE
+    *
+    * @requires $log
+    * @requires $q
+    * @requires $timeout
+    * @requires $compile
+    * @requires easy.form.providers:$easyInput
+    * @requires easy.form.$easyValidation
+    *
+    * @description
+    * # easyInput
+    *
+    *
+    * @example
+     <example module="easy.form.directives">
+       <file name="index.html">
+           <easy-input type='text' ng-model="model1">
+       </file>
+     </example>
+    *
+   */
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('easy.form.directives').directive("easyInput", ['$log', '$q', '$timeout', '$compile', '$easyInput', '$easyValidation', function($log, $q, $timeout, $compile, $easyInput, $easyValidation) {
 
-    /**
+    /*
     Compile dynamic template in runtime
     @param element
     @param scope
@@ -835,8 +908,7 @@
   }]);
 
 }).call(this);
-
-(function() {
+;(function() {
   'use strict';
 
   /**
@@ -931,13 +1003,11 @@
   }]);
 
 }).call(this);
-
-(function() {
+;(function() {
 
 
 }).call(this);
-
-(function() {
+;(function() {
   angular.module('easy.form.default').config(['$easyInputProvider', function($easyInputProvider) {
     $easyInputProvider.registerWrapper('vertical_form', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical_form.html'
@@ -973,8 +1043,7 @@
   }]);
 
 }).call(this);
-
-(function() {
+;(function() {
   angular.module('easy.form.default').config(['$easyInputProvider', function($easyInputProvider) {
     $easyInputProvider.registerInput('checkbox', {
       templateUrl: 'easy-form/templates/inputs/checkbox.html'
@@ -1022,8 +1091,7 @@
   }]);
 
 }).call(this);
-
-(function() {
+;(function() {
   angular.module('easy.form.default').config(['$easyValidationProvider', function($easyValidationProvider) {
     $easyValidationProvider.register('required', {
       expression: function(value) {

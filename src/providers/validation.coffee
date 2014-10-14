@@ -1,3 +1,13 @@
+'use strict'
+
+###*
+ # @ngdoc service
+ # @name easy.form.providers:$easyValidation
+ # @description
+ # # $easyValidation
+ #
+###
+
 angular.module 'easy.form.providers'
 
 .provider '$easyValidation', ->
