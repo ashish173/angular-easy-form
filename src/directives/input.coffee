@@ -152,7 +152,7 @@ angular.module('easy.form.directives')
       ngChange: '&'
       # label & placeholder
       label: '='
-#      placeholder: '='
+      placeholder: '='
       hint: '='
       # style
       labelClass: '@'
@@ -195,7 +195,7 @@ angular.module('easy.form.directives')
       ###*
       recognition if label and placeholder a string or a object
       ###
-      scope.label = attrs.label if angular.isUndefined(scope.label) and angular.isString(attrs.label)
+#      scope.label = attrs.label if angular.isUndefined(scope.label) and angular.isString(attrs.label)
 #      scope.placeholder = attrs.placeholder if angular.isUndefined(scope.placeholder) and angular.isString(attrs.placeholder)
 
       ###*

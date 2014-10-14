@@ -138,7 +138,7 @@ angular.module("easy-form/templates/inputs/datetime-local.html", []).run(["$temp
 
 angular.module("easy-form/templates/inputs/datetime.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/datetime.html",
-    "<time name=\"inputIn\" type=\"datetime\" class=\"form-control\" placeholder=\"{{placeholder}}\" ng-model=\"model\" />\n" +
+    "<input name=\"inputIn\" type=\"datetime\" class=\"form-control\" placeholder=\"{{placeholder}}\" ng-model=\"model\" />\n" +
     "");
 }]);
 

@@ -677,6 +677,7 @@
         ngDisabled: '=',
         ngChange: '&',
         label: '=',
+        placeholder: '=',
         hint: '=',
         labelClass: '@',
         controlClass: '@',
@@ -712,9 +713,6 @@
         /**
         recognition if label and placeholder a string or a object
          */
-        if (angular.isUndefined(scope.label) && angular.isString(attrs.label)) {
-          scope.label = attrs.label;
-        }
 
         /**
         Set labelClass
@@ -1215,7 +1213,7 @@ angular.module("easy-form/templates/inputs/datetime-local.html", []).run(["$temp
 
 angular.module("easy-form/templates/inputs/datetime.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/datetime.html",
-    "<time name=\"inputIn\" type=\"datetime\" class=\"form-control\" placeholder=\"{{placeholder}}\" ng-model=\"model\" />\n" +
+    "<input name=\"inputIn\" type=\"datetime\" class=\"form-control\" placeholder=\"{{placeholder}}\" ng-model=\"model\" />\n" +
     "");
 }]);
 
