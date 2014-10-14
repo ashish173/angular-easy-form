@@ -100,6 +100,27 @@ describe "easy.form", ->
           expect(wrapperScope.ngDisabled).toBeTruthy
           expect(wrapperScope.changeCallback).toEqual $scope.options.changeCallback()
 
+        it 'should recognition if label and placeholder a string or a object', ->
+          element = angular.element """
+                                    <form name="Form"><easy-input ng-model="inputModel" label="test label" placeholder="test placeholder"></easy-input></form>
+                                    """
+          $compile(element)($scope)
+#          $scope.$apply()
+#          inputElement = element.find('input').eq(0)
+#          labelElement = element.find('label').eq(0)
+#          expect(labelElement.text()).toBe('test label')
+#          expect(inputElement.attr("placeholder")).toBe('test placeholder')
+
+          element = angular.element """
+                                    <form name="Form"><easy-input ng-model="inputModel" label="'test label'" placeholder="'test placeholder'"></easy-input></form>
+                                    """
+          $compile(element)($scope)
+          $scope.$apply()
+          inputElement = element.find('input').eq(0)
+          labelElement = element.find('label').eq(0)
+          expect(labelElement.text()).toBe('test label')
+          expect(inputElement.attr("placeholder")).toBe('test placeholder')
+
 
       describe 'render', ->
         it 'should render wrapper', ->

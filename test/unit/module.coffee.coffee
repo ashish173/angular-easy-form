@@ -20,11 +20,11 @@ describe "easy.form", ->
       it "should have easy.form.directives as a dependency", ->
         expect(hasModule('easy.form.directives')).toBeTruthy()
 
-      it "should have easy.form.components as a dependency", ->
-        expect(hasModule('easy.form.components')).toBeTruthy()
-
       it "should have easy.form.providers as a dependency", ->
         expect(hasModule('easy.form.providers')).toBeTruthy()
 
       it "should have easy.form.templates as a dependency", ->
         expect(hasModule('easy.form.templates')).toBeTruthy()
+
+      it "should have easy.form.default as a dependency", ->
+        expect(hasModule('easy.form.default')).toBeTruthy()

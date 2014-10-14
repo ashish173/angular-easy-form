@@ -168,7 +168,6 @@
         ngDisabled: '=',
         ngChange: '&',
         label: '=',
-        placeholder: '=',
         hint: '=',
         labelClass: '@',
         controlClass: '@',
@@ -200,6 +199,13 @@
             }
           }
         });
+
+        /**
+        recognition if label and placeholder a string or a object
+         */
+        if (angular.isUndefined(scope.label) && angular.isString(attrs.label)) {
+          scope.label = attrs.label;
+        }
 
         /**
         Set labelClass

@@ -44,7 +44,6 @@ module.exports = (grunt) ->
         src: ['module.coffee'
               'providers/*.coffee'
               'directives/*.coffee'
-              'components/*.coffee'
               'default/*.coffee']
         dest: '.tmp'
         ext: '.js'
@@ -73,7 +72,6 @@ module.exports = (grunt) ->
         src: ['.tmp/module.js'
               '.tmp/providers/*.js'
               '.tmp/directives/*.js'
-              '.tmp/components/*.js'
               '.tmp/default/*.js'
               '.tmp/templates.js']
         dest: 'dist/angular-easy-form.js'
@@ -175,6 +173,7 @@ module.exports = (grunt) ->
   ]
   grunt.registerTask 'build', [
     'clean:dist'
+    'clean:dev'
     'wiredep'
     'coffee'
     'html2js'

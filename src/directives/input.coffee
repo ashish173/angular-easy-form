@@ -152,7 +152,7 @@ angular.module('easy.form.directives')
       ngChange: '&'
       # label & placeholder
       label: '='
-      placeholder: '='
+#      placeholder: '='
       hint: '='
       # style
       labelClass: '@'
@@ -193,16 +193,20 @@ angular.module('easy.form.directives')
           scope.ngChange() if scope.ngChange()
 
       ###*
+      recognition if label and placeholder a string or a object
+      ###
+      scope.label = attrs.label if angular.isUndefined(scope.label) and angular.isString(attrs.label)
+#      scope.placeholder = attrs.placeholder if angular.isUndefined(scope.placeholder) and angular.isString(attrs.placeholder)
+
+      ###*
       Set labelClass
       ###
       scope.labelClassArr = if scope.labelClass then scope.labelClass.split(/[ ,]+/) else []
-      #      ['col-xs-3', 'col-md-3', 'col-lg-3']
 
       ###*
       Set controlClass
       ###
       scope.controlClassArr = if scope.controlClass then scope.controlClass.split(/[ ,]+/) else []
-      #      ['col-xs-6', 'col-xs-6', 'col-xs-6']
 
       ###*
       Get wrapper template option and compile it
