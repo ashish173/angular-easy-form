@@ -18,7 +18,11 @@ module.exports = function (config) {
         files: [
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
-            'bower_components/angular-ui-select2/src/select2.js',
+            'bower_components/checklist-model/checklist-model.js',
+            'bower_components/angular-ui-select/dist/select.js',
+            'bower_components/textAngular/dist/textAngular.min.js',
+            'bower_components/angular-sanitize/angular-sanitize.js',
+            'bower_components/angular-elastic/elastic.js',
             'src/module.coffee',
             'src/**/*.coffee',
             '.tmp/templates.js',
