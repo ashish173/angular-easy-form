@@ -16,7 +16,7 @@ angular.module 'easy.form.default'
   $easyInputProvider.registerInput 'datetime',
     templateUrl: 'easy-form/templates/inputs/datetime.html'
 
-  $easyInputProvider.registerInput 'datetimeLocal',
+  $easyInputProvider.registerInput 'datetime-local',
     templateUrl: 'easy-form/templates/inputs/datetime-local.html'
 
   $easyInputProvider.registerInput 'date',
@@ -45,17 +45,24 @@ angular.module 'easy.form.default'
 
   $easyInputProvider.registerInput 'color',
     templateUrl: 'easy-form/templates/inputs/color.html'
-  # ----------------------------------------
-  # checklist
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'checklist',
-    templateUrl: 'easy-form/templates/inputs/checklist.html'
 
   # ----------------------------------------
-  # radiolist
+  # Checkboxes and radio
   # ----------------------------------------
-  $easyInputProvider.registerInput 'radiolist',
-    templateUrl: 'easy-form/templates/inputs/radiolist.html'
+  $easyInputProvider.registerInput 'checkbox',
+    templateUrl: 'easy-form/templates/inputs/checkbox.html'
+
+  $easyInputProvider.registerInput 'checkboxes',
+    templateUrl: 'easy-form/templates/inputs/i-boolean.html'
+
+  $easyInputProvider.registerInput 'checkboxes-inline',
+    templateUrl: 'easy-form/templates/inputs/checkboxes-inline.html'
+
+  $easyInputProvider.registerInput 'radios',
+    templateUrl: 'easy-form/templates/inputs/radios.html'
+
+  $easyInputProvider.registerInput 'radios-inline',
+    templateUrl: 'easy-form/templates/inputs/radios-inline.html'
 
   # ----------------------------------------
   # select

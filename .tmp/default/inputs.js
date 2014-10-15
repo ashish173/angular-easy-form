@@ -12,7 +12,7 @@
     $easyInputProvider.registerInput('datetime', {
       templateUrl: 'easy-form/templates/inputs/datetime.html'
     });
-    $easyInputProvider.registerInput('datetimeLocal', {
+    $easyInputProvider.registerInput('datetime-local', {
       templateUrl: 'easy-form/templates/inputs/datetime-local.html'
     });
     $easyInputProvider.registerInput('date', {
@@ -42,11 +42,20 @@
     $easyInputProvider.registerInput('color', {
       templateUrl: 'easy-form/templates/inputs/color.html'
     });
-    $easyInputProvider.registerInput('checklist', {
-      templateUrl: 'easy-form/templates/inputs/checklist.html'
+    $easyInputProvider.registerInput('checkbox', {
+      templateUrl: 'easy-form/templates/inputs/checkbox.html'
     });
-    $easyInputProvider.registerInput('radiolist', {
-      templateUrl: 'easy-form/templates/inputs/radiolist.html'
+    $easyInputProvider.registerInput('checkboxes', {
+      templateUrl: 'easy-form/templates/inputs/i-boolean.html'
+    });
+    $easyInputProvider.registerInput('checkboxes-inline', {
+      templateUrl: 'easy-form/templates/inputs/checkboxes-inline.html'
+    });
+    $easyInputProvider.registerInput('radios', {
+      templateUrl: 'easy-form/templates/inputs/radios.html'
+    });
+    $easyInputProvider.registerInput('radios-inline', {
+      templateUrl: 'easy-form/templates/inputs/radios-inline.html'
     });
     $easyInputProvider.registerInput('select', {
       templateUrl: 'easy-form/templates/inputs/select.html'

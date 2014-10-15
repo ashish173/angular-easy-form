@@ -1,12 +1,34 @@
 (function() {
   var app;
 
-  app = angular.module('demoApp', ['ui.select2', 'easy.form']);
+  app = angular.module('demoApp', ['easy.form']);
 
   app.controller('DemoCtrl', function($scope) {
-    return $scope.demo = {
+    $scope.demo = {
       controls: {
-        inputs: {}
+        inputs: {},
+        checkboxes: {}
+      }
+    };
+    $scope.checkboxOptions = {
+      checkbox: {
+        text: 'text of checkbox'
+      }
+    };
+    return $scope.checkboxesOptions = {
+      checkboxes: {
+        list: [
+          {
+            value: 'key1',
+            text: 'option 1'
+          }, {
+            value: 'key2',
+            text: 'option 2'
+          }, {
+            value: 'key3',
+            text: 'option 3'
+          }
+        ]
       }
     };
   });

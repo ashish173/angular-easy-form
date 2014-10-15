@@ -1,4 +1,4 @@
-angular.module('easy.form.templates', ['easy-form/templates/components/date-select.html', 'easy-form/templates/components/month-select.html', 'easy-form/templates/form-wrappers/default.html', 'easy-form/templates/input-wrappers/horizontal-form.html', 'easy-form/templates/input-wrappers/inline-form.html', 'easy-form/templates/input-wrappers/none.html', 'easy-form/templates/input-wrappers/vertical-form.html', 'easy-form/templates/inputs/checkbox.html', 'easy-form/templates/inputs/checklist.html', 'easy-form/templates/inputs/color.html', 'easy-form/templates/inputs/date.html', 'easy-form/templates/inputs/date_picker.html', 'easy-form/templates/inputs/date_select.html', 'easy-form/templates/inputs/datetime-local.html', 'easy-form/templates/inputs/datetime.html', 'easy-form/templates/inputs/datetime_picker.html', 'easy-form/templates/inputs/email.html', 'easy-form/templates/inputs/month.html', 'easy-form/templates/inputs/month_select.html', 'easy-form/templates/inputs/number.html', 'easy-form/templates/inputs/password.html', 'easy-form/templates/inputs/radio.html', 'easy-form/templates/inputs/search.html', 'easy-form/templates/inputs/select.html', 'easy-form/templates/inputs/select2.html', 'easy-form/templates/inputs/switch.html', 'easy-form/templates/inputs/tag.html', 'easy-form/templates/inputs/tel.html', 'easy-form/templates/inputs/text.html', 'easy-form/templates/inputs/textarea.html', 'easy-form/templates/inputs/time.html', 'easy-form/templates/inputs/time_picker.html', 'easy-form/templates/inputs/url.html', 'easy-form/templates/messages/default.html']);
+angular.module('easy.form.templates', ['easy-form/templates/components/date-select.html', 'easy-form/templates/components/month-select.html', 'easy-form/templates/form-wrappers/default.html', 'easy-form/templates/input-wrappers/horizontal-form.html', 'easy-form/templates/input-wrappers/inline-form.html', 'easy-form/templates/input-wrappers/none.html', 'easy-form/templates/input-wrappers/vertical-form.html', 'easy-form/templates/inputs/checkbox.html', 'easy-form/templates/inputs/checkboxes.html', 'easy-form/templates/inputs/color.html', 'easy-form/templates/inputs/date.html', 'easy-form/templates/inputs/date_picker.html', 'easy-form/templates/inputs/date_select.html', 'easy-form/templates/inputs/datetime-local.html', 'easy-form/templates/inputs/datetime.html', 'easy-form/templates/inputs/datetime_picker.html', 'easy-form/templates/inputs/email.html', 'easy-form/templates/inputs/i-boolean.html', 'easy-form/templates/inputs/month.html', 'easy-form/templates/inputs/month_select.html', 'easy-form/templates/inputs/number.html', 'easy-form/templates/inputs/password.html', 'easy-form/templates/inputs/radio.html', 'easy-form/templates/inputs/search.html', 'easy-form/templates/inputs/select.html', 'easy-form/templates/inputs/select2.html', 'easy-form/templates/inputs/switch.html', 'easy-form/templates/inputs/tag.html', 'easy-form/templates/inputs/tel.html', 'easy-form/templates/inputs/text.html', 'easy-form/templates/inputs/textarea.html', 'easy-form/templates/inputs/time.html', 'easy-form/templates/inputs/time_picker.html', 'easy-form/templates/inputs/url.html', 'easy-form/templates/messages/default.html']);
 
 angular.module("easy-form/templates/components/date-select.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/components/date-select.html",
@@ -81,12 +81,9 @@ angular.module("easy-form/templates/input-wrappers/none.html", []).run(["$templa
 angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/vertical-form.html",
     "<label ng-class=\"labelClassArr\" ng-bind=\"label\"></label>\n" +
-    "<div class=\"clearfix\"></div>\n" +
     "<easy-input-field ng-class=\"controlClassArr\"></easy-input-field>\n" +
-    "<div class=\"clearfix\"></div>\n" +
-    "<span class=\"help-block\" ng-bind=\"hint\" ng-show=\"hint\"></span>\n" +
-    "<div class=\"clearfix\"></div>\n" +
-    "<span class=\"help-block\" ng-bind=\"invalidMessage\"></span>\n" +
+    "<span class=\"help-block\" ng-bind=\"hint\" ng-show=\"hint && !invalidMessage\"></span>\n" +
+    "<span class=\"help-block\" ng-bind=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
     "\n" +
     "\n" +
     "");
@@ -94,14 +91,24 @@ angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(
 
 angular.module("easy-form/templates/inputs/checkbox.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/checkbox.html",
-    "");
+    "<div class=\"checkbox\" ng-if=\"options.checkbox\">\n" +
+    "    <label>\n" +
+    "        <input type=\"checkbox\" ng-model=\"model\">\n" +
+    "        {{options.checkbox.text}}\n" +
+    "    </label>\n" +
+    "</div>");
 }]);
 
-angular.module("easy-form/templates/inputs/checklist.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("easy-form/templates/inputs/checklist.html",
-    "<div class=\"checkbox\" ng-repeat=\"(key, text) in options.checklist\">\n" +
-    "    <input name=\"inputIn\" type=\"checkbox\" checklist-model=\"model\" checklist-value=\"key\" ng-disabled=\"ngDisabled\">{{text}}\n" +
-    "</div>");
+angular.module("easy-form/templates/inputs/checkboxes.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("easy-form/templates/inputs/checkboxes.html",
+    "<div class=\"checkbox\" ng-repeat=\"(value, text) in options.checkboxes.list\" ng-if=\"options.checkboxes\">\n" +
+    "    <label>\n" +
+    "        <input type=\"checkbox\" checklist-model=\"model\" checklist-value=\"value\"> {{text}}\n" +
+    "    </label>\n" +
+    "</div>\n" +
+    "\n" +
+    "        {{options}}\n" +
+    "");
 }]);
 
 angular.module("easy-form/templates/inputs/color.html", []).run(["$templateCache", function($templateCache) {
@@ -155,6 +162,17 @@ angular.module("easy-form/templates/inputs/email.html", []).run(["$templateCache
     "<input name=\"inputIn\" type=\"email\" class=\"form-control\" placeholder=\"{{placeholder}}\" ng-model=\"model\" />\n" +
     "\n" +
     "");
+}]);
+
+angular.module("easy-form/templates/inputs/i-boolean.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("easy-form/templates/inputs/i-boolean.html",
+    "<div class=\"checkbox\">\n" +
+    "    <label class=\"i-ckecks\">\n" +
+    "        <input type=\"checkbox\" >\n" +
+    "        <i></i>\n" +
+    "        {{options}}\n" +
+    "    </label>\n" +
+    "</div>");
 }]);
 
 angular.module("easy-form/templates/inputs/month.html", []).run(["$templateCache", function($templateCache) {

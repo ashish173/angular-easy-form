@@ -45,8 +45,8 @@ body(ng-controller='DemoCtrl')
                                         label='"datetime"', placeholder='"please enter datetime"')
 
                                     .form-group
-                                        easy-input(type='datetimeLocal', ng-model='demo.controls.inputs.datetimeLocal',
-                                        label='"datetimeLocal"', placeholder='"please enter datetime local"')
+                                        easy-input(type='datetime-local', ng-model='demo.controls.inputs.datetimeLocal',
+                                        label='"datetime local"', placeholder='"please enter datetime local"')
 
                                     .form-group
                                         easy-input(type='date', ng-model='demo.controls.inputs.date',
@@ -85,30 +85,65 @@ body(ng-controller='DemoCtrl')
                                         label='"color"', placeholder='"please enter color"')
                             .col-md-4
                                 pre {{demo.controls.inputs | json}}
-                    h4 Textarea
+                    h4 Textarea (in progress)
                     p Form control which supports multiple lines of text. Change rows attribute as necessary.
                     .bs-example
                         .row
                             .col-md-8
                                 ng-form.form
                                     .form-group
-                                        easy-input(type='textarea', ng-model='demo.controls.textarea.default',
-                                        label='"default row"', placeholder='"please enter something"')
+                                        easy-input(type='textarea', ng-model='demo.controls.textarea.basic',
+                                        label='"basic"', placeholder='"please enter something"')
                                     .form-group
-                                        easy-input(type='textarea', ng-model='demo.controls.textarea.defined',
-                                        label='"defined row"', placeholder='"please enter something"')
+                                        easy-input(type='textarea', ng-model='demo.controls.textarea.row',
+                                        label='"row"', placeholder='"please enter something"')
+                                    .form-group
+                                        easy-input(type='textarea', ng-model='demo.controls.textarea.auto',
+                                        label='"auto grow"', placeholder='"please enter something"')
+                                    .form-group
+                                        easy-input(type='textarea', ng-model='demo.controls.textarea.wysiwyg',
+                                        label='"wysiwyg"', placeholder='"please enter something"')
                             .col-md-4
                                 pre {{demo.controls.textarea | json}}
 
-                    h4 Checkboxes and radio
+                    h4 Checkboxes and radio (in progress)
                     .bs-example
                         .row
                             .col-md-8
                                 ng-form.form
                                     .form-group
+                                        easy-input(type='checkbox', ng-model='demo.controls.checkboxes.checkbox',
+                                        label='"Boolean"', options='checkboxOptions')
+
+                                    .form-group
+                                        easy-input(type='checkboxes', ng-model='demo.controls.checkboxes.checkboxes',
+                                        label='"checkboxes"', options='checkboxesOptions')
+
+                                    .form-group
+                                        easy-input(type='checkboxes-inline', ng-model='demo.controls.checkboxes.checkboxesInline',
+                                        label='"checkboxes inline"', placeholder='"options of checkbox"')
+
+                                    .form-group
+                                        easy-input(type='radios', ng-model='demo.controls.checkboxes.radios',
+                                        label='"radios"', placeholder='"options of checkbox"')
+
+                                    .form-group
+                                        easy-input(type='radios-inline', ng-model='demo.controls.checkboxes.radiosInline',
+                                        label='"radios inline"', placeholder='"options of checkbox"')
                             .col-md-4
-                                pre {{demo.controls.textarea | json}}
-                    h4 Extensions
+                                pre {{demo.controls.checkboxes | json}}
+                    h4 Select
+                    .bs-example
+                        .row
+                            .col-md-8
+                                ng-form.form
+                                    .form-group
+                                        easy-input(type='select', ng-model='demo.controls.checkboxes.radiosInline',
+                                        label='"single select"', options='selectOptions')
+                                    .form-group
+                                        easy-input(type='select', ng-model='demo.controls.checkboxes.radiosInline',
+                                        label='"multiple select"', options='multiSelectOptions')
+                    h4 ui-select (in progress)
                     .bs-example
 
                     h4 Custom
@@ -121,6 +156,11 @@ body(ng-controller='DemoCtrl')
                             .form-group
                                 easy-input(type='text', ng-model='modelLayoutVertial1',
                                 label='"Text"', placeholder='"placeholder"')
+                            .form-group.row
+                                easy-input.col-md-6(type='text', ng-model='demo.layouts.withLabel'
+                                label='"label"', placeholder='"with label"')
+                                easy-input.col-md-6(type='text', ng-model='demo.layouts.withOutLabel'
+                                placeholder='"without label"')
                     h4 Horizontal Form
                     .bs-example
                         ng-form.form
@@ -180,9 +220,8 @@ body(ng-controller='DemoCtrl')
                             a(href='#i18n') I18n
     // bower:js
     script(src='../bower_components/angular/angular.js')
+    script(src='../bower_components/checklist-model/checklist-model.js')
+    script(src='../bower_components/angular-ui-select/dist/select.js')
     // endbower
-    script(src='../lib/jquery/dist/jquery.js')
-    script(src='../lib/select2/select2.js')
-    script(src='../lib/angular-ui-select2/src/select2.js')
     script(src='../dist/angular-easy-form.js')
     script(src='demo.js')

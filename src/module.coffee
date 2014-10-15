@@ -10,6 +10,9 @@
 ###
 
 angular.module 'easy.form', [
+  'checklist-model'
+  'ui.select'
+
   'easy.form.directives'
   'easy.form.providers'
   'easy.form.templates'

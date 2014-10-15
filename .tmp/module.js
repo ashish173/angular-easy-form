@@ -9,7 +9,7 @@
     *
     * Main module of the application.
    */
-  angular.module('easy.form', ['easy.form.directives', 'easy.form.providers', 'easy.form.templates', 'easy.form.default']);
+  angular.module('easy.form', ['checklist-model', 'ui.select', 'easy.form.directives', 'easy.form.providers', 'easy.form.templates', 'easy.form.default']);
 
   angular.module('easy.form.directives', []);
 
