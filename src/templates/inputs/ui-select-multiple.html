@@ -1,7 +1,8 @@
 <ui-select ng-model="$parent.model"
            ng-disabled=""
-           reset-search-input="">
-    <ui-select-match placeholder="placeholder">{{$select.selected.text}}</ui-select-match>
+           reset-search-input=""
+           multiple>
+    <ui-select-match placeholder="placeholder">{{$item.text}}</ui-select-match>
     <ui-select-choices repeat="item in options.uiSelect.collection">
         <div ng-bind-html="item.text | highlight: $select.search"></div>
     </ui-select-choices>

@@ -4,12 +4,6 @@
   app = angular.module('demoApp', ['easy.form']);
 
   app.controller('DemoCtrl', function($scope) {
-    $scope.demo = {
-      controls: {
-        inputs: {},
-        checkboxes: {}
-      }
-    };
     $scope.checkboxOptions = {
       checkbox: {
         text: 'text of checkbox'
@@ -17,15 +11,31 @@
     };
     $scope.checkboxesOptions = {
       checkboxes: {
-        data: [
+        collection: [
           {
-            value: 'key1',
+            key: 'key1',
             text: 'option 1'
           }, {
-            value: 'key2',
+            key: 'key2',
             text: 'option 2'
           }, {
-            value: 'key3',
+            key: 'key3',
+            text: 'option 3'
+          }
+        ]
+      }
+    };
+    $scope.radiosOptions = {
+      radios: {
+        collection: [
+          {
+            key: 'key1',
+            text: 'option 1'
+          }, {
+            key: 'key2',
+            text: 'option 2'
+          }, {
+            key: 'key3',
             text: 'option 3'
           }
         ]
@@ -33,15 +43,15 @@
     };
     $scope.selectOptions = {
       select: {
-        data: [
+        collection: [
           {
-            value: 'key1',
+            key: 'key1',
             text: 'option 1'
           }, {
-            value: 'key2',
+            key: 'key2',
             text: 'option 2'
           }, {
-            value: 'key3',
+            key: 'key3',
             text: 'option 3'
           }
         ]
@@ -49,16 +59,15 @@
     };
     $scope.selectMultipleOptions = {
       select: {
-        multiple: true,
-        data: [
+        collection: [
           {
-            value: 'key1',
+            key: 'key1',
             text: 'option 1'
           }, {
-            value: 'key2',
+            key: 'key2',
             text: 'option 2'
           }, {
-            value: 'key3',
+            key: 'key3',
             text: 'option 3'
           }
         ]
@@ -66,35 +75,44 @@
     };
     $scope.uiSelectOptions = {
       uiSelect: {
-        data: [
+        collection: [
           {
-            value: 'key1',
+            key: 'key1',
             text: 'option 1'
           }, {
-            value: 'key2',
+            key: 'key2',
             text: 'option 2'
           }, {
-            value: 'key3',
+            key: 'key3',
             text: 'option 3'
           }
         ]
       }
     };
-    return $scope.uiSelectMultipleOptions = {
+    $scope.uiSelectMultipleOptions = {
       uiSelect: {
-        multiple: true,
-        data: [
+        collection: [
           {
-            value: 'key1',
+            key: 'key1',
             text: 'option 1'
           }, {
-            value: 'key2',
+            key: 'key2',
             text: 'option 2'
           }, {
-            value: 'key3',
+            key: 'key3',
             text: 'option 3'
           }
         ]
+      }
+    };
+    return $scope.demo = {
+      controls: {
+        inputs: {},
+        checkboxes: {
+          checkbox: true,
+          checkboxes: [],
+          checkboxesInline: []
+        }
       }
     };
   });

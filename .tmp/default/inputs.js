@@ -55,7 +55,7 @@
       templateUrl: 'easy-form/templates/inputs/checkbox.html'
     });
     $easyInputProvider.registerInput('checkboxes', {
-      templateUrl: 'easy-form/templates/inputs/i-boolean.html'
+      templateUrl: 'easy-form/templates/inputs/checkboxes.html'
     });
     $easyInputProvider.registerInput('checkboxes-inline', {
       templateUrl: 'easy-form/templates/inputs/checkboxes-inline.html'
@@ -74,6 +74,9 @@
     });
     $easyInputProvider.registerInput('ui-select', {
       templateUrl: 'easy-form/templates/inputs/ui-select.html'
+    });
+    $easyInputProvider.registerInput('ui-select-multiple', {
+      templateUrl: 'easy-form/templates/inputs/ui-select-multiple.html'
     });
     $easyInputProvider.registerInput('date', {
       templateUrl: 'easy-form/templates/inputs/date.html'

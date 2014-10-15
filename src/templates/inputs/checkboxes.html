@@ -1,7 +1,5 @@
-<div class="checkbox" ng-repeat="(value, text) in options.checkboxes.data">
+<div class="checkbox" ng-repeat="item in options.checkboxes.collection">
     <label>
-        <input type="checkbox" checklist-model="model" checklist-value="value"> {{text}}
+        <input type="checkbox" checklist-model="model" checklist-value="item"> {{item.text}}
     </label>
 </div>
-
-<pre>{{options}}</pre>

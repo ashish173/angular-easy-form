@@ -1,7 +1,7 @@
 doctype html
 html(lang="en", ng-app='demoApp')
 head
-    title Angular Easy Validation
+    title Angular Easy Form
     meta(name="viewport" content="width=device-width, initial-scale=1")
     link(rel='stylesheet', href='demo.css')
 body(ng-controller='DemoCtrl')
@@ -103,7 +103,7 @@ body(ng-controller='DemoCtrl')
                             .col-md-4
                                 pre {{demo.controls.textarea | json}}
 
-                    h4 Checkboxes and radio (in progress)
+                    h4 Checkboxes and radio
                     .bs-example
                         .row
                             .col-md-8
@@ -118,18 +118,18 @@ body(ng-controller='DemoCtrl')
 
                                     .form-group
                                         easy-input(type='checkboxes-inline', ng-model='demo.controls.checkboxes.checkboxesInline',
-                                        label='"checkboxes inline"', placeholder='"options of checkbox"')
+                                        label='"checkboxes inline"', options='checkboxesOptions')
 
                                     .form-group
                                         easy-input(type='radios', ng-model='demo.controls.checkboxes.radios',
-                                        label='"radios"', placeholder='"options of checkbox"')
+                                        label='"radios"', options='radiosOptions')
 
                                     .form-group
                                         easy-input(type='radios-inline', ng-model='demo.controls.checkboxes.radiosInline',
-                                        label='"radios inline"', placeholder='"options of checkbox"')
+                                        label='"radios inline"', options='radiosOptions')
                             .col-md-4
                                 pre {{demo.controls.checkboxes | json}}
-                    h4 Select(in progress)
+                    h4 Select
                     .bs-example
                         .row
                             .col-md-8
@@ -143,7 +143,7 @@ body(ng-controller='DemoCtrl')
                             .col-md-4
                                 pre {{demo.controls.select | json}}
 
-                    h4 ui-select (in progress)
+                    h4 UI Select
                     .bs-example
                         .row
                             .col-md-8
@@ -152,7 +152,7 @@ body(ng-controller='DemoCtrl')
                                         easy-input(type='ui-select', ng-model='demo.controls.uiSelect.basic',
                                         label='"single ui-select"', options='uiSelectOptions')
                                     .form-group
-                                        easy-input(type='ui-select', ng-model='demo.controls.uiSelect.multiple',
+                                        easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.multiple',
                                         label='"multiple select"', options='uiSelectMultipleOptions')
                             .col-md-4
                                 pre {{demo.controls.uiSelect | json}}
