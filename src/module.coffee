@@ -12,6 +12,8 @@
 angular.module 'easy.form', [
   'checklist-model'
   'ui.select'
+  'textAngular'
+  'monospaced.elastic'
 
   'easy.form.directives'
   'easy.form.providers'

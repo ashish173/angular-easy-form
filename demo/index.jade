@@ -85,7 +85,7 @@ body(ng-controller='DemoCtrl')
                                         label='"color"', placeholder='"please enter color"')
                             .col-md-4
                                 pre {{demo.controls.inputs | json}}
-                    h4 Textarea (in progress)
+                    h4 Textarea
                     p Form control which supports multiple lines of text. Change rows attribute as necessary.
                     .bs-example
                         .row
@@ -95,14 +95,11 @@ body(ng-controller='DemoCtrl')
                                         easy-input(type='textarea', ng-model='demo.controls.textarea.basic',
                                         label='"basic"', placeholder='"please enter something"')
                                     .form-group
-                                        easy-input(type='textarea', ng-model='demo.controls.textarea.row',
-                                        label='"row"', placeholder='"please enter something"')
+                                        easy-input(type='textarea-autosize', ng-model='demo.controls.textarea.autosize',
+                                        label='"autosize"', placeholder='"please enter something"')
                                     .form-group
-                                        easy-input(type='textarea', ng-model='demo.controls.textarea.auto',
-                                        label='"auto grow"', placeholder='"please enter something"')
-                                    .form-group
-                                        easy-input(type='textarea', ng-model='demo.controls.textarea.wysiwyg',
-                                        label='"wysiwyg"', placeholder='"please enter something"')
+                                        easy-input(type='text-angular', ng-model='demo.controls.textarea.textAngular',
+                                        label='"textAngular"', placeholder='"please enter something"')
                             .col-md-4
                                 pre {{demo.controls.textarea | json}}
 
@@ -132,20 +129,33 @@ body(ng-controller='DemoCtrl')
                                         label='"radios inline"', placeholder='"options of checkbox"')
                             .col-md-4
                                 pre {{demo.controls.checkboxes | json}}
-                    h4 Select
+                    h4 Select(in progress)
                     .bs-example
                         .row
                             .col-md-8
                                 ng-form.form
                                     .form-group
-                                        easy-input(type='select', ng-model='demo.controls.checkboxes.radiosInline',
+                                        easy-input(type='select', ng-model='demo.controls.select.basic',
                                         label='"single select"', options='selectOptions')
                                     .form-group
-                                        easy-input(type='select', ng-model='demo.controls.checkboxes.radiosInline',
-                                        label='"multiple select"', options='multiSelectOptions')
+                                        easy-input(type='select-multiple', ng-model='demo.controls.select.multiple',
+                                        label='"multiple select"', options='selectMultipleOptions')
+                            .col-md-4
+                                pre {{demo.controls.select | json}}
+
                     h4 ui-select (in progress)
                     .bs-example
-
+                        .row
+                            .col-md-8
+                                ng-form.form
+                                    .form-group
+                                        easy-input(type='ui-select', ng-model='demo.controls.uiSelect.basic',
+                                        label='"single ui-select"', options='uiSelectOptions')
+                                    .form-group
+                                        easy-input(type='ui-select', ng-model='demo.controls.uiSelect.multiple',
+                                        label='"multiple select"', options='uiSelectMultipleOptions')
+                            .col-md-4
+                                pre {{demo.controls.uiSelect | json}}
                     h4 Custom
                     .bs-example
                 .bs-docs-section
@@ -222,6 +232,9 @@ body(ng-controller='DemoCtrl')
     script(src='../bower_components/angular/angular.js')
     script(src='../bower_components/checklist-model/checklist-model.js')
     script(src='../bower_components/angular-ui-select/dist/select.js')
+    script(src='../bower_components/textAngular/dist/textAngular.min.js')
+    script(src='../bower_components/angular-sanitize/angular-sanitize.js')
+    script(src='../bower_components/angular-elastic/elastic.js')
     // endbower
     script(src='../dist/angular-easy-form.js')
     script(src='demo.js')

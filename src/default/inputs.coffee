@@ -47,6 +47,17 @@ angular.module 'easy.form.default'
     templateUrl: 'easy-form/templates/inputs/color.html'
 
   # ----------------------------------------
+  # textarea
+  # ----------------------------------------
+  $easyInputProvider.registerInput 'textarea',
+    templateUrl: 'easy-form/templates/inputs/textarea.html'
+
+  $easyInputProvider.registerInput 'textarea-autosize',
+    templateUrl: 'easy-form/templates/inputs/textarea-autosize.html'
+
+  $easyInputProvider.registerInput 'text-angular',
+    templateUrl: 'easy-form/templates/inputs/text-angular.html'
+  # ----------------------------------------
   # Checkboxes and radio
   # ----------------------------------------
   $easyInputProvider.registerInput 'checkbox',
@@ -70,11 +81,13 @@ angular.module 'easy.form.default'
   $easyInputProvider.registerInput 'select',
     templateUrl: 'easy-form/templates/inputs/select.html'
 
-  # ----------------------------------------
-  # select2
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'select2',
-    templateUrl: 'easy-form/templates/inputs/select2.html'
+  $easyInputProvider.registerInput 'select-multiple',
+    templateUrl: 'easy-form/templates/inputs/select-multiple.html'
+
+  $easyInputProvider.registerInput 'ui-select',
+    templateUrl: 'easy-form/templates/inputs/ui-select.html'
+
+
 
   # ----------------------------------------
   # date
@@ -118,11 +131,6 @@ angular.module 'easy.form.default'
   $easyInputProvider.registerInput 'year_select',
     templateUrl: 'easy-form/templates/inputs/year_select.html'
 
-  # ----------------------------------------
-  # textarea
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'textarea',
-    templateUrl: 'easy-form/templates/inputs/textarea.html'
 
   # ----------------------------------------
   # set default input

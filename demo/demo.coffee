@@ -15,8 +15,44 @@ app.controller 'DemoCtrl', ($scope) ->
 
   $scope.checkboxesOptions =
     checkboxes:
-      list: [
+      data: [
         {value: 'key1', text: 'option 1'}
         {value: 'key2', text: 'option 2'}
         {value: 'key3', text: 'option 3'}
       ]
+
+  $scope.selectOptions =
+    select:
+      data: [
+        {value: 'key1', text: 'option 1'}
+        {value: 'key2', text: 'option 2'}
+        {value: 'key3', text: 'option 3'}
+      ]
+
+  $scope.selectMultipleOptions =
+    select:
+      multiple: true
+      data: [
+        {value: 'key1', text: 'option 1'}
+        {value: 'key2', text: 'option 2'}
+        {value: 'key3', text: 'option 3'}
+      ]
+
+  $scope.uiSelectOptions =
+    uiSelect:
+      data: [
+        {value: 'key1', text: 'option 1'}
+        {value: 'key2', text: 'option 2'}
+        {value: 'key3', text: 'option 3'}
+      ]
+
+  $scope.uiSelectMultipleOptions =
+    uiSelect:
+      multiple: true
+      data: [
+        {value: 'key1', text: 'option 1'}
+        {value: 'key2', text: 'option 2'}
+        {value: 'key3', text: 'option 3'}
+      ]
+
+

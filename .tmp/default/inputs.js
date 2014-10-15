@@ -42,6 +42,15 @@
     $easyInputProvider.registerInput('color', {
       templateUrl: 'easy-form/templates/inputs/color.html'
     });
+    $easyInputProvider.registerInput('textarea', {
+      templateUrl: 'easy-form/templates/inputs/textarea.html'
+    });
+    $easyInputProvider.registerInput('textarea-autosize', {
+      templateUrl: 'easy-form/templates/inputs/textarea-autosize.html'
+    });
+    $easyInputProvider.registerInput('text-angular', {
+      templateUrl: 'easy-form/templates/inputs/text-angular.html'
+    });
     $easyInputProvider.registerInput('checkbox', {
       templateUrl: 'easy-form/templates/inputs/checkbox.html'
     });
@@ -60,8 +69,11 @@
     $easyInputProvider.registerInput('select', {
       templateUrl: 'easy-form/templates/inputs/select.html'
     });
-    $easyInputProvider.registerInput('select2', {
-      templateUrl: 'easy-form/templates/inputs/select2.html'
+    $easyInputProvider.registerInput('select-multiple', {
+      templateUrl: 'easy-form/templates/inputs/select-multiple.html'
+    });
+    $easyInputProvider.registerInput('ui-select', {
+      templateUrl: 'easy-form/templates/inputs/ui-select.html'
     });
     $easyInputProvider.registerInput('date', {
       templateUrl: 'easy-form/templates/inputs/date.html'
@@ -83,9 +95,6 @@
     });
     $easyInputProvider.registerInput('year_select', {
       templateUrl: 'easy-form/templates/inputs/year_select.html'
-    });
-    $easyInputProvider.registerInput('textarea', {
-      templateUrl: 'easy-form/templates/inputs/textarea.html'
     });
     return $easyInputProvider.setDefaultInput('text');
   });
