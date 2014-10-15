@@ -154,6 +154,13 @@ body(ng-controller='DemoCtrl')
                                     .form-group
                                         easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.multiple',
                                         label='"multiple select"', options='uiSelectMultipleOptions')
+                                    .form-group
+                                        easy-input(type='ui-select', ng-model='demo.controls.uiSelect.multiple',
+                                        label='"Remote Data Basic"', options='uiSelectRemoteOptions')
+                                    .form-group
+                                        easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.multiple',
+                                        label='"Remote Data Multiple"', options='uiSelectRemoteOptions')
+
                             .col-md-4
                                 pre {{demo.controls.uiSelect | json}}
                     h4 Custom

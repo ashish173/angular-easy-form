@@ -3,7 +3,9 @@
            reset-search-input=""
            multiple>
     <ui-select-match placeholder="placeholder">{{$item.text}}</ui-select-match>
-    <ui-select-choices repeat="item in options.uiSelect.collection">
+    <ui-select-choices repeat="item in options.uiSelect.collection"
+                       refresh="options.uiSelect.refresh($select.search)"
+                       refresh-delay="0">
         <div ng-bind-html="item.text | highlight: $select.search"></div>
     </ui-select-choices>
 </ui-select>
