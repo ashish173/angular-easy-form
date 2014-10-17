@@ -1409,7 +1409,9 @@ angular.module("easy-form/templates/inputs/ui-select-multiple.html", []).run(["$
     "           reset-search-input=\"\"\n" +
     "           multiple>\n" +
     "    <ui-select-match placeholder=\"placeholder\">{{$item.text}}</ui-select-match>\n" +
-    "    <ui-select-choices repeat=\"item in options.uiSelect.collection\">\n" +
+    "    <ui-select-choices repeat=\"item in options.uiSelect.collection\"\n" +
+    "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
+    "                       refresh-delay=\"0\">\n" +
     "        <div ng-bind-html=\"item.text | highlight: $select.search\"></div>\n" +
     "    </ui-select-choices>\n" +
     "</ui-select>");
@@ -1421,10 +1423,13 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "           ng-disabled=\"\"\n" +
     "           reset-search-input=\"\">\n" +
     "    <ui-select-match placeholder=\"placeholder\">{{$select.selected.text}}</ui-select-match>\n" +
-    "    <ui-select-choices repeat=\"item in options.uiSelect.collection\">\n" +
+    "    <ui-select-choices repeat=\"item in options.uiSelect.collection\"\n" +
+    "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
+    "                       refresh-delay=\"0\">\n" +
     "        <div ng-bind-html=\"item.text | highlight: $select.search\"></div>\n" +
     "    </ui-select-choices>\n" +
-    "</ui-select>");
+    "</ui-select>\n" +
+    "");
 }]);
 
 angular.module("easy-form/templates/inputs/url.html", []).run(["$templateCache", function($templateCache) {
