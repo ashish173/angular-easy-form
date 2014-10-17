@@ -73,7 +73,7 @@ module.exports = (grunt) ->
               '.tmp/providers/*.js'
               '.tmp/directives/*.js'
               '.tmp/default/*.js'
-              '.tmp/templates.js']
+              'src/templates/templates.js']
         dest: 'dist/angular-easy-form.js'
 
     ngAnnotate:
@@ -112,7 +112,7 @@ module.exports = (grunt) ->
           return 'easy-form' + '/' + moduleName + '.html'
       default:
         src: ['src/templates/**/*.html']
-        dest: '.tmp/templates.js'
+        dest: 'src/templates/templates.js'
 
     connect:
       options:

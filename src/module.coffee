@@ -14,6 +14,7 @@ angular.module 'easy.form', [
   'ui.select'
   'textAngular'
   'monospaced.elastic'
+  'ui.bootstrap'
 
   'easy.form.directives'
   'easy.form.providers'
