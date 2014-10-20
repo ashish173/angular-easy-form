@@ -1,9 +1,6 @@
-<ng-form name="formIn">
-    <div ng-class="{'has-error': formIn.inputIn.$invalid}">
-        <label class="control-label" ng-class="labelClassArr" ng-show="label">{{label}}</label>
-        <div ng-class="controlClassArr">
-            <easy-input-field></easy-input-field>
-            <ng-transclude></ng-transclude>
-        </div>
-    </div>
-</ng-form>
+<label class="control-label" ng-class="labelClassArr" ng-bind="label"></label>
+<div ng-class="controlClassArr">
+    <easy-input-field></easy-input-field>
+    <span class="help-block" ng-bind="hint" ng-show="hint && !invalidMessage"></span>
+    <span class="help-block" ng-bind="invalidMessage" ng-hide="hint && !invalidMessage"></span>
+</div>

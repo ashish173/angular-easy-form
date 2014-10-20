@@ -1,9 +1,2 @@
-<ng-form name="formIn">
-    <div ng-class="{'has-error': formIn.inputIn.$invalid}">
-        <label class="col-sm-{{wrapper[1]}} control-label" ng-show="wrapper[1]">{{label}}</label>
+<easy-input-field ng-class="controlClassArr"></easy-input-field>
 
-        <div class="col-sm-{{wrapper[2]}}" ng-show="wrapper[2]">
-            <easy-input-field ng-model="model" easy-input-options="easyInputOptions" placeholder="placeholder"></easy-input-field>
-        </div>
-    </div>
-</ng-form>

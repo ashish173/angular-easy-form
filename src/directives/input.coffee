@@ -137,6 +137,16 @@ angular.module('easy.form.directives')
   guid = ->
     s4() + s4() + s4() + s4()
 
+
+  ###*
+  Removing duplicate elements from array
+  ###
+  uniqueArray = (arr)->
+    newArr = {}
+    newArr[arr[key]] = arr[key] for key in [0...arr.length]
+    value for key, value of newArr
+    arr = newArr
+
   return (
     require: 'ngModel'
     restrict: 'AE'
@@ -184,6 +194,10 @@ angular.module('easy.form.directives')
 #                      'validCallback'
 #                      'inValidCallback']
 #        scope[key] = scope.options[key] for key in optionKeys when scope.options[key]
+      wrapper = $easyInput.getWrapper(scope.wrapper)
+      wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper)
+      input = $easyInput.getInput(scope.type)
+      inputTemplate = $easyInput.getInputTemplate(scope.type)
 
       ###*
       Watch the model change and trigger matched callback
@@ -202,22 +216,25 @@ angular.module('easy.form.directives')
       Set labelClass
       ###
       scope.labelClassArr = if scope.labelClass then scope.labelClass.split(/[ ,]+/) else []
+      scope.labelClassArr.push (wrapper.labelClass)... if angular.isArray(wrapper.labelClass)
+      uniqueArray(scope.labelClassArr)
 
       ###*
       Set controlClass
       ###
       scope.controlClassArr = if scope.controlClass then scope.controlClass.split(/[ ,]+/) else []
+      console.log wrapper.controlClass
+      scope.controlClassArr.push (wrapper.controlClass)... if angular.isArray(wrapper.controlClass)
+      uniqueArray(scope.controlClassArr)
 
       ###*
       Get wrapper template option and compile it
       ###
-      wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper)
       if wrapperTemplate then setElementTemplate(element, scope, wrapperTemplate)
 
       ###*
       Get input template option and compile it
       ###
-      inputTemplate = $easyInput.getInputTemplate(scope.type)
       inputElement = element.find('easy-input-field')
       if inputTemplate then setElementTemplate(inputElement, scope, inputTemplate)
       ###*

@@ -135,7 +135,9 @@
          */
         return {
           name: name,
-          templateUrl: object.templateUrl
+          templateUrl: object.templateUrl,
+          labelClass: object.labelClass,
+          controlClass: object.controlClass
         };
       };
     })(this);
@@ -225,6 +227,20 @@
       mapping = name ? this.getWrapperMapping(name) : this.defaultWrapperMapping;
       return $templateCache.get(mapping.templateUrl);
     };
+    this.getInput = function(name) {
+      if (name) {
+        return this.getInputMapping(name);
+      } else {
+        return this.defaultInputMapping;
+      }
+    };
+    this.getWrapper = function(name) {
+      if (name) {
+        return this.getWrapperMapping(name);
+      } else {
+        return this.defaultWrapperMapping;
+      }
+    };
     this.get = function($injector) {
       this.setupProviders($injector);
       return {
@@ -241,7 +257,9 @@
         setDefaultInput: this.setDefaultInput,
         setDefaultWrapper: this.setDefaultWrapper,
         getInputTemplate: this.getInputTemplate,
-        getWrapperTemplate: this.getWrapperTemplate
+        getWrapperTemplate: this.getWrapperTemplate,
+        getInput: this.getInput,
+        getWrapper: this.getWrapper
       };
     };
     this.get.$inject = ['$injector'];
@@ -545,7 +563,7 @@
     @param scope
     @param template
      */
-    var checkValidation, guid, invalidFunc, isFocusElement, s4, setElementTemplate, validFunc;
+    var checkValidation, guid, invalidFunc, isFocusElement, s4, setElementTemplate, uniqueArray, validFunc;
     setElementTemplate = function(element, scope, template) {
       element.html(template);
       return $compile(element.contents())(scope);
@@ -665,6 +683,22 @@
     guid = function() {
       return s4() + s4() + s4() + s4();
     };
+
+    /**
+    Removing duplicate elements from array
+     */
+    uniqueArray = function(arr) {
+      var key, newArr, value, _i, _ref;
+      newArr = {};
+      for (key = _i = 0, _ref = arr.length; 0 <= _ref ? _i < _ref : _i > _ref; key = 0 <= _ref ? ++_i : --_i) {
+        newArr[arr[key]] = arr[key];
+      }
+      for (key in newArr) {
+        value = newArr[key];
+        value;
+      }
+      return arr = newArr;
+    };
     return {
       require: 'ngModel',
       restrict: 'AE',
@@ -697,11 +731,15 @@
         /**
         Initialize scope from options
          */
+        var initialValidity, input, inputElement, inputTemplate, name, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+        wrapper = $easyInput.getWrapper(scope.wrapper);
+        wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper);
+        input = $easyInput.getInput(scope.type);
+        inputTemplate = $easyInput.getInputTemplate(scope.type);
 
         /**
         Watch the model change and trigger matched callback
          */
-        var initialValidity, inputElement, inputTemplate, name, uid, v, validMethod, validation, watch, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1;
         scope.$watch('model', function(newVal, oldVal) {
           if (newVal !== oldVal) {
             if (scope.ngChange()) {
@@ -718,16 +756,24 @@
         Set labelClass
          */
         scope.labelClassArr = scope.labelClass ? scope.labelClass.split(/[ ,]+/) : [];
+        if (angular.isArray(wrapper.labelClass)) {
+          (_ref = scope.labelClassArr).push.apply(_ref, wrapper.labelClass);
+        }
+        uniqueArray(scope.labelClassArr);
 
         /**
         Set controlClass
          */
         scope.controlClassArr = scope.controlClass ? scope.controlClass.split(/[ ,]+/) : [];
+        console.log(wrapper.controlClass);
+        if (angular.isArray(wrapper.controlClass)) {
+          (_ref1 = scope.controlClassArr).push.apply(_ref1, wrapper.controlClass);
+        }
+        uniqueArray(scope.controlClassArr);
 
         /**
         Get wrapper template option and compile it
          */
-        wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper);
         if (wrapperTemplate) {
           setElementTemplate(element, scope, wrapperTemplate);
         }
@@ -735,7 +781,6 @@
         /**
         Get input template option and compile it
          */
-        inputTemplate = $easyInput.getInputTemplate(scope.type);
         inputElement = element.find('easy-input-field');
         if (inputTemplate) {
           setElementTemplate(inputElement, scope, inputTemplate);
@@ -759,18 +804,18 @@
          */
         validation = [];
         if (scope.validatorRule != null) {
-          _ref = scope.validatorRule;
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            name = _ref[_i];
+          _ref2 = scope.validatorRule;
+          for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+            name = _ref2[_i];
             if (scope.validatorRule[name]) {
               validation.push(scope.validatorRule[name]);
             }
           }
         }
         if (scope.validator != null) {
-          _ref1 = scope.validator.split(/[ ,]+/);
-          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-            v = _ref1[_j];
+          _ref3 = scope.validator.split(/[ ,]+/);
+          for (_j = 0, _len1 = _ref3.length; _j < _len1; _j++) {
+            v = _ref3[_j];
             validation.push(v);
           }
         }
@@ -916,37 +961,39 @@
 }).call(this);
 ;(function() {
   angular.module('easy.form.default').config(['$easyInputProvider', function($easyInputProvider) {
-    $easyInputProvider.registerWrapper('verticalForm', {
+    $easyInputProvider.registerWrapper('vertical-form', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical-form.html'
     });
-    $easyInputProvider.registerWrapper('verticalFileInput', {
+    $easyInputProvider.registerWrapper('vertical-file-input', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical-file-input.html'
     });
-    $easyInputProvider.registerWrapper('verticalBoolean', {
+    $easyInputProvider.registerWrapper('vertical-boolean', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical-boolean.html'
     });
-    $easyInputProvider.registerWrapper('verticalRadioAndCheckboxes', {
+    $easyInputProvider.registerWrapper('vertical-radio-and-checkboxes', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical-radio-and-checkboxes.html'
     });
-    $easyInputProvider.registerWrapper('horizontalForm', {
-      templateUrl: 'easy-form/templates/input-wrappers/horizontal-form.html'
+    $easyInputProvider.registerWrapper('horizontal-form', {
+      templateUrl: 'easy-form/templates/input-wrappers/horizontal-form.html',
+      labelClass: ['col-xs-3'],
+      controlClass: ['col-xs-9']
     });
-    $easyInputProvider.registerWrapper('horizontalFileInput', {
-      templateUrl: 'easy-form/templates/input-wrappers/horizontalFileInput.html'
+    $easyInputProvider.registerWrapper('horizontal-file-input', {
+      templateUrl: 'easy-form/templates/input-wrappers/horizontal-file-input.html'
     });
-    $easyInputProvider.registerWrapper('horizontalBoolean', {
-      templateUrl: 'easy-form/templates/input-wrappers/horizontalBoolean.html'
+    $easyInputProvider.registerWrapper('horizontal-boolean', {
+      templateUrl: 'easy-form/templates/input-wrappers/horizontal-boolean.html'
     });
-    $easyInputProvider.registerWrapper('horizontalRadioAndCheckboxes', {
+    $easyInputProvider.registerWrapper('horizontal-radio-and-checkboxes', {
       templateUrl: 'easy-form/templates/input-wrappers/horizontal-radio-and-checkboxes.html'
     });
-    $easyInputProvider.registerWrapper('inlineForm', {
-      templateUrl: 'easy-form/templates/input-wrappers/horizontalRadioAndCheckboxes.html'
+    $easyInputProvider.registerWrapper('inline-form', {
+      templateUrl: 'easy-form/templates/input-wrappers/inline-form.html'
     });
     $easyInputProvider.registerWrapper('none', {
       templateUrl: 'easy-form/templates/input-wrappers/none.html'
     });
-    return $easyInputProvider.setDefaultWrapper('verticalForm');
+    return $easyInputProvider.setDefaultWrapper('vertical-form');
   }]);
 
 }).call(this);
@@ -1145,28 +1192,19 @@ angular.module("easy-form/templates/form-wrappers/default.html", []).run(["$temp
 
 angular.module("easy-form/templates/input-wrappers/horizontal-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/horizontal-form.html",
-    "<ng-form name=\"formIn\">\n" +
-    "    <div ng-class=\"{'has-error': formIn.inputIn.$invalid}\">\n" +
-    "        <label class=\"control-label\" ng-class=\"labelClassArr\" ng-show=\"label\">{{label}}</label>\n" +
-    "        <div ng-class=\"controlClassArr\">\n" +
-    "            <easy-input-field></easy-input-field>\n" +
-    "            <ng-transclude></ng-transclude>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</ng-form>");
+    "<label class=\"control-label\" ng-class=\"labelClassArr\" ng-bind=\"label\"></label>\n" +
+    "<div ng-class=\"controlClassArr\">\n" +
+    "    <easy-input-field></easy-input-field>\n" +
+    "    <span class=\"help-block\" ng-bind=\"hint\" ng-show=\"hint && !invalidMessage\"></span>\n" +
+    "    <span class=\"help-block\" ng-bind=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
+    "</div>");
 }]);
 
 angular.module("easy-form/templates/input-wrappers/inline-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/inline-form.html",
-    "<ng-form name=\"formIn\">\n" +
-    "    <div ng-class=\"{'has-error': formIn.inputIn.$invalid}\">\n" +
-    "        <label class=\"col-sm-{{wrapper[1]}} control-label\" ng-show=\"wrapper[1]\">{{label}}</label>\n" +
+    "<easy-input-field ng-class=\"controlClassArr\"></easy-input-field>\n" +
     "\n" +
-    "        <div class=\"col-sm-{{wrapper[2]}}\" ng-show=\"wrapper[2]\">\n" +
-    "            <easy-input-field ng-model=\"model\" easy-input-options=\"easyInputOptions\" placeholder=\"placeholder\"></easy-input-field>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "</ng-form>");
+    "");
 }]);
 
 angular.module("easy-form/templates/input-wrappers/none.html", []).run(["$templateCache", function($templateCache) {

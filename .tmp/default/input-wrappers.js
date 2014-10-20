@@ -1,36 +1,38 @@
 (function() {
   angular.module('easy.form.default').config(function($easyInputProvider) {
-    $easyInputProvider.registerWrapper('verticalForm', {
+    $easyInputProvider.registerWrapper('vertical-form', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical-form.html'
     });
-    $easyInputProvider.registerWrapper('verticalFileInput', {
+    $easyInputProvider.registerWrapper('vertical-file-input', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical-file-input.html'
     });
-    $easyInputProvider.registerWrapper('verticalBoolean', {
+    $easyInputProvider.registerWrapper('vertical-boolean', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical-boolean.html'
     });
-    $easyInputProvider.registerWrapper('verticalRadioAndCheckboxes', {
+    $easyInputProvider.registerWrapper('vertical-radio-and-checkboxes', {
       templateUrl: 'easy-form/templates/input-wrappers/vertical-radio-and-checkboxes.html'
     });
-    $easyInputProvider.registerWrapper('horizontalForm', {
-      templateUrl: 'easy-form/templates/input-wrappers/horizontal-form.html'
+    $easyInputProvider.registerWrapper('horizontal-form', {
+      templateUrl: 'easy-form/templates/input-wrappers/horizontal-form.html',
+      labelClass: ['col-xs-3'],
+      controlClass: ['col-xs-9']
     });
-    $easyInputProvider.registerWrapper('horizontalFileInput', {
-      templateUrl: 'easy-form/templates/input-wrappers/horizontalFileInput.html'
+    $easyInputProvider.registerWrapper('horizontal-file-input', {
+      templateUrl: 'easy-form/templates/input-wrappers/horizontal-file-input.html'
     });
-    $easyInputProvider.registerWrapper('horizontalBoolean', {
-      templateUrl: 'easy-form/templates/input-wrappers/horizontalBoolean.html'
+    $easyInputProvider.registerWrapper('horizontal-boolean', {
+      templateUrl: 'easy-form/templates/input-wrappers/horizontal-boolean.html'
     });
-    $easyInputProvider.registerWrapper('horizontalRadioAndCheckboxes', {
+    $easyInputProvider.registerWrapper('horizontal-radio-and-checkboxes', {
       templateUrl: 'easy-form/templates/input-wrappers/horizontal-radio-and-checkboxes.html'
     });
-    $easyInputProvider.registerWrapper('inlineForm', {
-      templateUrl: 'easy-form/templates/input-wrappers/horizontalRadioAndCheckboxes.html'
+    $easyInputProvider.registerWrapper('inline-form', {
+      templateUrl: 'easy-form/templates/input-wrappers/inline-form.html'
     });
     $easyInputProvider.registerWrapper('none', {
       templateUrl: 'easy-form/templates/input-wrappers/none.html'
     });
-    return $easyInputProvider.setDefaultWrapper('verticalForm');
+    return $easyInputProvider.setDefaultWrapper('vertical-form');
   });
 
 }).call(this);

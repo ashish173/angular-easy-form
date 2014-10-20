@@ -65,6 +65,8 @@ angular.module 'easy.form.providers'
     {
     name: name
     templateUrl: object.templateUrl
+    labelClass: object.labelClass
+    controlClass: object.controlClass
     }
 
   @registerInput = (name, object = {}) ->
@@ -131,6 +133,12 @@ angular.module 'easy.form.providers'
     mapping = if name then @getWrapperMapping(name) else @defaultWrapperMapping
     $templateCache.get(mapping.templateUrl)
 
+  @getInput = (name)->
+    if name then @getInputMapping(name) else @defaultInputMapping
+
+  @getWrapper = (name)->
+    if name then @getWrapperMapping(name) else @defaultWrapperMapping
+
   # ----------------------------------------
   # $get
   # ----------------------------------------
@@ -154,6 +162,8 @@ angular.module 'easy.form.providers'
     setDefaultWrapper: @setDefaultWrapper
     getInputTemplate: @getInputTemplate
     getWrapperTemplate: @getWrapperTemplate
+    getInput: @getInput
+    getWrapper: @getWrapper
 
   @get.$inject = ['$injector']
   @$get = @get

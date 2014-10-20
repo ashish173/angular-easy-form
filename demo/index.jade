@@ -31,7 +31,7 @@ body(ng-controller='DemoCtrl')
                     .bs-example
                         .row
                             .col-md-8
-                                ng-form.form
+                                ng-form
                                     .form-group
                                         easy-input(type='text', ng-model='demo.controls.inputs.text',
                                         label='"text"', placeholder='"please enter text"')
@@ -90,7 +90,7 @@ body(ng-controller='DemoCtrl')
                     .bs-example
                         .row
                             .col-md-8
-                                ng-form.form
+                                ng-form
                                     .form-group
                                         easy-input(type='textarea', ng-model='demo.controls.textarea.basic',
                                         label='"basic"', placeholder='"please enter something"')
@@ -107,7 +107,7 @@ body(ng-controller='DemoCtrl')
                     .bs-example
                         .row
                             .col-md-8
-                                ng-form.form
+                                ng-form
                                     .form-group
                                         easy-input(type='checkbox', ng-model='demo.controls.checkboxes.checkbox',
                                         label='"Boolean"', options='checkboxOptions')
@@ -133,7 +133,7 @@ body(ng-controller='DemoCtrl')
                     .bs-example
                         .row
                             .col-md-8
-                                ng-form.form
+                                ng-form
                                     .form-group
                                         easy-input(type='select', ng-model='demo.controls.select.basic',
                                         label='"single select"', options='selectOptions')
@@ -147,7 +147,7 @@ body(ng-controller='DemoCtrl')
                     .bs-example
                         .row
                             .col-md-8
-                                ng-form.form
+                                ng-form
                                     .form-group
                                         easy-input(type='ui-select', ng-model='demo.controls.uiSelect.basic',
                                         label='"single ui-select"', options='uiSelectOptions')
@@ -169,21 +169,30 @@ body(ng-controller='DemoCtrl')
                     h3#layouts.page-header Layouts
                     h4 Vertical Form
                     .bs-example
-                        ng-form.form
+                        ng-form
                             .form-group
-                                easy-input(type='text', ng-model='modelLayoutVertial1',
+                                easy-input(type='text', ng-model='demo.layout.vertical.text',
                                 label='"Text"', placeholder='"placeholder"')
-                            .form-group.row
-                                easy-input.col-md-6(type='text', ng-model='demo.layouts.withLabel'
-                                label='"label"', placeholder='"with label"')
-                                easy-input.col-md-6(type='text', ng-model='demo.layouts.withOutLabel'
-                                placeholder='"without label"')
+
                     h4 Horizontal Form
                     .bs-example
-                        ng-form.form
+                        ng-form.form-horizontal
+                            .form-group
+                                easy-input(type='text', ng-model='demo.layout.horizontal.text', wrapper='horizontal-form'
+                                label='"Text"', placeholder='"placeholder"')
+
                     h4 Inline Form
                     .bs-example
-                        ng-form.form
+                        ng-form.form-inline
+                            .form-group
+                                easy-input(type='text', ng-model='demo.layout.inline.text1', wrapper='inline-form'
+                                placeholder='"placeholder"')
+                            .form-group
+                                easy-input(type='text', ng-model='demo.layout.inline.text2', wrapper='inline-form'
+                                placeholder='"placeholder"')
+                            .form-group
+                                easy-input(type='text', ng-model='demo.layout.inline.text3', wrapper='inline-form'
+                                placeholder='"placeholder"')
                 .bs-docs-section
                     h3#validation.page-header Validation
                     h4 Basic

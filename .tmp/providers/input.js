@@ -58,7 +58,9 @@
          */
         return {
           name: name,
-          templateUrl: object.templateUrl
+          templateUrl: object.templateUrl,
+          labelClass: object.labelClass,
+          controlClass: object.controlClass
         };
       };
     })(this);
@@ -148,6 +150,20 @@
       mapping = name ? this.getWrapperMapping(name) : this.defaultWrapperMapping;
       return $templateCache.get(mapping.templateUrl);
     };
+    this.getInput = function(name) {
+      if (name) {
+        return this.getInputMapping(name);
+      } else {
+        return this.defaultInputMapping;
+      }
+    };
+    this.getWrapper = function(name) {
+      if (name) {
+        return this.getWrapperMapping(name);
+      } else {
+        return this.defaultWrapperMapping;
+      }
+    };
     this.get = function($injector) {
       this.setupProviders($injector);
       return {
@@ -164,7 +180,9 @@
         setDefaultInput: this.setDefaultInput,
         setDefaultWrapper: this.setDefaultWrapper,
         getInputTemplate: this.getInputTemplate,
-        getWrapperTemplate: this.getWrapperTemplate
+        getWrapperTemplate: this.getWrapperTemplate,
+        getInput: this.getInput,
+        getWrapper: this.getWrapper
       };
     };
     this.get.$inject = ['$injector'];

@@ -36,7 +36,7 @@
     @param scope
     @param template
      */
-    var checkValidation, guid, invalidFunc, isFocusElement, s4, setElementTemplate, validFunc;
+    var checkValidation, guid, invalidFunc, isFocusElement, s4, setElementTemplate, uniqueArray, validFunc;
     setElementTemplate = function(element, scope, template) {
       element.html(template);
       return $compile(element.contents())(scope);
@@ -156,6 +156,22 @@
     guid = function() {
       return s4() + s4() + s4() + s4();
     };
+
+    /**
+    Removing duplicate elements from array
+     */
+    uniqueArray = function(arr) {
+      var key, newArr, value, _i, _ref;
+      newArr = {};
+      for (key = _i = 0, _ref = arr.length; 0 <= _ref ? _i < _ref : _i > _ref; key = 0 <= _ref ? ++_i : --_i) {
+        newArr[arr[key]] = arr[key];
+      }
+      for (key in newArr) {
+        value = newArr[key];
+        value;
+      }
+      return arr = newArr;
+    };
     return {
       require: 'ngModel',
       restrict: 'AE',
@@ -188,11 +204,15 @@
         /**
         Initialize scope from options
          */
+        var initialValidity, input, inputElement, inputTemplate, name, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+        wrapper = $easyInput.getWrapper(scope.wrapper);
+        wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper);
+        input = $easyInput.getInput(scope.type);
+        inputTemplate = $easyInput.getInputTemplate(scope.type);
 
         /**
         Watch the model change and trigger matched callback
          */
-        var initialValidity, inputElement, inputTemplate, name, uid, v, validMethod, validation, watch, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1;
         scope.$watch('model', function(newVal, oldVal) {
           if (newVal !== oldVal) {
             if (scope.ngChange()) {
@@ -209,16 +229,24 @@
         Set labelClass
          */
         scope.labelClassArr = scope.labelClass ? scope.labelClass.split(/[ ,]+/) : [];
+        if (angular.isArray(wrapper.labelClass)) {
+          (_ref = scope.labelClassArr).push.apply(_ref, wrapper.labelClass);
+        }
+        uniqueArray(scope.labelClassArr);
 
         /**
         Set controlClass
          */
         scope.controlClassArr = scope.controlClass ? scope.controlClass.split(/[ ,]+/) : [];
+        console.log(wrapper.controlClass);
+        if (angular.isArray(wrapper.controlClass)) {
+          (_ref1 = scope.controlClassArr).push.apply(_ref1, wrapper.controlClass);
+        }
+        uniqueArray(scope.controlClassArr);
 
         /**
         Get wrapper template option and compile it
          */
-        wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper);
         if (wrapperTemplate) {
           setElementTemplate(element, scope, wrapperTemplate);
         }
@@ -226,7 +254,6 @@
         /**
         Get input template option and compile it
          */
-        inputTemplate = $easyInput.getInputTemplate(scope.type);
         inputElement = element.find('easy-input-field');
         if (inputTemplate) {
           setElementTemplate(inputElement, scope, inputTemplate);
@@ -250,18 +277,18 @@
          */
         validation = [];
         if (scope.validatorRule != null) {
-          _ref = scope.validatorRule;
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            name = _ref[_i];
+          _ref2 = scope.validatorRule;
+          for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+            name = _ref2[_i];
             if (scope.validatorRule[name]) {
               validation.push(scope.validatorRule[name]);
             }
           }
         }
         if (scope.validator != null) {
-          _ref1 = scope.validator.split(/[ ,]+/);
-          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-            v = _ref1[_j];
+          _ref3 = scope.validator.split(/[ ,]+/);
+          for (_j = 0, _len1 = _ref3.length; _j < _len1; _j++) {
+            v = _ref3[_j];
             validation.push(v);
           }
         }

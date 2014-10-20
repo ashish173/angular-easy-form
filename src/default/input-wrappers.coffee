@@ -4,56 +4,58 @@ angular.module 'easy.form.default'
   # ----------------------------------------
   # vertical_form
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'verticalForm',
+  $easyInputProvider.registerWrapper 'vertical-form',
     templateUrl: 'easy-form/templates/input-wrappers/vertical-form.html'
 
   # ----------------------------------------
   # vertical_file_input
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'verticalFileInput',
+  $easyInputProvider.registerWrapper 'vertical-file-input',
     templateUrl: 'easy-form/templates/input-wrappers/vertical-file-input.html'
 
   # ----------------------------------------
   # vertical_boolean
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'verticalBoolean',
+  $easyInputProvider.registerWrapper 'vertical-boolean',
     templateUrl: 'easy-form/templates/input-wrappers/vertical-boolean.html'
 
   # ----------------------------------------
   # vertical_radio_and_checkboxes
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'verticalRadioAndCheckboxes',
+  $easyInputProvider.registerWrapper 'vertical-radio-and-checkboxes',
     templateUrl: 'easy-form/templates/input-wrappers/vertical-radio-and-checkboxes.html'
 
   # ----------------------------------------
   # horizontal_form
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'horizontalForm',
+  $easyInputProvider.registerWrapper 'horizontal-form',
     templateUrl: 'easy-form/templates/input-wrappers/horizontal-form.html'
+    labelClass: ['col-xs-3']
+    controlClass: ['col-xs-9']
 
   # ----------------------------------------
   # horizontal_file_input
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'horizontalFileInput',
-    templateUrl: 'easy-form/templates/input-wrappers/horizontalFileInput.html'
+  $easyInputProvider.registerWrapper 'horizontal-file-input',
+    templateUrl: 'easy-form/templates/input-wrappers/horizontal-file-input.html'
 
   # ----------------------------------------
   # horizontal_boolean
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'horizontalBoolean',
-    templateUrl: 'easy-form/templates/input-wrappers/horizontalBoolean.html'
+  $easyInputProvider.registerWrapper 'horizontal-boolean',
+    templateUrl: 'easy-form/templates/input-wrappers/horizontal-boolean.html'
 
   # ----------------------------------------
   # horizontal_radio_and_checkboxes
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'horizontalRadioAndCheckboxes',
+  $easyInputProvider.registerWrapper 'horizontal-radio-and-checkboxes',
     templateUrl: 'easy-form/templates/input-wrappers/horizontal-radio-and-checkboxes.html'
 
   # ----------------------------------------
   # inline_form
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'inlineForm',
-    templateUrl: 'easy-form/templates/input-wrappers/horizontalRadioAndCheckboxes.html'
+  $easyInputProvider.registerWrapper 'inline-form',
+    templateUrl: 'easy-form/templates/input-wrappers/inline-form.html'
 
   # ----------------------------------------
   # blank
@@ -64,4 +66,4 @@ angular.module 'easy.form.default'
   # ----------------------------------------
   # set default wrapper
   # ----------------------------------------
-  $easyInputProvider.setDefaultWrapper 'verticalForm'
+  $easyInputProvider.setDefaultWrapper 'vertical-form'
