@@ -1,5 +1,6 @@
 <ui-select ng-model="$parent.model"
            ng-disabled="ngDisabled"
+           search-enabled="{{options.uiSelect.searchEnabled != false}}"
            ng-if="!options.uiSelect.multiple">
     <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
     <ui-select-choices repeat="item in options.uiSelect.collection"
@@ -11,6 +12,7 @@
 
 <ui-select ng-model="$parent.model"
            ng-disabled="ngDisabled"
+           search-enabled="{{options.uiSelect.searchEnabled != false}}"
            ng-if="options.uiSelect.multiple"
            multiple>
     <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>

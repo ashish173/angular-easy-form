@@ -97,6 +97,7 @@ angular.module('easy.form.directives')
     validMessage = ''
     errorMessage = validation + "ErrorMessage"
     expression = $easyValidation.getExpression(validator)
+    $log.debug "validator: #{validator} not found" unless expression?
     valid =
       success: ->
         scope.$invalid = false

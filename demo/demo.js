@@ -111,6 +111,8 @@
     };
     $scope.uiSelectOptions = {
       uiSelect: {
+        searchEnabled: false,
+        allowEmpty: true,
         formatSelection: function(item) {
           return item.text;
         },

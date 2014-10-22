@@ -106,6 +106,9 @@
       validMessage = '';
       errorMessage = validation + "ErrorMessage";
       expression = $easyValidation.getExpression(validator);
+      if (expression == null) {
+        $log.debug("validator: " + validator + " not found");
+      }
       valid = {
         success: function() {
           scope.$invalid = false;

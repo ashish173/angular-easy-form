@@ -275,6 +275,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
   $templateCache.put("easy-form/templates/inputs/ui-select.html",
     "<ui-select ng-model=\"$parent.model\"\n" +
     "           ng-disabled=\"ngDisabled\"\n" +
+    "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"!options.uiSelect.multiple\">\n" +
     "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
     "    <ui-select-choices repeat=\"item in options.uiSelect.collection\"\n" +
@@ -286,6 +287,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "\n" +
     "<ui-select ng-model=\"$parent.model\"\n" +
     "           ng-disabled=\"ngDisabled\"\n" +
+    "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"options.uiSelect.multiple\"\n" +
     "           multiple>\n" +
     "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +

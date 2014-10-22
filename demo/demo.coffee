@@ -63,6 +63,8 @@ app.controller 'DemoCtrl', ($scope, $http) ->
 
   $scope.uiSelectOptions =
     uiSelect:
+      searchEnabled: false
+      allowEmpty: true
       formatSelection: (item) ->
         item.text
       formatResult: (item) ->
