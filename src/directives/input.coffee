@@ -223,7 +223,6 @@ angular.module('easy.form.directives')
       Set controlClass
       ###
       scope.controlClassArr = if scope.controlClass then scope.controlClass.split(/[ ,]+/) else []
-      console.log wrapper.controlClass
       scope.controlClassArr.push (wrapper.controlClass)... if angular.isArray(wrapper.controlClass)
       uniqueArray(scope.controlClassArr)
 

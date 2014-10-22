@@ -34,55 +34,59 @@ body(ng-controller='DemoCtrl')
                                 ng-form
                                     .form-group
                                         easy-input(type='text', ng-model='demo.controls.inputs.text',
-                                        label='"text"', placeholder='"please enter text"')
+                                        label='"text"', placeholder='"please enter text"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='password', ng-model='demo.controls.inputs.password',
-                                        label='"password"', placeholder='"please enter password"')
+                                        label='"password"', placeholder='"please enter password"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='datetime', ng-model='demo.controls.inputs.datetime',
-                                        label='"datetime"', placeholder='"please enter datetime"')
+                                        label='"datetime"', placeholder='"please enter datetime"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='datetime-local', ng-model='demo.controls.inputs.datetimeLocal',
-                                        label='"datetime local"', placeholder='"please enter datetime local"')
+                                        label='"datetime local"', placeholder='"please enter datetime local"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='date', ng-model='demo.controls.inputs.date',
-                                        label='"date"', placeholder='"please enter date"')
+                                        label='"date"', placeholder='"please enter date"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='month', ng-model='demo.controls.inputs.month',
-                                        label='"month"', placeholder='"please enter Text"')
+                                        label='"month"', placeholder='"please enter Text"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='time', ng-model='demo.controls.inputs.time',
-                                        label='"time"', placeholder='"please enter time"')
+                                        label='"time"', placeholder='"please enter time"', ng-disabled='disabled')
+
+                                    .form-group
+                                        easy-input(type='week', ng-model='demo.controls.inputs.week',
+                                        label='"week"', placeholder='"please enter week"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='number', ng-model='demo.controls.inputs.number',
-                                        label='"number"', placeholder='"please enter number"')
+                                        label='"number"', placeholder='"please enter number"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='email', ng-model='demo.controls.inputs.email',
-                                        label='"email"', placeholder='"please enter email"')
+                                        label='"email"', placeholder='"please enter email"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='url', ng-model='demo.controls.inputs.url',
-                                        label='"url"', placeholder='"please enter date"')
+                                        label='"url"', placeholder='"please enter date"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='search', ng-model='demo.controls.inputs.search',
-                                        label='"search"', placeholder='"please enter search"')
+                                        label='"search"', placeholder='"please enter search"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='tel', ng-model='demo.controls.inputs.tel',
-                                        label='"tel"', placeholder='"please enter tel"')
+                                        label='"tel"', placeholder='"please enter tel"', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='color', ng-model='demo.controls.inputs.color',
-                                        label='"color"', placeholder='"please enter color"')
+                                        label='"color"', placeholder='"please enter color"', ng-disabled='disabled')
                             .col-md-4
                                 pre {{demo.controls.inputs | json}}
                     h4 Textarea
@@ -93,13 +97,13 @@ body(ng-controller='DemoCtrl')
                                 ng-form
                                     .form-group
                                         easy-input(type='textarea', ng-model='demo.controls.textarea.basic',
-                                        label='"basic"', placeholder='"please enter something"')
+                                        label='"basic"', placeholder='"please enter something"', ng-disabled='disabled')
                                     .form-group
                                         easy-input(type='textarea-autosize', ng-model='demo.controls.textarea.autosize',
-                                        label='"autosize"', placeholder='"please enter something"')
+                                        label='"autosize"', placeholder='"please enter something"', ng-disabled='disabled')
                                     .form-group
                                         easy-input(type='text-angular', ng-model='demo.controls.textarea.textAngular',
-                                        label='"textAngular"', placeholder='"please enter something"')
+                                        label='"textAngular"', placeholder='"please enter something"', ng-disabled='disabled')
                             .col-md-4
                                 pre {{demo.controls.textarea | json}}
 
@@ -110,23 +114,23 @@ body(ng-controller='DemoCtrl')
                                 ng-form
                                     .form-group
                                         easy-input(type='checkbox', ng-model='demo.controls.checkboxes.checkbox',
-                                        label='"Boolean"', options='checkboxOptions')
+                                        label='"Boolean"', options='checkboxOptions', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='checkboxes', ng-model='demo.controls.checkboxes.checkboxes',
-                                        label='"checkboxes"', options='checkboxesOptions')
+                                        label='"checkboxes"', options='checkboxesOptions', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='checkboxes-inline', ng-model='demo.controls.checkboxes.checkboxesInline',
-                                        label='"checkboxes inline"', options='checkboxesOptions')
+                                        label='"checkboxes inline"', options='checkboxesOptions', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='radios', ng-model='demo.controls.checkboxes.radios',
-                                        label='"radios"', options='radiosOptions')
+                                        label='"radios"', options='radiosOptions', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='radios-inline', ng-model='demo.controls.checkboxes.radiosInline',
-                                        label='"radios inline"', options='radiosOptions')
+                                        label='"radios inline"', options='radiosOptions', ng-disabled='disabled')
                             .col-md-4
                                 pre {{demo.controls.checkboxes | json}}
                     h4 Select
@@ -136,10 +140,10 @@ body(ng-controller='DemoCtrl')
                                 ng-form
                                     .form-group
                                         easy-input(type='select', ng-model='demo.controls.select.basic',
-                                        label='"single select"', options='selectOptions')
+                                        label='"single select"', options='selectOptions', ng-disabled='disabled')
                                     .form-group
                                         easy-input(type='select-multiple', ng-model='demo.controls.select.multiple',
-                                        label='"multiple select"', options='selectMultipleOptions')
+                                        label='"multiple select"', options='selectMultipleOptions', ng-disabled='disabled')
                             .col-md-4
                                 pre {{demo.controls.select | json}}
 
@@ -150,16 +154,16 @@ body(ng-controller='DemoCtrl')
                                 ng-form
                                     .form-group
                                         easy-input(type='ui-select', ng-model='demo.controls.uiSelect.basic',
-                                        label='"single ui-select"', options='uiSelectOptions')
+                                        label='"single ui-select"', options='uiSelectOptions', ng-disabled='disabled')
                                     .form-group
                                         easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.multiple',
-                                        label='"multiple select"', options='uiSelectMultipleOptions')
+                                        label='"multiple select"', options='uiSelectMultipleOptions', ng-disabled='disabled')
                                     .form-group
-                                        easy-input(type='ui-select', ng-model='demo.controls.uiSelect.multiple',
-                                        label='"Remote Data Basic"', options='uiSelectRemoteOptions')
-                                    .form-group
-                                        easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.multiple',
-                                        label='"Remote Data Multiple"', options='uiSelectRemoteOptions')
+                                        easy-input(type='ui-select', ng-model='demo.controls.uiSelect.remote',
+                                        label='"Remote Data Basic"', options='uiSelectRemoteOptions', ng-disabled='disabled')
+                                    //.form-group
+                                    //    easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.remoteMultiple',
+                                    //    label='"Remote Data Multiple"', options='uiSelectRemoteOptions')
 
                             .col-md-4
                                 pre {{demo.controls.uiSelect | json}}
@@ -172,27 +176,27 @@ body(ng-controller='DemoCtrl')
                         ng-form
                             .form-group
                                 easy-input(type='text', ng-model='demo.layout.vertical.text',
-                                label='"Text"', placeholder='"placeholder"')
+                                label='"Text"', placeholder='"placeholder"', ng-disabled='disabled')
 
                     h4 Horizontal Form
                     .bs-example
                         ng-form.form-horizontal
                             .form-group
                                 easy-input(type='text', ng-model='demo.layout.horizontal.text', wrapper='horizontal-form'
-                                label='"Text"', placeholder='"placeholder"')
+                                label='"Text"', placeholder='"placeholder"', ng-disabled='disabled')
 
                     h4 Inline Form
                     .bs-example
                         ng-form.form-inline
                             .form-group
                                 easy-input(type='text', ng-model='demo.layout.inline.text1', wrapper='inline-form'
-                                placeholder='"placeholder"')
+                                placeholder='"placeholder"', ng-disabled='disabled')
                             .form-group
                                 easy-input(type='text', ng-model='demo.layout.inline.text2', wrapper='inline-form'
-                                placeholder='"placeholder"')
+                                placeholder='"placeholder"', ng-disabled='disabled')
                             .form-group
                                 easy-input(type='text', ng-model='demo.layout.inline.text3', wrapper='inline-form'
-                                placeholder='"placeholder"')
+                                placeholder='"placeholder"', ng-disabled='disabled')
                 .bs-docs-section
                     h3#validation.page-header Validation
                     h4 Basic
@@ -200,18 +204,27 @@ body(ng-controller='DemoCtrl')
                         ng-form.form
                             .form-group
                                 easy-input(type='text', ng-model='modelSingleValidation1',
-                                label='"Text"', placeholder='"placeholder"', validator='required')
+                                label='"Text"', placeholder='"placeholder"', validator='required', ng-disabled='disabled')
                     h4 Multiple
                     .bs-example
                         ng-form.form
                             .form-group
                                 easy-input(type='text', ng-model='model1',
-                                label='"Text"', placeholder='"placeholder"')
+                                label='"Text"', placeholder='"placeholder"', ng-disabled='disabled')
+
+                    h4 Watch trigger
+                    .bs-example
+
                     h4 Blur trigger
                     .bs-example
 
-                    h4 Manual trigger
+                    h4 Callback trigger
                     .bs-example
+
+                    h4 Event trigger
+                    .bs-example
+
+
 
                 .bs-docs-section
                     h3#ng-form-extend.page-header ngForm extend
@@ -229,7 +242,10 @@ body(ng-controller='DemoCtrl')
                     .bs-example
             .col-md-3
                 .bs-docs-sidebar.hidden-print.hidden-xs.hidden-sm
-                    ul.nav.bs-docs-sidenav
+                    ul.nav.bs-docs-sidenav(data-spy="affix", data-offset-top="60", data-offset-bottom="200")
+                        li
+                            button.btn.btn-xs.btn-primary(ng-click='enable()') Enable
+                            button.btn.btn-xs.btn-default(ng-click='disable()') Disable
                         li
                             a(href='#inputs') Inputs
                         li
@@ -253,5 +269,8 @@ body(ng-controller='DemoCtrl')
     script(src='../bower_components/angular-elastic/elastic.js')
     script(src='../bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
     // endbower
+
+    script(src='../bower_components/jquery/dist/jquery.js')
+    script(src='../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js')
     script(src='../dist/angular-easy-form.js')
     script(src='demo.js')

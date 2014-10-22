@@ -24,6 +24,9 @@
     $easyInputProvider.registerInput('time', {
       templateUrl: 'easy-form/templates/inputs/time.html'
     });
+    $easyInputProvider.registerInput('week', {
+      templateUrl: 'easy-form/templates/inputs/week.html'
+    });
     $easyInputProvider.registerInput('number', {
       templateUrl: 'easy-form/templates/inputs/number.html'
     });

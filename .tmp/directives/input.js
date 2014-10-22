@@ -238,7 +238,6 @@
         Set controlClass
          */
         scope.controlClassArr = scope.controlClass ? scope.controlClass.split(/[ ,]+/) : [];
-        console.log(wrapper.controlClass);
         if (angular.isArray(wrapper.controlClass)) {
           (_ref1 = scope.controlClassArr).push.apply(_ref1, wrapper.controlClass);
         }

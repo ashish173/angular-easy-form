@@ -3,6 +3,8 @@ app = angular.module 'demoApp', [
 ]
 
 app.controller 'DemoCtrl', ($scope, $http) ->
+  $scope.disabled = undefined
+
   $scope.checkboxOptions =
     checkbox:
       text: 'text of checkbox'
@@ -41,6 +43,10 @@ app.controller 'DemoCtrl', ($scope, $http) ->
 
   $scope.uiSelectOptions =
     uiSelect:
+      formatSelection: (item) ->
+        item.text
+      formatResult: (item) ->
+        item.text
       collection: [
         {key: 'key1', text: 'option 1'}
         {key: 'key2', text: 'option 2'}
@@ -57,15 +63,17 @@ app.controller 'DemoCtrl', ($scope, $http) ->
 
   $scope.uiSelectRemoteOptions =
     uiSelect:
+      formatSelection: (item) ->
+        item.name
+      formatResult: (item) ->
+        item.name
       refresh: (address)->
         params =
           address: address
-          sensor: false
-        $http.get("http://maps.googleapis.com/maps/api/geocode/json",
+        $http.get("json/countries.json",
           params: params
         ).then (response) ->
-          $scope.uiSelectRemoteOptions.uiSelect.collection = []
-          $scope.uiSelectRemoteOptions.uiSelect.collection.push(key: result.formatted_address, text: result.formatted_address) for result in response.data.results
+          $scope.uiSelectRemoteOptions.uiSelect.collection = response.data
 
   $scope.demo =
     controls:
@@ -74,5 +82,32 @@ app.controller 'DemoCtrl', ($scope, $http) ->
         checkbox: true
         checkboxes: []
         checkboxesInline: []
+      uiSelect:
+        basic:
+          key: 'key1'
+          text: 'option 1'
+        multiple: [
+          {
+            key: 'key1'
+            text: 'option 1'
+          },
+          {
+            key: 'key2',
+            text: 'option 2'
+          }
+        ]
+        remote: {
+            name: "Sudan",
+            code: "SD"
+          }
+
+  $scope.enable = ->
+    $scope.disabled = false
+
+  $scope.disable = ->
+    $scope.disabled = true
+
+
+
 
 

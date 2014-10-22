@@ -4,6 +4,7 @@
   app = angular.module('demoApp', ['easy.form']);
 
   app.controller('DemoCtrl', function($scope, $http) {
+    $scope.disabled = void 0;
     $scope.checkboxOptions = {
       checkbox: {
         text: 'text of checkbox'
@@ -75,6 +76,12 @@
     };
     $scope.uiSelectOptions = {
       uiSelect: {
+        formatSelection: function(item) {
+          return item.text;
+        },
+        formatResult: function(item) {
+          return item.text;
+        },
         collection: [
           {
             key: 'key1',
@@ -107,40 +114,59 @@
     };
     $scope.uiSelectRemoteOptions = {
       uiSelect: {
+        formatSelection: function(item) {
+          return item.name;
+        },
+        formatResult: function(item) {
+          return item.name;
+        },
         refresh: function(address) {
           var params;
           params = {
-            address: address,
-            sensor: false
+            address: address
           };
-          return $http.get("http://maps.googleapis.com/maps/api/geocode/json", {
+          return $http.get("json/countries.json", {
             params: params
           }).then(function(response) {
-            var result, _i, _len, _ref, _results;
-            $scope.uiSelectRemoteOptions.uiSelect.collection = [];
-            _ref = response.data.results;
-            _results = [];
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              result = _ref[_i];
-              _results.push($scope.uiSelectRemoteOptions.uiSelect.collection.push({
-                key: result.formatted_address,
-                text: result.formatted_address
-              }));
-            }
-            return _results;
+            return $scope.uiSelectRemoteOptions.uiSelect.collection = response.data;
           });
         }
       }
     };
-    return $scope.demo = {
+    $scope.demo = {
       controls: {
         inputs: {},
         checkboxes: {
           checkbox: true,
           checkboxes: [],
           checkboxesInline: []
+        },
+        uiSelect: {
+          basic: {
+            key: 'key1',
+            text: 'option 1'
+          },
+          multiple: [
+            {
+              key: 'key1',
+              text: 'option 1'
+            }, {
+              key: 'key2',
+              text: 'option 2'
+            }
+          ],
+          remote: {
+            name: "Sudan",
+            code: "SD"
+          }
         }
       }
+    };
+    $scope.enable = function() {
+      return $scope.disabled = false;
+    };
+    return $scope.disable = function() {
+      return $scope.disabled = true;
     };
   });
 
