@@ -1,6 +1,6 @@
 <div class="radio" ng-repeat="item in options.radios.collection">
     <label>
-        <input type="radio" ng-value="{{item}}" ng-model="$parent.model">
+        <input type="radio" ng-value="{{item}}" ng-model="$parent.model" ng-disabled="ngDisabled">
         {{item.text}}
     </label>
 </div>

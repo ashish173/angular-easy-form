@@ -1,5 +1,5 @@
 <div class="checkbox" ng-repeat="item in options.checkboxes.collection">
     <label>
-        <input type="checkbox" checklist-model="model" checklist-value="item"> {{item.text}}
+        <input type="checkbox" checklist-model="model" checklist-value="item" ng-disabled="ngDisabled"> {{item.text}}
     </label>
 </div>
