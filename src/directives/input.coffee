@@ -153,6 +153,7 @@ angular.module('easy.form.directives')
     transclude: true
     scope:
       model: '=ngModel'
+      name: '@'
       options: '='
       # template
       type: '@'
@@ -174,7 +175,7 @@ angular.module('easy.form.directives')
       originInvalidClass: '@'
       validMethod: '@'
       validatorRule: '='
-      validTrigger: '@'
+      validTriggerEvent: '@'
       initialValidity: '='
       validCallback: '&'
       invalidCallback: '&'
@@ -234,8 +235,9 @@ angular.module('easy.form.directives')
       ###*
       Get input template option and compile it
       ###
-      inputElement = element.find('easy-input-field')
-      if inputTemplate then setElementTemplate(inputElement, scope, inputTemplate)
+      inputFieldElement = element.find('easy-input-field')
+      if inputFieldElement then setElementTemplate(inputFieldElement, scope, inputTemplate)
+      inputElement = inputFieldElement.children("[name='inputIn']")
       ###*
       watch
       @type {watch}
@@ -268,6 +270,7 @@ angular.module('easy.form.directives')
         guid use
         ###
         uid = ctrl.validationId = guid()
+        console.log ctrl
 
         ###*
         Valid/Invalid Message
@@ -290,7 +293,7 @@ angular.module('easy.form.directives')
         ###*
         Use default validMethod if there is no value
         ###
-        validMethod = if scope.validMethod then scope.validMethod.split(/[ ,]+/) else ['watch']
+        validMethod = if scope.validMethod then scope.validMethod.split(/[ ,]+/) else ['blur', 'submit']
 
         ###*
         Reset the validation for specific form
@@ -328,52 +331,29 @@ angular.module('easy.form.directives')
               ctrl.$setViewValue ctrl.$viewValue # has value when initial
             checkValidation scope, element, attrs, ctrl, validation, value unless ctrl.$pristine
 
-        if 'submit' in validMethod
-          ###*
-          Click submit form, check the validity when submit
-          ###
-          scope.$on ctrl.$name + "submit-" + uid, (event, index) ->
-            value = element[0].value
-            isValid = false
-
-            isFocusElement = false  if index is 0
-
-            isValid = checkValidation(scope, element, attrs, ctrl, validation, value)
-
-            if scope.validMethod is "submit"
-              watch() # clear previous scope.$watch
-              watch = scope.$watch "model", (value, oldValue) ->
-
-                # don't watch when init
-                return  if value is oldValue
-
-                # scope.$watch will translate '' to undefined
-                # undefined/null will pass the required submit /^.+/
-                # cause some error in this validation
-                value = ""  if value is `undefined` or value is null
-
-                isValid = checkValidation(scope, element, attrs, ctrl, validation, value)
-
-            # Focus first input element when submit error
-            if not isFocusElement and not isValid
-              isFocusElement = true
-              element[0].focus()
-
         if 'blur' in validMethod
           ###*
           Validate blur method
           ###
-          # todo get input element again after successful rendering
-          element.bind "blur", ->
-            value = element[0].value
+          inputElement.bind "blur", ->
             scope.$apply ->
-              checkValidation scope, element, attrs, ctrl, validation, value
+              checkValidation scope, element, attrs, ctrl, validation, scope.model
 
-        if 'trigger' in validMethod
+        if 'submit' in validMethod
           ###*
-          Validate trigger method
+          Click submit form, check the validity when submit
           ###
-          scope.validTrigger
-          scope.$on scope.validTrigger, ->
-            checkValidation scope, element, attrs, ctrl, validation, value
+          scope.$on ctrl.$name + "-submit-" + uid,  ->
+            checkValidation(scope, element, attrs, ctrl, validation, scope.model)
+
+
+
+
+        if scope.validTriggerEvent?
+          ###*
+          Do validation when receive a given event command
+          ###
+          scope.$on scope.validTriggerEvent,  ->
+            checkValidation(scope, element, attrs, ctrl, validation, scope.model)
+
   )

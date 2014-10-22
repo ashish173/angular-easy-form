@@ -141,8 +141,8 @@
         }
       } else {
         for (i in form) {
-          if (form[i] && form[i].hasOwnProperty("$dirty")) {
-            $scope.$broadcast(i + "submit-" + form[i].validationId, idx++);
+          if (form[i] && form[i].hasOwnProperty("$dirty") && form[i].validationId) {
+            $scope.$broadcast("" + i + "-submit-" + form[i].validationId, idx++);
           }
         }
       }

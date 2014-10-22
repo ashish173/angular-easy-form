@@ -72,35 +72,17 @@
     $easyInputProvider.registerInput('select', {
       templateUrl: 'easy-form/templates/inputs/select.html'
     });
-    $easyInputProvider.registerInput('select-multiple', {
-      templateUrl: 'easy-form/templates/inputs/select-multiple.html'
-    });
     $easyInputProvider.registerInput('ui-select', {
       templateUrl: 'easy-form/templates/inputs/ui-select.html'
     });
-    $easyInputProvider.registerInput('ui-select-multiple', {
-      templateUrl: 'easy-form/templates/inputs/ui-select-multiple.html'
+    $easyInputProvider.registerInput('datepicker', {
+      templateUrl: 'easy-form/templates/inputs/datepicker.html'
     });
-    $easyInputProvider.registerInput('date', {
-      templateUrl: 'easy-form/templates/inputs/date.html'
+    $easyInputProvider.registerInput('timepicker', {
+      templateUrl: 'template/easy-form/templates/inputs/timepicker.html'
     });
-    $easyInputProvider.registerInput('date_picker', {
-      templateUrl: 'template/easy-form/templates/inputs/date_picker.html'
-    });
-    $easyInputProvider.registerInput('date_select', {
-      templateUrl: 'easy-form/templates/inputs/date_select.html'
-    });
-    $easyInputProvider.registerInput('month_picker', {
-      templateUrl: 'easy-form/templates/inputs/month_picker.html'
-    });
-    $easyInputProvider.registerInput('month_select', {
-      templateUrl: 'easy-form/templates/inputs/month_select.html'
-    });
-    $easyInputProvider.registerInput('year_picker', {
-      templateUrl: 'easy-form/templates/inputs/year_picker.html'
-    });
-    $easyInputProvider.registerInput('year_select', {
-      templateUrl: 'easy-form/templates/inputs/year_select.html'
+    $easyInputProvider.registerInput('datetimepicker', {
+      templateUrl: 'easy-form/templates/inputs/datetimepicker.html'
     });
     return $easyInputProvider.setDefaultInput('text');
   });

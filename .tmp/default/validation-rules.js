@@ -5,7 +5,7 @@
         return !!value;
       },
       messages: {
-        invalid: "This should be Required!!",
+        invalid: "This should be required.",
         valid: "It's Required"
       },
       translate: true
@@ -13,7 +13,7 @@
     $easyValidationProvider.register('url', {
       expression: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
       messages: {
-        invalid: "This should be Url",
+        invalid: "This should be url.",
         valid: "It's Url"
       },
       translate: true

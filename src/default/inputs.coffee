@@ -84,57 +84,20 @@ angular.module 'easy.form.default'
   $easyInputProvider.registerInput 'select',
     templateUrl: 'easy-form/templates/inputs/select.html'
 
-  $easyInputProvider.registerInput 'select-multiple',
-    templateUrl: 'easy-form/templates/inputs/select-multiple.html'
-
   $easyInputProvider.registerInput 'ui-select',
     templateUrl: 'easy-form/templates/inputs/ui-select.html'
 
-  $easyInputProvider.registerInput 'ui-select-multiple',
-    templateUrl: 'easy-form/templates/inputs/ui-select-multiple.html'
+  # ----------------------------------------
+  # date & time picker
+  # ----------------------------------------
+  $easyInputProvider.registerInput 'datepicker',
+    templateUrl: 'easy-form/templates/inputs/datepicker.html'
 
-  # ----------------------------------------
-  # date
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'date',
-    templateUrl: 'easy-form/templates/inputs/date.html'
+  $easyInputProvider.registerInput 'timepicker',
+    templateUrl: 'template/easy-form/templates/inputs/timepicker.html'
 
-  # ----------------------------------------
-  # date_picker
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'date_picker',
-    templateUrl: 'template/easy-form/templates/inputs/date_picker.html'
-
-  # ----------------------------------------
-  # date_select
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'date_select',
-    templateUrl: 'easy-form/templates/inputs/date_select.html'
-
-  # ----------------------------------------
-  # month_picker
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'month_picker',
-    templateUrl: 'easy-form/templates/inputs/month_picker.html'
-
-  # ----------------------------------------
-  # month_select
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'month_select',
-    templateUrl: 'easy-form/templates/inputs/month_select.html'
-
-  # ----------------------------------------
-  # year_picker
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'year_picker',
-    templateUrl: 'easy-form/templates/inputs/year_picker.html'
-
-  # ----------------------------------------
-  # year_select
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'year_select',
-    templateUrl: 'easy-form/templates/inputs/year_select.html'
-
+  $easyInputProvider.registerInput 'datetimepicker',
+    templateUrl: 'easy-form/templates/inputs/datetimepicker.html'
 
   # ----------------------------------------
   # set default input

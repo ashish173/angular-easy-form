@@ -26,8 +26,42 @@
         ]
       }
     };
+    $scope.checkboxesInlineOptions = {
+      checkboxes: {
+        inline: true,
+        collection: [
+          {
+            key: 'key1',
+            text: 'option 1'
+          }, {
+            key: 'key2',
+            text: 'option 2'
+          }, {
+            key: 'key3',
+            text: 'option 3'
+          }
+        ]
+      }
+    };
     $scope.radiosOptions = {
       radios: {
+        collection: [
+          {
+            key: 'key1',
+            text: 'option 1'
+          }, {
+            key: 'key2',
+            text: 'option 2'
+          }, {
+            key: 'key3',
+            text: 'option 3'
+          }
+        ]
+      }
+    };
+    $scope.radiosInlineOptions = {
+      radios: {
+        inline: true,
         collection: [
           {
             key: 'key1',
@@ -60,6 +94,7 @@
     };
     $scope.selectMultipleOptions = {
       select: {
+        multiple: true,
         collection: [
           {
             key: 'key1',
@@ -98,6 +133,13 @@
     };
     $scope.uiSelectMultipleOptions = {
       uiSelect: {
+        multiple: true,
+        formatSelection: function(item) {
+          return item.text;
+        },
+        formatResult: function(item) {
+          return item.text;
+        },
         collection: [
           {
             key: 'key1',
@@ -165,8 +207,17 @@
     $scope.enable = function() {
       return $scope.disabled = false;
     };
-    return $scope.disable = function() {
+    $scope.disable = function() {
       return $scope.disabled = true;
+    };
+    $scope.trigValidation = function() {
+      return $scope.$broadcast('trigge-validate');
+    };
+    $scope.validCallback = function() {
+      return alert('valid');
+    };
+    return $scope.invalidCallback = function() {
+      return alert('invalid');
     };
   });
 

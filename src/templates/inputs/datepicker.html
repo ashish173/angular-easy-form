@@ -1,0 +1,16 @@
+<div class="input-group date">
+    <input name="inputIn" class="form-control" type="text" ng-model="model" easy-datepicker easy-datepicker-options=""/>
+    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+</div>
+
+<p class="input-group">
+    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="model"
+           min-date="minDate" max-date="'2015-06-22'" datepicker-options="options.datepicker"
+           date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open($event)"><i
+            class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+</p>
+
+<input name="inputIn" type="text" class="form-control" placeholder="{{placeholder}}" ng-model="model" ng-disabled="ngDisabled"/>

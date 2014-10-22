@@ -116,6 +116,7 @@ angular.module 'easy.form.providers'
   @validate = (form) ->
     deferred = $q.defer()
     idx = 0
+
     if form is `undefined`
       console.error "This is not a regular Form name scope"
       deferred.reject "This is not a regular Form name scope"
@@ -126,8 +127,9 @@ angular.module 'easy.form.providers'
       for k of form
         $scope.$broadcast form[k].$name + "submit-" + form[k].validationId, idx++
     else
+
       for i of form # whole scope
-        $scope.$broadcast i + "submit-" + form[i].validationId, idx++  if form[i] and form[i].hasOwnProperty("$dirty")
+        $scope.$broadcast "#{i}-submit-#{form[i].validationId}", idx++  if form[i] and form[i].hasOwnProperty("$dirty") and  form[i].validationId
     deferred.promise.success = (fn) ->
       deferred.promise.then (value) ->
         fn value

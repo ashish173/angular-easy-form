@@ -121,16 +121,16 @@ body(ng-controller='DemoCtrl')
                                         label='"checkboxes"', options='checkboxesOptions', ng-disabled='disabled')
 
                                     .form-group
-                                        easy-input(type='checkboxes-inline', ng-model='demo.controls.checkboxes.checkboxesInline',
-                                        label='"checkboxes inline"', options='checkboxesOptions', ng-disabled='disabled')
+                                        easy-input(type='checkboxes', ng-model='demo.controls.checkboxes.checkboxesInline',
+                                        label='"checkboxes inline"', options='checkboxesInlineOptions', ng-disabled='disabled')
 
                                     .form-group
                                         easy-input(type='radios', ng-model='demo.controls.checkboxes.radios',
                                         label='"radios"', options='radiosOptions', ng-disabled='disabled')
 
                                     .form-group
-                                        easy-input(type='radios-inline', ng-model='demo.controls.checkboxes.radiosInline',
-                                        label='"radios inline"', options='radiosOptions', ng-disabled='disabled')
+                                        easy-input(type='radios', ng-model='demo.controls.checkboxes.radiosInline',
+                                        label='"radios inline"', options='radiosInlineOptions', ng-disabled='disabled')
                             .col-md-4
                                 pre {{demo.controls.checkboxes | json}}
                     h4 Select
@@ -142,7 +142,7 @@ body(ng-controller='DemoCtrl')
                                         easy-input(type='select', ng-model='demo.controls.select.basic',
                                         label='"single select"', options='selectOptions', ng-disabled='disabled')
                                     .form-group
-                                        easy-input(type='select-multiple', ng-model='demo.controls.select.multiple',
+                                        easy-input(type='select', ng-model='demo.controls.select.multiple',
                                         label='"multiple select"', options='selectMultipleOptions', ng-disabled='disabled')
                             .col-md-4
                                 pre {{demo.controls.select | json}}
@@ -156,7 +156,7 @@ body(ng-controller='DemoCtrl')
                                         easy-input(type='ui-select', ng-model='demo.controls.uiSelect.basic',
                                         label='"single ui-select"', options='uiSelectOptions', ng-disabled='disabled')
                                     .form-group
-                                        easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.multiple',
+                                        easy-input(type='ui-select', ng-model='demo.controls.uiSelect.multiple',
                                         label='"multiple select"', options='uiSelectMultipleOptions', ng-disabled='disabled')
                                     .form-group
                                         easy-input(type='ui-select', ng-model='demo.controls.uiSelect.remote',
@@ -201,28 +201,68 @@ body(ng-controller='DemoCtrl')
                     h3#validation.page-header Validation
                     h4 Basic
                     .bs-example
-                        ng-form.form
-                            .form-group
-                                easy-input(type='text', ng-model='modelSingleValidation1',
-                                label='"Text"', placeholder='"placeholder"', validator='required', ng-disabled='disabled')
+                        .row
+                            .col-md-8
+                                ng-form.form
+                                    .form-group
+                                        easy-input(type='text', ng-model='demo.validation.basic.required',
+                                        label='"Required"', placeholder='"Required"', validator='required', ng-disabled='disabled')
+                                    .form-group
+                                        easy-input(type='text', ng-model='demo.validation.basic.url',
+                                        label='"URL"', placeholder='"URL"', validator='url', ng-disabled='disabled')
+                                    .form-group
+                                        easy-input(type='text', ng-model='demo.validation.basic.email',
+                                        label='"Email"', placeholder='"Email"', validator='email', ng-disabled='disabled')
+                                    .form-group
+                                        easy-input(type='text', ng-model='demo.validation.basic.number',
+                                        label='"Number"', placeholder='"Number"', validator='number', ng-disabled='disabled')
+                            .col-md-4
+                                pre {{demo.validation.basic | json}}
+
                     h4 Multiple
                     .bs-example
                         ng-form.form
                             .form-group
-                                easy-input(type='text', ng-model='model1',
-                                label='"Text"', placeholder='"placeholder"', ng-disabled='disabled')
+                                easy-input(type='text', ng-model='demo.validation.multiple1', ng-disabled='disabled',
+                                label='"Required + Email"', placeholder='"placeholder"', validator='rquired, email')
 
-                    h4 Watch trigger
-                    .bs-example
+                    //h4 Watch method
+                    //.bs-example
+                    //    ng-form.form
+                    //        .form-group
+                    //            easy-input(type='text', ng-model='demo.validation.methods.watch', validMethod='watch'
+                    //                label='"required"', placeholder='"required"', validator='required', ng-disabled='disabled')
 
-                    h4 Blur trigger
+                    h4 Blur method
                     .bs-example
+                        ng-form.form
+                            .form-group
+                                easy-input(type='text', ng-model='demo.validation.methods.blur',
+                                label='"required"', placeholder='"required"', validator='required', ng-disabled='disabled')
 
-                    h4 Callback trigger
+                    h4 Sumbit method
                     .bs-example
+                        ng-form.form(name='validateMethodSubmitForm')
+                            .form-group
+                                easy-input(type='text', ng-model='demo.validation.methods.submit', name='validateMethodSubmitRequired'
+                                label='"Required"', placeholder='"Required"', validator='required', ng-disabled='disabled')
+                            button.btn.btn-primary(easy-submit='validateMethodSubmitForm') Submit
 
-                    h4 Event trigger
+                    h4 Event method
                     .bs-example
+                        ng-form.form
+                            .form-group
+                                easy-input(type='text', ng-model='demo.validation.methods.event', ng-disabled='disabled'
+                                label='"Required"', placeholder='"Required"', validator='required', valid-trigger-event='trigge-validate')
+                            button.btn.btn-primary(ng-click='trigValidation()') Trigger
+
+                    h4 Valid / Invalid Callback
+                    .bs-example
+                        ng-form.form(name='validateCallbackForm')
+                            .form-group
+                                easy-input(type='text', ng-model='demo.validation.callback', ng-disabled='disabled', name='validateCallback'
+                                label='"Required"', placeholder='"Required"', validator='required', valid-callback='validCallback()', invalid-callback='invalidCallback()')
+                            button.btn.btn-primary(easy-submit='validateCallbackForm') Submit
 
 
 
@@ -270,7 +310,7 @@ body(ng-controller='DemoCtrl')
     script(src='../bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
     // endbower
 
-    script(src='../bower_components/jquery/dist/jquery.js')
-    script(src='../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js')
+    script(src='//code.jquery.com/jquery-2.1.1.min.js')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
     script(src='../dist/angular-easy-form.js')
     script(src='demo.js')

@@ -1,9 +1,22 @@
 <ui-select ng-model="$parent.model"
-           ng-disabled="ngDisabled">
+           ng-disabled="ngDisabled"
+           ng-if="!options.uiSelect.multiple">
     <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
     <ui-select-choices repeat="item in options.uiSelect.collection"
                        refresh="options.uiSelect.refresh($select.search)"
                        refresh-delay="0">
         <div ng-bind-html="options.uiSelect.formatSelection(item) | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>
+
+<ui-select ng-model="$parent.model"
+           ng-disabled="ngDisabled"
+           ng-if="options.uiSelect.multiple"
+           multiple>
+    <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
+    <ui-select-choices repeat="item in options.uiSelect.collection"
+                       refresh="options.uiSelect.refresh($select.search)"
+                       refresh-delay="0">
+        <div ng-bind-html="options.uiSelect.formatSelection(item)"></div>
     </ui-select-choices>
 </ui-select>

@@ -178,6 +178,7 @@
       transclude: true,
       scope: {
         model: '=ngModel',
+        name: '@',
         options: '=',
         type: '@',
         wrapper: '@',
@@ -194,7 +195,7 @@
         originInvalidClass: '@',
         validMethod: '@',
         validatorRule: '=',
-        validTrigger: '@',
+        validTriggerEvent: '@',
         initialValidity: '=',
         validCallback: '&',
         invalidCallback: '&'
@@ -204,7 +205,7 @@
         /**
         Initialize scope from options
          */
-        var initialValidity, input, inputElement, inputTemplate, name, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+        var initialValidity, input, inputElement, inputFieldElement, inputTemplate, name, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
         wrapper = $easyInput.getWrapper(scope.wrapper);
         wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper);
         input = $easyInput.getInput(scope.type);
@@ -253,10 +254,11 @@
         /**
         Get input template option and compile it
          */
-        inputElement = element.find('easy-input-field');
-        if (inputTemplate) {
-          setElementTemplate(inputElement, scope, inputTemplate);
+        inputFieldElement = element.find('easy-input-field');
+        if (inputFieldElement) {
+          setElementTemplate(inputFieldElement, scope, inputTemplate);
         }
+        inputElement = inputFieldElement.children("[name='inputIn']");
 
         /**
         watch
@@ -302,6 +304,7 @@
           guid use
            */
           uid = ctrl.validationId = guid();
+          console.log(ctrl);
 
           /**
           Valid/Invalid Message
@@ -323,7 +326,7 @@
           /**
           Use default validMethod if there is no value
            */
-          validMethod = scope.validMethod ? scope.validMethod.split(/[ ,]+/) : ['watch'];
+          validMethod = scope.validMethod ? scope.validMethod.split(/[ ,]+/) : ['blur', 'submit'];
 
           /**
           Reset the validation for specific form
@@ -367,58 +370,33 @@
               }
             });
           }
-          if (__indexOf.call(validMethod, 'submit') >= 0) {
-
-            /**
-            Click submit form, check the validity when submit
-             */
-            scope.$on(ctrl.$name + "submit-" + uid, function(event, index) {
-              var isValid, value;
-              value = element[0].value;
-              isValid = false;
-              if (index === 0) {
-                isFocusElement = false;
-              }
-              isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
-              if (scope.validMethod === "submit") {
-                watch();
-                watch = scope.$watch("model", function(value, oldValue) {
-                  if (value === oldValue) {
-                    return;
-                  }
-                  if (value === undefined || value === null) {
-                    value = "";
-                  }
-                  return isValid = checkValidation(scope, element, attrs, ctrl, validation, value);
-                });
-              }
-              if (!isFocusElement && !isValid) {
-                isFocusElement = true;
-                return element[0].focus();
-              }
-            });
-          }
           if (__indexOf.call(validMethod, 'blur') >= 0) {
 
             /**
             Validate blur method
              */
-            element.bind("blur", function() {
-              var value;
-              value = element[0].value;
+            inputElement.bind("blur", function() {
               return scope.$apply(function() {
-                return checkValidation(scope, element, attrs, ctrl, validation, value);
+                return checkValidation(scope, element, attrs, ctrl, validation, scope.model);
               });
             });
           }
-          if (__indexOf.call(validMethod, 'trigger') >= 0) {
+          if (__indexOf.call(validMethod, 'submit') >= 0) {
 
             /**
-            Validate trigger method
+            Click submit form, check the validity when submit
              */
-            scope.validTrigger;
-            return scope.$on(scope.validTrigger, function() {
-              return checkValidation(scope, element, attrs, ctrl, validation, value);
+            scope.$on(ctrl.$name + "-submit-" + uid, function() {
+              return checkValidation(scope, element, attrs, ctrl, validation, scope.model);
+            });
+          }
+          if (scope.validTriggerEvent != null) {
+
+            /**
+            Do validation when receive a given event command
+             */
+            return scope.$on(scope.validTriggerEvent, function() {
+              return checkValidation(scope, element, attrs, ctrl, validation, scope.model);
             });
           }
         }
