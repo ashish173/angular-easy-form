@@ -156,6 +156,9 @@ body(ng-controller='DemoCtrl')
                                         easy-input(type='ui-select', ng-model='demo.controls.uiSelect.basic',
                                         label='"single ui-select"', options='uiSelectOptions', ng-disabled='disabled')
                                     .form-group
+                                        easy-input(type='ui-select', ng-model='demo.controls.uiSelect.singleProperty',
+                                        label='"single property ui-select"', options='uiSelectSinglePropertyOptions', ng-disabled='disabled')
+                                    .form-group
                                         easy-input(type='ui-select', ng-model='demo.controls.uiSelect.multiple',
                                         label='"multiple select"', options='uiSelectMultipleOptions', ng-disabled='disabled')
                                     .form-group

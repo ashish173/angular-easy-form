@@ -23,9 +23,10 @@ module.exports = function (config) {
             'bower_components/textAngular/dist/textAngular.min.js',
             'bower_components/angular-sanitize/angular-sanitize.js',
             'bower_components/angular-elastic/elastic.js',
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'src/module.coffee',
             'src/**/*.coffee',
-            '.tmp/templates.js',
+            'src/templates/templates.js',
             'test/unit/**/*.coffee'
         ],
 

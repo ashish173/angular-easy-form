@@ -66,9 +66,23 @@ app.controller 'DemoCtrl', ($scope, $http) ->
       searchEnabled: false
       allowEmpty: true
       formatSelection: (item) ->
-        item.text
+        item.text if item? and item.text?
       formatResult: (item) ->
-        item.text
+        item.text if item? and item.text?
+      collection: [
+        {key: 'key1', text: 'option 1'}
+        {key: 'key2', text: 'option 2'}
+        {key: 'key3', text: 'option 3'}
+      ]
+
+  $scope.uiSelectSinglePropertyOptions =
+    uiSelect:
+      searchEnabled: false
+      bindProperty: 'key'
+      formatSelection: (item) ->
+        item.text if item? and item.text?
+      formatResult: (item) ->
+        item.text if item? and item.text?
       collection: [
         {key: 'key1', text: 'option 1'}
         {key: 'key2', text: 'option 2'}
@@ -113,6 +127,7 @@ app.controller 'DemoCtrl', ($scope, $http) ->
         basic:
           key: 'key1'
           text: 'option 1'
+#        singleProperty: 'key1'
         multiple: [
           {
             key: 'key1'

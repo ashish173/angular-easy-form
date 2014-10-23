@@ -1,7 +1,8 @@
-<ui-select ng-model="$parent.model"
+<!--single of objects-->
+<ui-select ng-model="$parent.$parent.model"
            ng-disabled="ngDisabled"
            search-enabled="{{options.uiSelect.searchEnabled != false}}"
-           ng-if="!options.uiSelect.multiple">
+           ng-if="!options.uiSelect.multiple && !options.uiSelect.bindProperty">
     <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
     <ui-select-choices repeat="item in options.uiSelect.collection"
                        refresh="options.uiSelect.refresh($select.search)"
@@ -10,13 +11,39 @@
     </ui-select-choices>
 </ui-select>
 
-<ui-select ng-model="$parent.model"
+<!--multiple of objects-->
+<ui-select ng-model="$parent.$parent.model"
            ng-disabled="ngDisabled"
            search-enabled="{{options.uiSelect.searchEnabled != false}}"
-           ng-if="options.uiSelect.multiple"
+           ng-if="options.uiSelect.multiple && !options.uiSelect.bindProperty"
            multiple>
     <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
     <ui-select-choices repeat="item in options.uiSelect.collection"
+                       refresh="options.uiSelect.refresh($select.search)"
+                       refresh-delay="0">
+        <div ng-bind-html="options.uiSelect.formatSelection(item)"></div>
+    </ui-select-choices>
+</ui-select>
+<!--single of objects with single property binding-->
+<ui-select ng-model="$parent.$parent.model"
+           ng-disabled="ngDisabled"
+           search-enabled="{{options.uiSelect.searchEnabled != false}}"
+           ng-if="!options.uiSelect.multiple && options.uiSelect.bindProperty">
+    <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
+    <ui-select-choices repeat="item[options.uiSelect.bindProperty] as item in options.uiSelect.collection"
+                       refresh="options.uiSelect.refresh($select.search)"
+                       refresh-delay="0">
+        <div ng-bind-html="options.uiSelect.formatSelection(item) | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>
+<!--multiple of objects with single property binding-->
+<ui-select ng-model="$parent.$parent.model"
+           ng-disabled="ngDisabled"
+           search-enabled="{{options.uiSelect.searchEnabled != false}}"
+           ng-if="options.uiSelect.multiple && options.uiSelect.bindProperty"
+           multiple>
+    <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
+    <ui-select-choices repeat="item[options.uiSelect.bindProperty] in options.uiSelect.collection"
                        refresh="options.uiSelect.refresh($select.search)"
                        refresh-delay="0">
         <div ng-bind-html="options.uiSelect.formatSelection(item)"></div>

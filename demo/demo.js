@@ -114,10 +114,42 @@
         searchEnabled: false,
         allowEmpty: true,
         formatSelection: function(item) {
-          return item.text;
+          if ((item != null) && (item.text != null)) {
+            return item.text;
+          }
         },
         formatResult: function(item) {
-          return item.text;
+          if ((item != null) && (item.text != null)) {
+            return item.text;
+          }
+        },
+        collection: [
+          {
+            key: 'key1',
+            text: 'option 1'
+          }, {
+            key: 'key2',
+            text: 'option 2'
+          }, {
+            key: 'key3',
+            text: 'option 3'
+          }
+        ]
+      }
+    };
+    $scope.uiSelectSinglePropertyOptions = {
+      uiSelect: {
+        searchEnabled: false,
+        bindProperty: 'key',
+        formatSelection: function(item) {
+          if ((item != null) && (item.text != null)) {
+            return item.text;
+          }
+        },
+        formatResult: function(item) {
+          if ((item != null) && (item.text != null)) {
+            return item.text;
+          }
         },
         collection: [
           {

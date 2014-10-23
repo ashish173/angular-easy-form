@@ -23,6 +23,7 @@ module.exports = function (config) {
             'bower_components/textAngular/dist/textAngular.min.js',
             'bower_components/angular-sanitize/angular-sanitize.js',
             'bower_components/angular-elastic/elastic.js',
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'dist/angular-easy-form.min.js',
             'test/unit/**/*.coffee'
         ],

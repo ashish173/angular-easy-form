@@ -3,8 +3,8 @@ describe 'easy.form', ->
     beforeEach module('easy.form')
 
     describe 'inputMappings', ->
-      it 'should have 31 default inputMappings by initialization', inject ($easyInput) ->
-        expect(31).toBe Object.keys($easyInput.inputMappings).length
+      it 'should have 27 default inputMappings by initialization', inject ($easyInput) ->
+        expect(27).toBe Object.keys($easyInput.inputMappings).length
 
     describe 'wrapperMappings', ->
       it 'should have 10 default inputMappings by initialization', inject ($easyInput) ->

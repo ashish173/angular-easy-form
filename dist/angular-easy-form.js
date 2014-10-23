@@ -1403,10 +1403,11 @@ angular.module("easy-form/templates/inputs/timepicker.html", []).run(["$template
 
 angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/ui-select.html",
-    "<ui-select ng-model=\"$parent.model\"\n" +
+    "<!--single of objects-->\n" +
+    "<ui-select ng-model=\"$parent.$parent.model\"\n" +
     "           ng-disabled=\"ngDisabled\"\n" +
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
-    "           ng-if=\"!options.uiSelect.multiple\">\n" +
+    "           ng-if=\"!options.uiSelect.multiple && !options.uiSelect.bindProperty\">\n" +
     "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
     "    <ui-select-choices repeat=\"item in options.uiSelect.collection\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
@@ -1415,13 +1416,39 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "    </ui-select-choices>\n" +
     "</ui-select>\n" +
     "\n" +
-    "<ui-select ng-model=\"$parent.model\"\n" +
+    "<!--multiple of objects-->\n" +
+    "<ui-select ng-model=\"$parent.$parent.model\"\n" +
     "           ng-disabled=\"ngDisabled\"\n" +
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
-    "           ng-if=\"options.uiSelect.multiple\"\n" +
+    "           ng-if=\"options.uiSelect.multiple && !options.uiSelect.bindProperty\"\n" +
     "           multiple>\n" +
     "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
     "    <ui-select-choices repeat=\"item in options.uiSelect.collection\"\n" +
+    "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
+    "                       refresh-delay=\"0\">\n" +
+    "        <div ng-bind-html=\"options.uiSelect.formatSelection(item)\"></div>\n" +
+    "    </ui-select-choices>\n" +
+    "</ui-select>\n" +
+    "<!--single of objects with single property binding-->\n" +
+    "<ui-select ng-model=\"$parent.$parent.model\"\n" +
+    "           ng-disabled=\"ngDisabled\"\n" +
+    "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
+    "           ng-if=\"!options.uiSelect.multiple && options.uiSelect.bindProperty\">\n" +
+    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
+    "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] as item in options.uiSelect.collection\"\n" +
+    "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
+    "                       refresh-delay=\"0\">\n" +
+    "        <div ng-bind-html=\"options.uiSelect.formatSelection(item) | highlight: $select.search\"></div>\n" +
+    "    </ui-select-choices>\n" +
+    "</ui-select>\n" +
+    "<!--multiple of objects with single property binding-->\n" +
+    "<ui-select ng-model=\"$parent.$parent.model\"\n" +
+    "           ng-disabled=\"ngDisabled\"\n" +
+    "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
+    "           ng-if=\"options.uiSelect.multiple && options.uiSelect.bindProperty\"\n" +
+    "           multiple>\n" +
+    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
+    "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] in options.uiSelect.collection\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
     "        <div ng-bind-html=\"options.uiSelect.formatSelection(item)\"></div>\n" +
