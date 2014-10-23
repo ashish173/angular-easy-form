@@ -178,7 +178,6 @@
     return {
       require: 'ngModel',
       restrict: 'AE',
-      transclude: true,
       scope: {
         model: '=ngModel',
         name: '@',
@@ -203,7 +202,7 @@
         validCallback: '&',
         invalidCallback: '&'
       },
-      link: function(scope, element, attrs, ctrl, transclude) {
+      link: function(scope, element, attrs, ctrl) {
 
         /**
         Initialize scope from options

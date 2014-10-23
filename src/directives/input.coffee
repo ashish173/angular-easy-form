@@ -151,7 +151,6 @@ angular.module('easy.form.directives')
   return (
     require: 'ngModel'
     restrict: 'AE'
-    transclude: true
     scope:
       model: '=ngModel'
       name: '@'
@@ -180,7 +179,7 @@ angular.module('easy.form.directives')
       initialValidity: '='
       validCallback: '&'
       invalidCallback: '&'
-    link: (scope, element, attrs, ctrl, transclude) ->
+    link: (scope, element, attrs, ctrl) ->
       ###*
       Initialize scope from options
       ###

@@ -66,7 +66,7 @@ angular.module("easy-form/templates/input-wrappers/inline-form.html", []).run(["
 
 angular.module("easy-form/templates/input-wrappers/none.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/none.html",
-    "<div ng-transclude></div>");
+    "<easy-input-field ng-class=\"controlClassArr\"></easy-input-field>");
 }]);
 
 angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(["$templateCache", function($templateCache) {
