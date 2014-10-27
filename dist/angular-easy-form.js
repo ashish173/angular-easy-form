@@ -871,12 +871,11 @@
           Set custom initial validity
           Usage: <easy-input initial-validity="true" ... >
            */
-          scope.$invalid !== ctrl.$setValidity(ctrl.$name, initialValidity);
 
           /**
           Use default validMethod if there is no value
            */
-          validMethod = scope.validMethod ? scope.validMethod.split(/[ ,]+/) : ['blur', 'submit'];
+          validMethod = scope.validMethod ? scope.validMethod.split(/[ ,]+/) : ['watch', 'blur', 'submit'];
 
           /**
           Reset the validation for specific form
@@ -912,11 +911,9 @@
               /**
               dirty, pristine, viewValue control here
                */
-              if (ctrl.$pristine && ctrl.$viewValue) {
-                ctrl.$setViewValue(ctrl.$viewValue);
-              }
-              if (!ctrl.$pristine) {
-                return checkValidation(scope, element, attrs, ctrl, validation, value);
+              console.log(value);
+              if (ctrl.$pristine && ctrl.$viewValue && ctrl.$invalid) {
+                return checkValidation(scope, element, attrs, ctrl, validation, scope.model);
               }
             });
           }

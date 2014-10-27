@@ -286,13 +286,13 @@ angular.module('easy.form.directives')
         Set custom initial validity
         Usage: <easy-input initial-validity="true" ... >
         ###
-        scope.$invalid != ctrl.$setValidity ctrl.$name, initialValidity
+        # scope.$invalid != ctrl.$setValidity ctrl.$name, initialValidity
 
 
         ###*
         Use default validMethod if there is no value
         ###
-        validMethod = if scope.validMethod then scope.validMethod.split(/[ ,]+/) else ['blur', 'submit']
+        validMethod = if scope.validMethod then scope.validMethod.split(/[ ,]+/) else ['watch', 'blur', 'submit']
 
         ###*
         Reset the validation for specific form
@@ -326,9 +326,8 @@ angular.module('easy.form.directives')
             ###*
             dirty, pristine, viewValue control here
             ###
-            if ctrl.$pristine and ctrl.$viewValue
-              ctrl.$setViewValue ctrl.$viewValue # has value when initial
-            checkValidation scope, element, attrs, ctrl, validation, value unless ctrl.$pristine
+            if ctrl.$pristine and ctrl.$viewValue and ctrl.$invalid
+              checkValidation scope, element, attrs, ctrl, validation, scope.model
 
         if 'blur' in validMethod
           ###*
@@ -343,7 +342,7 @@ angular.module('easy.form.directives')
           Click submit form, check the validity when submit
           ###
           scope.$on ctrl.$name + "-submit-" + uid,  ->
-            checkValidation(scope, element, attrs, ctrl, validation, scope.model)
+            checkValidation scope, element, attrs, ctrl, validation, scope.model
 
 
 
