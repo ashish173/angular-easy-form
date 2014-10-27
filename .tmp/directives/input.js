@@ -339,7 +339,7 @@
           /**
           Do the initial validation
            */
-          _checkValidation(scope, element, attrs, ctrl, validation, scope.model);
+          _checkValidation(scope, element, attrs, ctrl, validation);
 
           /**
           Use default validMethod if there is no value
@@ -402,6 +402,8 @@
             Click submit form, check the validity when submit
              */
             scope.$on(ctrl.$name + "-submit-" + uid, function() {
+              scope.$pristine = false;
+              scope.$dirty = true;
               return _checkValidation(scope, element, attrs, ctrl, validation);
             });
           }
@@ -411,6 +413,8 @@
             Do validation when receive a given event command
              */
             return scope.$on(scope.validTriggerEvent, function() {
+              scope.$pristine = false;
+              scope.$dirty = true;
               return _checkValidation(scope, element, attrs, ctrl, validation);
             });
           }

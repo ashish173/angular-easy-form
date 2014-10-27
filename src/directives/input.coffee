@@ -356,6 +356,8 @@ angular.module('easy.form.directives')
           Click submit form, check the validity when submit
           ###
           scope.$on ctrl.$name + "-submit-" + uid,  ->
+            scope.$pristine = false
+            scope.$dirty = true
             _checkValidation scope, element, attrs, ctrl, validation
 
 
@@ -366,6 +368,8 @@ angular.module('easy.form.directives')
           Do validation when receive a given event command
           ###
           scope.$on scope.validTriggerEvent,  ->
+            scope.$pristine = false
+            scope.$dirty = true
             _checkValidation scope, element, attrs, ctrl, validation
 
   )
