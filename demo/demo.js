@@ -83,8 +83,9 @@
     };
     $scope.selectSingleCustomizeSelectOptions = {
       select: {
-        bindProperty: 'key',
-        bindText: 'text',
+        selectOptions: function() {
+          return 'item.text for item in options.select.collection';
+        },
         collection: [
           {
             key: 'key1',

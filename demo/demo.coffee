@@ -50,8 +50,8 @@ app.controller 'DemoCtrl', ($scope, $http) ->
 
   $scope.selectSingleCustomizeSelectOptions =
     select:
-      bindProperty: 'key'
-      bindText: 'text'
+      selectOptions: ->
+        'item.text for item in options.select.collection'
       collection: [
         {key: 'key1', text: 'option 1'}
         {key: 'key2', text: 'option 2'}
