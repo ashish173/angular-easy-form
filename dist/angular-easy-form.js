@@ -585,8 +585,8 @@
     @param scope
     @param template
      */
-    var checkValidation, guid, invalidFunc, isFocusElement, s4, setElementTemplate, uniqueArray, validFunc;
-    setElementTemplate = function(element, scope, template) {
+    var guid, s4, uniqueArray, _checkValidation, _invalidFunc, _isFocusElement, _setElementTemplate, _validFunc;
+    _setElementTemplate = function(element, scope, template) {
       element.html(template);
       return $compile(element.contents())(scope);
     };
@@ -600,12 +600,15 @@
     @param ctrl
     @returns {}
      */
-    validFunc = function(scope, element, validMessage, validation, callback, ctrl) {
-      element.removeClass('has-error');
+    _validFunc = function(scope, element, validMessage, validation, callback, ctrl) {
+      scope.$invalid = false;
       scope.invalidMessage = null;
       ctrl.$setValidity(ctrl.$name, true);
-      if (callback) {
-        callback();
+      if (scope.$dirty === true) {
+        element.removeClass('has-error');
+        if (callback) {
+          callback();
+        }
       }
       return true;
     };
@@ -619,13 +622,15 @@
     @param ctrl
     @returns {}
      */
-    invalidFunc = function(scope, element, invalidMessage, validator, callback, ctrl) {
-      element.addClass('has-error');
-      scope.validMessage = null;
-      scope.invalidMessage = $easyValidation.showInvalidMessage ? $easyValidation.getInvalidMessage(validator) : null;
+    _invalidFunc = function(scope, element, invalidMessage, validator, callback, ctrl) {
+      scope.$invalid = true;
       ctrl.$setValidity(ctrl.$name, false);
-      if (callback) {
-        callback();
+      if (scope.$dirty === true) {
+        element.addClass('has-error');
+        scope.invalidMessage = $easyValidation.showInvalidMessage ? $easyValidation.getInvalidMessage(validator) : null;
+        if (callback) {
+          callback();
+        }
       }
       return false;
     };
@@ -635,7 +640,7 @@
     @type {boolean}
     private variable
      */
-    isFocusElement = false;
+    _isFocusElement = false;
 
     /**
     Check Validation with Function or RegExp
@@ -647,7 +652,7 @@
     @param value
     @returns {}
      */
-    checkValidation = function(scope, element, attrs, ctrl, validation, value) {
+    _checkValidation = function(scope, element, attrs, ctrl, validation) {
       var errorMessage, expression, invalidMessage, leftValidation, valid, validMessage, validator;
       validator = validation[0];
       leftValidation = validation.slice(1);
@@ -660,26 +665,24 @@
       }
       valid = {
         success: function() {
-          scope.$invalid = false;
-          validFunc(scope, element, validMessage, validator, scope.validCallback, ctrl);
+          _validFunc(scope, element, validMessage, validator, scope.validCallback, ctrl);
           if (leftValidation.length) {
-            return checkValidation(scope, element, attrs, ctrl, leftValidation, value);
+            return _checkValidation(scope, element, attrs, ctrl, leftValidation);
           } else {
             return true;
           }
         },
         error: function() {
-          scope.$invalid = true;
-          return invalidFunc(scope, element, invalidMessage, validator, scope.invalidCallback, ctrl);
+          return _invalidFunc(scope, element, invalidMessage, validator, scope.invalidCallback, ctrl);
         }
       };
       if (expression === undefined) {
         console.error("You are using undefined validator \"%s\"", validator);
         if (leftValidation.length) {
-          return checkValidation(scope, element, attrs, ctrl, leftValidation, value);
+          return _checkValidation(scope, element, attrs, ctrl, leftValidation);
         }
       } else if (expression.constructor === Function) {
-        return $q.all([expression(value, scope, element, attrs)]).then((function(data) {
+        return $q.all([expression(scope.model, scope, element, attrs)]).then((function(data) {
           if (data && data.length > 0 && data[0]) {
             return valid.success();
           } else {
@@ -689,7 +692,7 @@
           return valid.error();
         });
       } else if (expression.constructor === RegExp) {
-        if ($easyValidation.getExpression(validator).test(value)) {
+        if ($easyValidation.getExpression(validator).test(scope.model)) {
           return valid.success();
         } else {
           return valid.error();
@@ -799,7 +802,7 @@
         Get wrapper template option and compile it
          */
         if (wrapperTemplate) {
-          setElementTemplate(element, scope, wrapperTemplate);
+          _setElementTemplate(element, scope, wrapperTemplate);
         }
 
         /**
@@ -807,7 +810,7 @@
          */
         inputFieldElement = element.find('easy-input-field');
         if (inputFieldElement) {
-          setElementTemplate(inputFieldElement, scope, inputTemplate);
+          _setElementTemplate(inputFieldElement, scope, inputTemplate);
         }
         inputElement = inputFieldElement.children("[name='inputIn']");
 
@@ -873,6 +876,21 @@
            */
 
           /**
+          set and watch model $pristine and $dirty
+           */
+          scope.$pristine = true;
+          scope.$dirty = false;
+          inputElement.bind("change", function() {
+            scope.$pristine = false;
+            return scope.$dirty = true;
+          });
+
+          /**
+          Do the initial validation
+           */
+          _checkValidation(scope, element, attrs, ctrl, validation, scope.model);
+
+          /**
           Use default validMethod if there is no value
            */
           validMethod = scope.validMethod ? scope.validMethod.split(/[ ,]+/) : ['watch', 'blur', 'submit'];
@@ -889,7 +907,7 @@
             $watch again while reset the form
              */
             watch();
-            isFocusElement = false;
+            _isFocusElement = false;
             ctrl.$setViewValue("");
             ctrl.$setPristine();
             ctrl.$setValidity(ctrl.$name, false);
@@ -911,9 +929,8 @@
               /**
               dirty, pristine, viewValue control here
                */
-              console.log(value);
               if (ctrl.$pristine && ctrl.$viewValue && ctrl.$invalid) {
-                return checkValidation(scope, element, attrs, ctrl, validation, scope.model);
+                return _checkValidation(scope, element, attrs, ctrl, validation);
               }
             });
           }
@@ -924,7 +941,7 @@
              */
             inputElement.bind("blur", function() {
               return scope.$apply(function() {
-                return checkValidation(scope, element, attrs, ctrl, validation, scope.model);
+                return _checkValidation(scope, element, attrs, ctrl, validation);
               });
             });
           }
@@ -934,7 +951,7 @@
             Click submit form, check the validity when submit
              */
             scope.$on(ctrl.$name + "-submit-" + uid, function() {
-              return checkValidation(scope, element, attrs, ctrl, validation, scope.model);
+              return _checkValidation(scope, element, attrs, ctrl, validation);
             });
           }
           if (scope.validTriggerEvent != null) {
@@ -943,7 +960,7 @@
             Do validation when receive a given event command
              */
             return scope.$on(scope.validTriggerEvent, function() {
-              return checkValidation(scope, element, attrs, ctrl, validation, scope.model);
+              return _checkValidation(scope, element, attrs, ctrl, validation);
             });
           }
         }
@@ -1203,6 +1220,7 @@ angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(
     "<easy-input-field ng-class=\"controlClassArr\"></easy-input-field>\n" +
     "<span class=\"help-block\" ng-bind=\"hint\" ng-show=\"hint && !invalidMessage\"></span>\n" +
     "<span class=\"help-block\" ng-bind=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
+    "\n" +
     "\n" +
     "\n" +
     "");

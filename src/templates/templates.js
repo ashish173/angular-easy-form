@@ -77,6 +77,7 @@ angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(
     "<span class=\"help-block\" ng-bind=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
     "\n" +
     "\n" +
+    "\n" +
     "");
 }]);
 

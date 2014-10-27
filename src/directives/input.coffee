@@ -35,7 +35,7 @@ angular.module('easy.form.directives')
   @param scope
   @param template
   ###
-  setElementTemplate = (element, scope, template) ->
+  _setElementTemplate = (element, scope, template) ->
     element.html(template)
     $compile(element.contents())(scope)
 
@@ -48,12 +48,13 @@ angular.module('easy.form.directives')
   @param ctrl
   @returns {}
   ###
-  validFunc = (scope, element, validMessage, validation, callback, ctrl) ->
-    element.removeClass('has-error')
+  _validFunc = (scope, element, validMessage, validation, callback, ctrl) ->
+    scope.$invalid = false
     scope.invalidMessage = null
-#    scope.validMessage = if $easyValidation.showValidMessage then $easyValidation.getValidMessage(validator) else null
     ctrl.$setValidity ctrl.$name, true
-    callback()  if callback
+    if scope.$dirty is true
+      element.removeClass('has-error')
+      callback()  if callback
     true
 
   ###*
@@ -65,12 +66,13 @@ angular.module('easy.form.directives')
   @param ctrl
   @returns {}
   ###
-  invalidFunc = (scope, element, invalidMessage, validator, callback, ctrl) ->
-    element.addClass('has-error')
-    scope.validMessage = null
-    scope.invalidMessage = if $easyValidation.showInvalidMessage then $easyValidation.getInvalidMessage(validator) else null
+  _invalidFunc = (scope, element, invalidMessage, validator, callback, ctrl) ->
+    scope.$invalid = true
     ctrl.$setValidity ctrl.$name, false
-    callback()  if callback
+    if scope.$dirty is true
+      element.addClass('has-error')
+      scope.invalidMessage = if $easyValidation.showInvalidMessage then $easyValidation.getInvalidMessage(validator) else null
+      callback()  if callback
     false
 
   ###*
@@ -78,7 +80,7 @@ angular.module('easy.form.directives')
   @type {boolean}
   private variable
   ###
-  isFocusElement = false
+  _isFocusElement = false
 
   ###*
   Check Validation with Function or RegExp
@@ -90,7 +92,7 @@ angular.module('easy.form.directives')
   @param value
   @returns {}
   ###
-  checkValidation = (scope, element, attrs, ctrl, validation, value) ->
+  _checkValidation = (scope, element, attrs, ctrl, validation) ->
     validator = validation[0]
     leftValidation = validation.slice(1)
     invalidMessage = $easyValidation.getInvalidMessage(validator)
@@ -100,22 +102,20 @@ angular.module('easy.form.directives')
     $log.debug "validator: #{validator} not found" unless expression?
     valid =
       success: ->
-        scope.$invalid = false
-        validFunc scope, element, validMessage, validator, scope.validCallback, ctrl
+        _validFunc scope, element, validMessage, validator, scope.validCallback, ctrl
         if leftValidation.length
-          checkValidation scope, element, attrs, ctrl, leftValidation, value
+          _checkValidation scope, element, attrs, ctrl, leftValidation
         else
           true
       error: ->
-        scope.$invalid = true
-        invalidFunc scope, element, invalidMessage, validator, scope.invalidCallback, ctrl
+        _invalidFunc scope, element, invalidMessage, validator, scope.invalidCallback, ctrl
 
     if expression is `undefined`
       console.error "You are using undefined validator \"%s\"", validator
       if leftValidation.length
-        checkValidation scope, element, attrs, ctrl, leftValidation, value
+        _checkValidation scope, element, attrs, ctrl, leftValidation
     else if expression.constructor is Function
-      $q.all([expression(value, scope, element, attrs)]).then ((data) ->
+      $q.all([expression(scope.model, scope, element, attrs)]).then ((data) ->
         if data and data.length > 0 and data[0]
           valid.success()
         else
@@ -125,7 +125,7 @@ angular.module('easy.form.directives')
 
       # Check with RegExp
     else if expression.constructor is RegExp
-      (if $easyValidation.getExpression(validator).test(value) then valid.success() else valid.error())
+      (if $easyValidation.getExpression(validator).test(scope.model) then valid.success() else valid.error())
     else
       valid.error()
 
@@ -230,13 +230,13 @@ angular.module('easy.form.directives')
       ###*
       Get wrapper template option and compile it
       ###
-      if wrapperTemplate then setElementTemplate(element, scope, wrapperTemplate)
+      if wrapperTemplate then _setElementTemplate(element, scope, wrapperTemplate)
 
       ###*
       Get input template option and compile it
       ###
       inputFieldElement = element.find('easy-input-field')
-      if inputFieldElement then setElementTemplate(inputFieldElement, scope, inputTemplate)
+      if inputFieldElement then _setElementTemplate(inputFieldElement, scope, inputTemplate)
       inputElement = inputFieldElement.children("[name='inputIn']")
       ###*
       watch
@@ -288,6 +288,20 @@ angular.module('easy.form.directives')
         ###
         # scope.$invalid != ctrl.$setValidity ctrl.$name, initialValidity
 
+        ###*
+        set and watch model $pristine and $dirty
+        ###
+        scope.$pristine = true
+        scope.$dirty = false
+
+        inputElement.bind "change", ->
+          scope.$pristine = false
+          scope.$dirty = true
+
+        ###*
+        Do the initial validation
+        ###
+        _checkValidation scope, element, attrs, ctrl, validation
 
         ###*
         Use default validMethod if there is no value
@@ -305,7 +319,7 @@ angular.module('easy.form.directives')
           $watch again while reset the form
           ###
           watch()
-          isFocusElement = false
+          _isFocusElement = false
           ctrl.$setViewValue ""
           ctrl.$setPristine()
           ctrl.$setValidity ctrl.$name, false
@@ -327,7 +341,7 @@ angular.module('easy.form.directives')
             dirty, pristine, viewValue control here
             ###
             if ctrl.$pristine and ctrl.$viewValue and ctrl.$invalid
-              checkValidation scope, element, attrs, ctrl, validation, scope.model
+              _checkValidation scope, element, attrs, ctrl, validation
 
         if 'blur' in validMethod
           ###*
@@ -335,14 +349,14 @@ angular.module('easy.form.directives')
           ###
           inputElement.bind "blur", ->
             scope.$apply ->
-              checkValidation scope, element, attrs, ctrl, validation, scope.model
+              _checkValidation scope, element, attrs, ctrl, validation
 
         if 'submit' in validMethod
           ###*
           Click submit form, check the validity when submit
           ###
           scope.$on ctrl.$name + "-submit-" + uid,  ->
-            checkValidation scope, element, attrs, ctrl, validation, scope.model
+            _checkValidation scope, element, attrs, ctrl, validation
 
 
 
@@ -352,6 +366,6 @@ angular.module('easy.form.directives')
           Do validation when receive a given event command
           ###
           scope.$on scope.validTriggerEvent,  ->
-            checkValidation(scope, element, attrs, ctrl, validation, scope.model)
+            _checkValidation scope, element, attrs, ctrl, validation
 
   )

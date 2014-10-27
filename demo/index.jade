@@ -211,18 +211,17 @@ body(ng-controller='DemoCtrl')
                             .col-md-8
                                 ng-form.form(name='validateMethodBasicForm')
                                     .form-group
-                                        easy-input(type='text', ng-model='demo.validation.basic.required',
+                                        easy-input(type='text', name='required', ng-model='demo.validation.basic.required',
                                         label='"Required"', placeholder='"Required"', validator='required', ng-disabled='disabled')
                                     .form-group
-                                        easy-input(type='text', ng-model='demo.validation.basic.url',
+                                        easy-input(type='text', name='url', ng-model='demo.validation.basic.url',
                                         label='"URL"', placeholder='"URL"', validator='url', ng-disabled='disabled')
                                     .form-group
-                                        easy-input(type='text', ng-model='demo.validation.basic.email',
+                                        easy-input(type='text', name='email', ng-model='demo.validation.basic.email',
                                         label='"Email"', placeholder='"Email"', validator='email', ng-disabled='disabled')
                                     .form-group
-                                        easy-input(type='text', ng-model='demo.validation.basic.number',
+                                        easy-input(type='text', name='number', ng-model='demo.validation.basic.number',
                                         label='"Number"', placeholder='"Number"', validator='number', ng-disabled='disabled')
-                                    input(type="email", name='test', ng-model="test",required)
                             .col-md-4
                                 pre {{demo.validation.basic | json}}
                                 pre
@@ -248,11 +247,21 @@ body(ng-controller='DemoCtrl')
 
                     h4 Blur method
                     .bs-example
-                        ng-form.form(name='validateMethodBlurForm')
-                            .form-group
-                                easy-input(type='text', ng-model='demo.validation.methods.blur',
-                                label='"required"', placeholder='"required"', validator='required', ng-disabled='disabled')
-
+                        .row
+                            .col-xs-8
+                                ng-form.form(name='validateMethodBlurForm')
+                                    .form-group
+                                        easy-input(type='text', ng-model='demo.validation.methods.blur',
+                                        label='"required"', placeholder='"required"', validator='required', ng-disabled='disabled')
+                            .col-md-4
+                                pre {{demo.validation.methods.blur | json}}
+                                pre
+                                    p form.$pristine = {{validateMethodBlurForm.$pristine}}
+                                    p form.$dirty = {{validateMethodBlurForm.$dirty}}
+                                    p form.$valid = {{validateMethodBlurForm.$valid}}
+                                    p form.$invalid = {{validateMethodBlurForm.$invalid}}
+                                    p form.$submitted = {{validateMethodBlurForm.$submitted}}
+                                    p form.$error = {{validateMethodBlurForm.$error | json}}
                     h4 Sumbit method
                     .bs-example
                         ng-form.form(name='validateMethodSubmitForm')
