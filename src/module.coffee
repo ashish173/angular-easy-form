@@ -15,6 +15,7 @@ angular.module 'easy.form', [
   'textAngular'
   'monospaced.elastic'
   'ui.bootstrap'
+  'ngTagsInput'
 
   'easy.form.directives'
   'easy.form.providers'

@@ -270,7 +270,6 @@ angular.module('easy.form.directives')
         guid use
         ###
         uid = ctrl.validationId = guid()
-        console.log ctrl
 
         ###*
         Valid/Invalid Message

@@ -75,6 +75,9 @@
     $easyInputProvider.registerInput('ui-select', {
       templateUrl: 'easy-form/templates/inputs/ui-select.html'
     });
+    $easyInputProvider.registerInput('tag', {
+      templateUrl: 'easy-form/templates/inputs/tag.html'
+    });
     $easyInputProvider.registerInput('datepicker', {
       templateUrl: 'easy-form/templates/inputs/datepicker.html'
     });

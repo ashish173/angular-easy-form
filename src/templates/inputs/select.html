@@ -1,4 +1,33 @@
-<select class="form-control" ng-model="model" ng-if="!options.select.multiple" ng-options="item.key as item.text for item in options.select.collection" ng-disabled="ngDisabled">
+<!--single of objects-->
+<select class="form-control"
+        ng-model="$parent.model"
+        ng-disabled="ngDisabled"
+        ng-if="!options.select.multiple && !options.select.selectOptions"
+        ng-options="item for item in options.select.collection">
 </select>
-<select class="form-control" ng-model="model" ng-if="options.select.multiple" ng-options="item.key as item.text for item in options.select.collection" multiple ng-disabled="ngDisabled">
+
+<!--multiple of objects-->
+<select class="form-control"
+        ng-model="$parent.model"
+        ng-disabled="ngDisabled"
+        multiple
+        ng-if="options.select.multiple && !options.select.selectOptions"
+        ng-options="item for item in options.select.collection" >
+</select>
+
+<!--single of objects with customize selectOptions-->
+<select class="form-control"
+        ng-model="$parent.model"
+        ng-disabled="ngDisabled"
+        ng-if="!options.select.multiple && options.select.selectOptions"
+        ng-options="{{options.select.selectOptions()}}">
+</select>
+
+<!--multiple of objects with customize selectOptions-->
+<select class="form-control"
+        ng-model="$parent.model"
+        ng-disabled="ngDisabled"
+        multiple
+        ng-if="options.select.multiple && options.select.selectOptions"
+        ng-options="{{options.select.selectOptions()}}">
 </select>

@@ -306,7 +306,6 @@
           guid use
            */
           uid = ctrl.validationId = guid();
-          console.log(ctrl);
 
           /**
           Valid/Invalid Message

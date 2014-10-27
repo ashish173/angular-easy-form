@@ -78,6 +78,13 @@
     };
     $scope.selectOptions = {
       select: {
+        collection: ['key1', 'key2', 'key3']
+      }
+    };
+    $scope.selectSingleCustomizeSelectOptions = {
+      select: {
+        bindProperty: 'key',
+        bindText: 'text',
         collection: [
           {
             key: 'key1',
@@ -95,6 +102,9 @@
     $scope.selectMultipleOptions = {
       select: {
         multiple: true,
+        selectOptions: function() {
+          return 'item.text for item in options.select.collection';
+        },
         collection: [
           {
             key: 'key1',

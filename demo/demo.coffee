@@ -46,6 +46,12 @@ app.controller 'DemoCtrl', ($scope, $http) ->
 
   $scope.selectOptions =
     select:
+      collection: [ 'key1', 'key2', 'key3']
+
+  $scope.selectSingleCustomizeSelectOptions =
+    select:
+      bindProperty: 'key'
+      bindText: 'text'
       collection: [
         {key: 'key1', text: 'option 1'}
         {key: 'key2', text: 'option 2'}
@@ -55,6 +61,8 @@ app.controller 'DemoCtrl', ($scope, $http) ->
   $scope.selectMultipleOptions =
     select:
       multiple: true
+      selectOptions: ->
+        'item.text for item in options.select.collection'
       collection: [
         {key: 'key1', text: 'option 1'}
         {key: 'key2', text: 'option 2'}

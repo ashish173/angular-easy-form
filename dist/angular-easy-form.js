@@ -9,7 +9,7 @@
     *
     * Main module of the application.
    */
-  angular.module('easy.form', ['checklist-model', 'ui.select', 'textAngular', 'monospaced.elastic', 'ui.bootstrap', 'easy.form.directives', 'easy.form.providers', 'easy.form.templates', 'easy.form.default']);
+  angular.module('easy.form', ['checklist-model', 'ui.select', 'textAngular', 'monospaced.elastic', 'ui.bootstrap', 'ngTagsInput', 'easy.form.directives', 'easy.form.providers', 'easy.form.templates', 'easy.form.default']);
 
   angular.module('easy.form.directives', []);
 
@@ -855,7 +855,6 @@
           guid use
            */
           uid = ctrl.validationId = guid();
-          console.log(ctrl);
 
           /**
           Valid/Invalid Message
@@ -1075,6 +1074,9 @@
     $easyInputProvider.registerInput('ui-select', {
       templateUrl: 'easy-form/templates/inputs/ui-select.html'
     });
+    $easyInputProvider.registerInput('tag', {
+      templateUrl: 'easy-form/templates/inputs/tag.html'
+    });
     $easyInputProvider.registerInput('datepicker', {
       templateUrl: 'easy-form/templates/inputs/datepicker.html'
     });
@@ -1127,7 +1129,7 @@
   }]);
 
 }).call(this);
-;angular.module('easy.form.templates', ['easy-form/templates/components/date-select.html', 'easy-form/templates/components/month-select.html', 'easy-form/templates/form-wrappers/default.html', 'easy-form/templates/input-wrappers/horizontal-form.html', 'easy-form/templates/input-wrappers/inline-form.html', 'easy-form/templates/input-wrappers/none.html', 'easy-form/templates/input-wrappers/vertical-form.html', 'easy-form/templates/inputs/checkbox.html', 'easy-form/templates/inputs/checkboxes.html', 'easy-form/templates/inputs/color.html', 'easy-form/templates/inputs/date.html', 'easy-form/templates/inputs/datepicker.html', 'easy-form/templates/inputs/datetime-local.html', 'easy-form/templates/inputs/datetime.html', 'easy-form/templates/inputs/datetimepicker.html', 'easy-form/templates/inputs/email.html', 'easy-form/templates/inputs/month.html', 'easy-form/templates/inputs/number.html', 'easy-form/templates/inputs/password.html', 'easy-form/templates/inputs/radios.html', 'easy-form/templates/inputs/search.html', 'easy-form/templates/inputs/select.html', 'easy-form/templates/inputs/switch.html', 'easy-form/templates/inputs/tel.html', 'easy-form/templates/inputs/text-angular.html', 'easy-form/templates/inputs/text.html', 'easy-form/templates/inputs/textarea-autosize.html', 'easy-form/templates/inputs/textarea.html', 'easy-form/templates/inputs/time.html', 'easy-form/templates/inputs/timepicker.html', 'easy-form/templates/inputs/ui-select.html', 'easy-form/templates/inputs/url.html', 'easy-form/templates/inputs/week.html', 'easy-form/templates/messages/default.html']);
+;angular.module('easy.form.templates', ['easy-form/templates/components/date-select.html', 'easy-form/templates/components/month-select.html', 'easy-form/templates/form-wrappers/default.html', 'easy-form/templates/input-wrappers/horizontal-form.html', 'easy-form/templates/input-wrappers/inline-form.html', 'easy-form/templates/input-wrappers/none.html', 'easy-form/templates/input-wrappers/vertical-form.html', 'easy-form/templates/inputs/checkbox.html', 'easy-form/templates/inputs/checkboxes.html', 'easy-form/templates/inputs/color.html', 'easy-form/templates/inputs/date.html', 'easy-form/templates/inputs/datepicker.html', 'easy-form/templates/inputs/datetime-local.html', 'easy-form/templates/inputs/datetime.html', 'easy-form/templates/inputs/datetimepicker.html', 'easy-form/templates/inputs/email.html', 'easy-form/templates/inputs/month.html', 'easy-form/templates/inputs/number.html', 'easy-form/templates/inputs/password.html', 'easy-form/templates/inputs/radios.html', 'easy-form/templates/inputs/search.html', 'easy-form/templates/inputs/select.html', 'easy-form/templates/inputs/switch.html', 'easy-form/templates/inputs/tag.html', 'easy-form/templates/inputs/tel.html', 'easy-form/templates/inputs/text-angular.html', 'easy-form/templates/inputs/text.html', 'easy-form/templates/inputs/textarea-autosize.html', 'easy-form/templates/inputs/textarea.html', 'easy-form/templates/inputs/time.html', 'easy-form/templates/inputs/timepicker.html', 'easy-form/templates/inputs/ui-select.html', 'easy-form/templates/inputs/url.html', 'easy-form/templates/inputs/week.html', 'easy-form/templates/messages/default.html']);
 
 angular.module("easy-form/templates/components/date-select.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/components/date-select.html",
@@ -1334,10 +1336,40 @@ angular.module("easy-form/templates/inputs/search.html", []).run(["$templateCach
 
 angular.module("easy-form/templates/inputs/select.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/select.html",
-    "<select class=\"form-control\" ng-model=\"model\" ng-if=\"!options.select.multiple\" ng-options=\"item.key as item.text for item in options.select.collection\" ng-disabled=\"ngDisabled\">\n" +
+    "<!--single of objects-->\n" +
+    "<select class=\"form-control\"\n" +
+    "        ng-model=\"$parent.model\"\n" +
+    "        ng-disabled=\"ngDisabled\"\n" +
+    "        ng-if=\"!options.select.multiple && !options.select.selectOptions\"\n" +
+    "        ng-options=\"item for item in options.select.collection\">\n" +
     "</select>\n" +
-    "<select class=\"form-control\" ng-model=\"model\" ng-if=\"options.select.multiple\" ng-options=\"item.key as item.text for item in options.select.collection\" multiple ng-disabled=\"ngDisabled\">\n" +
-    "</select>");
+    "\n" +
+    "<!--multiple of objects-->\n" +
+    "<select class=\"form-control\"\n" +
+    "        ng-model=\"$parent.model\"\n" +
+    "        ng-disabled=\"ngDisabled\"\n" +
+    "        multiple\n" +
+    "        ng-if=\"options.select.multiple && !options.select.selectOptions\"\n" +
+    "        ng-options=\"item for item in options.select.collection\" >\n" +
+    "</select>\n" +
+    "\n" +
+    "<!--single of objects with customize selectOptions-->\n" +
+    "<select class=\"form-control\"\n" +
+    "        ng-model=\"$parent.model\"\n" +
+    "        ng-disabled=\"ngDisabled\"\n" +
+    "        ng-if=\"!options.select.multiple && options.select.selectOptions\"\n" +
+    "        ng-options=\"{{options.select.selectOptions()}}\">\n" +
+    "</select>\n" +
+    "\n" +
+    "<!--multiple of objects with customize selectOptions-->\n" +
+    "<select class=\"form-control\"\n" +
+    "        ng-model=\"$parent.model\"\n" +
+    "        ng-disabled=\"ngDisabled\"\n" +
+    "        multiple\n" +
+    "        ng-if=\"options.select.multiple && options.select.selectOptions\"\n" +
+    "        ng-options=\"{{options.select.selectOptions()}}\">\n" +
+    "</select>\n" +
+    "");
 }]);
 
 angular.module("easy-form/templates/inputs/switch.html", []).run(["$templateCache", function($templateCache) {
@@ -1355,6 +1387,11 @@ angular.module("easy-form/templates/inputs/switch.html", []).run(["$templateCach
     "        switch-off-label=\"{{ offLabel }}\"\n" +
     "        switch-on=\"{{ on }}\"\n" +
     "        switch-off=\"{{ off }}\" >");
+}]);
+
+angular.module("easy-form/templates/inputs/tag.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("easy-form/templates/inputs/tag.html",
+    "<tags-input name=\"inputIn\"  ng-model=\"model\"></tags-input>");
 }]);
 
 angular.module("easy-form/templates/inputs/tel.html", []).run(["$templateCache", function($templateCache) {
@@ -1408,7 +1445,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"!options.uiSelect.multiple && !options.uiSelect.bindProperty\">\n" +
     "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
-    "    <ui-select-choices repeat=\"item in options.uiSelect.collection\"\n" +
+    "    <ui-select-choices repeat=\"item in options.uiSelect.collection | filter: $select.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
     "        <div ng-bind-html=\"options.uiSelect.formatSelection(item) | highlight: $select.search\"></div>\n" +
@@ -1421,33 +1458,35 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"options.uiSelect.multiple && !options.uiSelect.bindProperty\"\n" +
     "           multiple>\n" +
-    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
-    "    <ui-select-choices repeat=\"item in options.uiSelect.collection\"\n" +
+    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($item)}}</ui-select-match>\n" +
+    "    <ui-select-choices repeat=\"item in options.uiSelect.collection | filter:$search.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
     "        <div ng-bind-html=\"options.uiSelect.formatSelection(item)\"></div>\n" +
     "    </ui-select-choices>\n" +
     "</ui-select>\n" +
+    "\n" +
     "<!--single of objects with single property binding-->\n" +
     "<ui-select ng-model=\"$parent.$parent.model\"\n" +
     "           ng-disabled=\"ngDisabled\"\n" +
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"!options.uiSelect.multiple && options.uiSelect.bindProperty\">\n" +
     "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
-    "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] as item in options.uiSelect.collection\"\n" +
+    "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] as item in options.uiSelect.collection | filter: $select.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
     "        <div ng-bind-html=\"options.uiSelect.formatSelection(item) | highlight: $select.search\"></div>\n" +
     "    </ui-select-choices>\n" +
     "</ui-select>\n" +
+    "\n" +
     "<!--multiple of objects with single property binding-->\n" +
     "<ui-select ng-model=\"$parent.$parent.model\"\n" +
     "           ng-disabled=\"ngDisabled\"\n" +
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"options.uiSelect.multiple && options.uiSelect.bindProperty\"\n" +
     "           multiple>\n" +
-    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
-    "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] in options.uiSelect.collection\"\n" +
+    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($item)}}</ui-select-match>\n" +
+    "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] in options.uiSelect.collection | filter: $search.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
     "        <div ng-bind-html=\"options.uiSelect.formatSelection(item)\"></div>\n" +

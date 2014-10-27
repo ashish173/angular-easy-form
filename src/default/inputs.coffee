@@ -87,6 +87,13 @@ angular.module 'easy.form.default'
   $easyInputProvider.registerInput 'ui-select',
     templateUrl: 'easy-form/templates/inputs/ui-select.html'
 
+
+  # ----------------------------------------
+  # tag
+  # ----------------------------------------
+  $easyInputProvider.registerInput 'tag',
+    templateUrl: 'easy-form/templates/inputs/tag.html'
+
   # ----------------------------------------
   # date & time picker
   # ----------------------------------------
