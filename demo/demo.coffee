@@ -157,6 +157,9 @@ app.controller 'DemoCtrl', ($scope, $http) ->
   $scope.disable = ->
     $scope.disabled = true
 
+  $scope.submit = ->
+    alert 'submitting'
+
   $scope.trigValidation = ->
     $scope.$broadcast 'trigge-validate'
 

@@ -255,6 +255,9 @@
     $scope.disable = function() {
       return $scope.disabled = true;
     };
+    $scope.submit = function() {
+      return alert('submitting');
+    };
     $scope.trigValidation = function() {
       return $scope.$broadcast('trigge-validate');
     };

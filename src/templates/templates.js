@@ -59,7 +59,7 @@ angular.module("easy-form/templates/input-wrappers/horizontal-form.html", []).ru
 
 angular.module("easy-form/templates/input-wrappers/inline-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/inline-form.html",
-    "<easy-input-field ng-class=\"controlClassArr\"></easy-input-field>\n" +
+    "<label ng-class=\"labelClassArr\" ng-bind=\"label\"></label><easy-input-field ng-class=\"controlClassArr\"></easy-input-field>\n" +
     "\n" +
     "");
 }]);

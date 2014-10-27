@@ -203,6 +203,11 @@ body(ng-controller='DemoCtrl')
                             .form-group
                                 easy-input(type='text', ng-model='demo.layout.inline.text3', wrapper='inline-form'
                                 placeholder='"placeholder"', ng-disabled='disabled')
+                        ng-form.form-inline
+                            .form-group
+                                easy-input(type='text', ng-model='demo.layout.inline.text4', wrapper='inline-form'
+                                label='"some long text as label"'
+                                placeholder='"placeholder"', ng-disabled='disabled')
                 .bs-docs-section
                     h3#validation.page-header Validation
                     h4 Basic
@@ -266,9 +271,12 @@ body(ng-controller='DemoCtrl')
                     .bs-example
                         ng-form.form(name='validateMethodSubmitForm')
                             .form-group
-                                easy-input(type='text', ng-model='demo.validation.methods.submit', name='validateMethodSubmitRequired'
+                                easy-input(type='text', ng-model='demo.validation.methods.submit.text', name='validateMethodSubmitRequired'
                                 label='"Required"', placeholder='"Required"', validator='required', ng-disabled='disabled')
-                            button.btn.btn-primary(easy-submit='validateMethodSubmitForm') Submit
+                            .form-group
+                                easy-input(type='select', ng-model='demo.validation.methods.submit.select',
+                                label='"single select"', options='selectOptions', ng-disabled='disabled', validator='required')
+                            button.btn.btn-primary(easy-submit='validateMethodSubmitForm', ng-click='submit()') Submit
 
                     h4 Event method
                     .bs-example
