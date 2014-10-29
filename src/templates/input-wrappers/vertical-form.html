@@ -1,7 +1,7 @@
-<label ng-class="labelClassArr" ng-bind="label"></label>
+<label ng-class="labelClassArr" ng-bind-html="label"></label>
 <easy-input-field ng-class="controlClassArr"></easy-input-field>
-<span class="help-block" ng-bind="hint" ng-show="hint && !invalidMessage"></span>
-<span class="help-block" ng-bind="invalidMessage" ng-hide="hint && !invalidMessage"></span>
+<span class="help-block" ng-bind-html="hint" ng-show="hint && !invalidMessage"></span>
+<span class="help-block" ng-bind-html="invalidMessage" ng-hide="hint && !invalidMessage"></span>
 
 
 

@@ -269,4 +269,14 @@
     };
   });
 
+  app.config(function($easyInputProvider) {
+    return $easyInputProvider.registerInput('custom-input', {
+      templateUrl: 'easy-form/templates/inputs/custom-select.html'
+    });
+  });
+
+  app.run(function($templateCache) {
+    return $templateCache.put("easy-form/templates/inputs/month-select.html", "<div class=\"row\">\n" + "    <div class=\"col-xs-7\">\n" + "        <select class=\"form-control\" name=\"year-select\" ng-model=\"year\" ng-options=\"option.key as option.text for option in yearOptions\">\n" + "        </select>\n" + "    </div>\n" + "\n" + "    <div class=\"col-xs-6\">\n" + "        <select class=\"form-control\" name=\"month-select\" ng-model=\"month\" ng-options=\"option.key as option.text for option in monthOptions\">\n" + "        </select>\n" + "    </div>\n" + "\n" + "    <div class=\"col-xs-5\">\n" + "        <select class=\"form-control\" name=\"day-select\" ng-model=\"day\" ng-options=\"option.key as option.text for option in dayOptions\">\n" + "        </select>\n" + "    </div>\n" + "</div>");
+  });
+
 }).call(this);
