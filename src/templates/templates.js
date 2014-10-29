@@ -49,17 +49,17 @@ angular.module("easy-form/templates/form-wrappers/default.html", []).run(["$temp
 
 angular.module("easy-form/templates/input-wrappers/horizontal-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/horizontal-form.html",
-    "<label class=\"control-label\" ng-class=\"labelClassArr\" ng-bind=\"label\"></label>\n" +
+    "<label class=\"control-label\" ng-class=\"labelClassArr\" ng-bind-html=\"label\"></label>\n" +
     "<div ng-class=\"controlClassArr\">\n" +
     "    <easy-input-field></easy-input-field>\n" +
-    "    <span class=\"help-block\" ng-bind=\"hint\" ng-show=\"hint && !invalidMessage\"></span>\n" +
-    "    <span class=\"help-block\" ng-bind=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
+    "    <span class=\"help-block\" ng-bind-html=\"hint\" ng-show=\"hint && !invalidMessage\"></span>\n" +
+    "    <span class=\"help-block\" ng-bind-html=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
     "</div>");
 }]);
 
 angular.module("easy-form/templates/input-wrappers/inline-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/inline-form.html",
-    "<label ng-class=\"labelClassArr\" ng-bind=\"label\"></label><easy-input-field ng-class=\"controlClassArr\"></easy-input-field>\n" +
+    "<label ng-class=\"labelClassArr\" ng-bind-html=\"label\"></label><easy-input-field ng-class=\"controlClassArr\"></easy-input-field>\n" +
     "\n" +
     "");
 }]);
@@ -71,10 +71,10 @@ angular.module("easy-form/templates/input-wrappers/none.html", []).run(["$templa
 
 angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/vertical-form.html",
-    "<label ng-class=\"labelClassArr\" ng-bind=\"label\"></label>\n" +
+    "<label ng-class=\"labelClassArr\" ng-bind-html=\"label\"></label>\n" +
     "<easy-input-field ng-class=\"controlClassArr\"></easy-input-field>\n" +
-    "<span class=\"help-block\" ng-bind=\"hint\" ng-show=\"hint && !invalidMessage\"></span>\n" +
-    "<span class=\"help-block\" ng-bind=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
+    "<span class=\"help-block\" ng-bind-html=\"hint\" ng-show=\"hint && !invalidMessage\"></span>\n" +
+    "<span class=\"help-block\" ng-bind-html=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
     "\n" +
     "\n" +
     "\n" +
