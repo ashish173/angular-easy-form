@@ -1,7 +1,15 @@
 (function() {
   var app;
 
-  app = angular.module('demoApp', ['easy.form']);
+  app = angular.module('demoApp', ['pascalprecht.translate', 'easy.form']);
+
+  app.config(function($translateProvider) {
+    var translations;
+    translations = {
+      custom_validate_error_2: 'This should be greater then model 1.'
+    };
+    return $translateProvider.translations('en', translations).preferredLanguage('en');
+  });
 
   app.controller('DemoCtrl', function($scope, $http) {
     $scope.disabled = void 0;
@@ -247,7 +255,8 @@
             code: "SD"
           }
         }
-      }
+      },
+      validation: {}
     };
     $scope.enable = function() {
       return $scope.disabled = false;
@@ -264,9 +273,29 @@
     $scope.validCallback = function() {
       return alert('valid');
     };
-    return $scope.invalidCallback = function() {
+    $scope.invalidCallback = function() {
       return alert('invalid');
     };
+    $scope.customValid = {
+      name: 'big',
+      expression: function(value) {
+        if (value == null) {
+          return true;
+        }
+        return parseInt(value) > parseInt($scope.demo.validation.customize1);
+      },
+      messages: {
+        invalid: "custom_validate_error_2"
+      },
+      translate: true
+    };
+    return $scope.$watch('demo.validation.customize1', function(newVal, oldVal) {
+      var model2;
+      model2 = $scope.customValidateForm.model2;
+      if (model2.$invalid && model2.$dirty) {
+        return $scope.$broadcast('trigger-model2-validate');
+      }
+    });
   });
 
   app.config(function($easyInputProvider) {

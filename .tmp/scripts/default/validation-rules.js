@@ -8,7 +8,7 @@
         invalid: "This should be required.",
         valid: "It's Required"
       },
-      translate: true
+      translate: false
     });
     $easyValidationProvider.register('url', {
       expression: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
@@ -16,7 +16,7 @@
         invalid: "This should be url.",
         valid: "It's Url"
       },
-      translate: true
+      translate: false
     });
     $easyValidationProvider.register('email', {
       expression: /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
@@ -24,7 +24,7 @@
         invalid: "This should be email",
         valid: "It's email"
       },
-      translate: true
+      translate: false
     });
     return $easyValidationProvider.register('number', {
       expression: /^\d+$/,
@@ -32,7 +32,7 @@
         invalid: "This should be number",
         valid: "It's number"
       },
-      translate: true
+      translate: false
     });
   });
 

@@ -1,6 +1,16 @@
 app = angular.module 'demoApp', [
+  'pascalprecht.translate'
   'easy.form'
 ]
+
+app.config ($translateProvider) ->
+  translations =
+    custom_validate_error_2: 'This should be greater then model 1.'
+
+  $translateProvider
+  .translations('en', translations)
+  .preferredLanguage('en');
+
 
 app.controller 'DemoCtrl', ($scope, $http) ->
   $scope.disabled = undefined
@@ -119,9 +129,9 @@ app.controller 'DemoCtrl', ($scope, $http) ->
       refresh: (address)->
         params =
           address: address
-        $http.get("json/countries.json",
+        $http.get "json/countries.json",
           params: params
-        ).then (response) ->
+        .then (response) ->
           $scope.uiSelectRemoteOptions.uiSelect.collection = response.data
 
   $scope.demo =
@@ -150,6 +160,7 @@ app.controller 'DemoCtrl', ($scope, $http) ->
             name: "Sudan",
             code: "SD"
           }
+    validation: {}
 
   $scope.enable = ->
     $scope.disabled = false
@@ -168,6 +179,22 @@ app.controller 'DemoCtrl', ($scope, $http) ->
 
   $scope.invalidCallback = ->
     alert('invalid')
+
+
+  ## custom validation
+  $scope.customValid =
+    name: 'big',
+    expression: (value) ->
+      return true unless value?
+      parseInt(value) > parseInt($scope.demo.validation.customize1)
+    messages:
+      invalid: "custom_validate_error_2"
+    translate: true
+
+  $scope.$watch 'demo.validation.customize1', (newVal, oldVal) ->
+    model2 = $scope.customValidateForm.model2
+    if model2.$invalid and model2.$dirty
+      $scope.$broadcast 'trigger-model2-validate'
 
 app.config ($easyInputProvider) ->
   $easyInputProvider.registerInput 'custom-input',

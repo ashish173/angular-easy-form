@@ -6,13 +6,46 @@ module.exports = (grunt) ->
 
   require('time-grunt')(grunt);
 
+  appConfig =
+    config:
+      src: "config/grunt/*"
+
+    paths:
+      dist: "dist"
+      src: "src"
+      demo: 'demo'
+      tmp: ".tmp"
+
+
   grunt.config.init
     compass:
+      options:
+        sassDir: "#{appConfig.paths.demo}/styles"
+        cssDir: "#{appConfig.paths.tmp}/styles"
+        generatedImagesDir: "#{appConfig.paths.tmp}/images/generated"
+        imagesDir: "#{appConfig.paths.demo}/images"
+        javascriptsDir: "#{appConfig.paths.demo}/scripts"
+        fontsDir: "#{appConfig.paths.demo}/fonts"
+        importPath: "./bower_components"
+        httpImagesPath: "/images"
+        httpGeneratedImagesPath: "/images/generated"
+        httpFontsPath: "/fonts"
+        relativeAssets: false
+        assetCacheBuster: false
+        raw: "Sass::Script::Number.precision = 10\n"
+
+      dist:
+        options:
+          debugInfo: false
+
+      server:
+        options:
+          debugInfo: true
+
       dev:
         options:
-          sassDir: 'demo'
-          cssDir: 'demo'
-          outputStyle: 'compressed'
+          debugInfo: true
+          watch: true
 
     clean:
       dist:
@@ -45,35 +78,38 @@ module.exports = (grunt) ->
               'providers/*.coffee'
               'directives/*.coffee'
               'default/*.coffee']
-        dest: '.tmp'
+        dest: '.tmp/scripts'
         ext: '.js'
       demo:
         files:
-          'demo/demo.js': 'demo/demo.coffee'
+          '.tmp/scripts/demo.js': 'demo/scripts/demo.coffee'
 
     jade:
-      compile:
-        options:
-          data:
-            debug: true
+      options:
+        sourceMap: true
+        sourceRoot: ""
 
+      index:
+        options:
+          pretty: true
         files: [
-          cwd: "demo"
-          src: "index.jade"
-          dest: "demo"
-          ext: ".html"
           expand: true
+          pretty: true
+          cwd: "#{appConfig.paths.demo}"
+          src: "*.jade"
+          dest: "#{appConfig.paths.tmp}"
+          ext: ".html"
         ]
 
     concat:
       options:
         separator: ';'
       dist:
-        src: ['.tmp/module.js'
-              '.tmp/providers/*.js'
-              '.tmp/directives/*.js'
-              '.tmp/default/*.js'
-              'src/templates/templates.js']
+        src: ['.tmp/scripts/module.js'
+              '.tmp/scripts/providers/*.js'
+              '.tmp/scripts/directives/*.js'
+              '.tmp/scripts/default/*.js'
+              '.tmp/scripts/templates.js']
         dest: 'dist/angular-easy-form.js'
 
     ngAnnotate:
@@ -95,13 +131,24 @@ module.exports = (grunt) ->
         options:
           spawn: no
       coffee:
-        files: ['src/*.coffee', 'rules/*.coffee', 'demo/*.coffee']
+        files: ['src/**/*.coffee', 'demo/**/*.coffee']
         tasks: ['coffee']
         options:
           spawn: no
       jade:
         files: ["demo/index.jade"]
         tasks: ["jade"]
+      livereload:
+        options:
+          livereload: "<%= connect.options.livereload %>"
+          spawn: false
+        files: [
+          "#{appConfig.paths.demo}/*.html"
+          "#{appConfig.paths.tmp}/styles/{,*/}{,*/}{,*/}*.css"
+          "#{appConfig.paths.tmp}/scripts/**/*.js"
+          "#{appConfig.paths.tmp}/views/**/*.html"
+          "#{appConfig.paths.app}/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
+        ]
 
     html2js:
       options:
@@ -112,17 +159,23 @@ module.exports = (grunt) ->
           return 'easy-form' + '/' + moduleName + '.html'
       default:
         src: ['src/templates/**/*.html']
-        dest: 'src/templates/templates.js'
+        dest: '.tmp/scripts/templates.js'
 
     connect:
       options:
-        protocol: 'http'
-        hostname: '*'
         port: 9000
-        base: '.'
+        hostname: "localhost"
+        livereload: 35729
+
       livereload:
         options:
           open: true
+          middleware: (connect) ->
+            [
+              connect.static(".tmp")
+              connect().use("/bower_components", connect.static("./bower_components"))
+              connect.static('demo')
+            ]
 
     karma:
       dev:
@@ -132,7 +185,13 @@ module.exports = (grunt) ->
 
     wiredep:
       demo:
-        src: ['demo/index.jade', 'demo/demo.scss']
+        src: ['demo/index.jade']
+        ignorePath: /\.\.\//
+
+      sass:
+        src: ["#{appConfig.paths.demo}/styles/{,*/}*.{scss,sass}"]
+        ignorePath: /(\.\.\/){1,2}bower_components\//
+
       test:
         src: ['test/karma.conf.coffee'],
         ignorePath: '../'
@@ -158,26 +217,40 @@ module.exports = (grunt) ->
         src: 'content/tutorial/*.ngdoc'
         title: 'Tutorial'
 
-
+    # Run some tasks in parallel to speed up the build process
+    concurrent:
+      dev: [
+        "coffee"
+        "jade"
+        "compass:server"
+      ]
+      test: [
+        "coffee"
+        "jade"
+        "compass:server"
+      ]
+      dist: [
+        "coffee"
+        "jade"
+        "compass:dist"
+      ]
   # -----------------------------------
   # register task
   # -----------------------------------
 
   grunt.registerTask 'dev', [
     'clean:dev'
-    'compass'
-    'coffee'
-    'jade'
-    'connect'
+    'wiredep'
+    "concurrent:dev"
+    'html2js'
+    'connect:livereload'
     'watch'
   ]
   grunt.registerTask 'build', [
-    'clean:dist'
-    'clean:dev'
+    'clean'
     'wiredep'
-    'coffee'
+    "concurrent:dist"
     'html2js'
-    'jade'
     'concat'
     'ngAnnotate'
     'uglify'

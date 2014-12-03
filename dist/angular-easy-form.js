@@ -577,7 +577,7 @@
    */
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  angular.module('easy.form.directives').directive("easyInput", ['$log', '$q', '$timeout', '$compile', '$easyInput', '$easyValidation', function($log, $q, $timeout, $compile, $easyInput, $easyValidation) {
+  angular.module('easy.form.directives').directive("easyInput", ['$log', '$parse', '$injector', '$q', '$timeout', '$compile', '$easyInput', '$easyValidation', function($log, $parse, $injector, $q, $timeout, $compile, $easyInput, $easyValidation) {
 
     /*
     Compile dynamic template in runtime
@@ -585,7 +585,7 @@
     @param scope
     @param template
      */
-    var guid, s4, uniqueArray, _checkValidation, _invalidFunc, _isFocusElement, _setElementTemplate, _validFunc;
+    var $translate, guid, s4, uniqueArray, _checkValidation, _invalidFunc, _isFocusElement, _isTranslateEnable, _setElementTemplate, _validFunc;
     _setElementTemplate = function(element, scope, template) {
       element.html(template);
       return $compile(element.contents())(scope);
@@ -627,7 +627,7 @@
       ctrl.$setValidity(ctrl.$name, false);
       if (scope.$dirty === true) {
         element.addClass('has-error');
-        scope.invalidMessage = $easyValidation.showInvalidMessage ? $easyValidation.getInvalidMessage(validator) : null;
+        scope.invalidMessage = $easyValidation.showInvalidMessage ? invalidMessage : null;
         if (callback) {
           callback();
         }
@@ -643,6 +643,16 @@
     _isFocusElement = false;
 
     /**
+    If translate module exsited, and inject a $translate object
+    @type {boolean}
+    private variable
+     */
+    _isTranslateEnable = $injector.has('$translate');
+    if (_isTranslateEnable) {
+      $translate = $injector.get('$translate');
+    }
+
+    /**
     Check Validation with Function or RegExp
     @param scope
     @param element
@@ -652,7 +662,7 @@
     @param value
     @returns {}
      */
-    _checkValidation = function(scope, element, attrs, ctrl, validation) {
+    _checkValidation = function(scope, element, attrs, ctrl, validation, customValidationRules) {
       var errorMessage, expression, invalidMessage, leftValidation, valid, validMessage, validator;
       validator = validation[0];
       leftValidation = validation.slice(1);
@@ -660,6 +670,15 @@
       validMessage = '';
       errorMessage = validation + "ErrorMessage";
       expression = $easyValidation.getExpression(validator);
+      if ((expression == null) && customValidationRules[validator]) {
+        expression = customValidationRules[validator].expression;
+        invalidMessage = customValidationRules[validator].messages.invalid;
+      }
+      if (_isTranslateEnable) {
+        $translate(invalidMessage).then(function(translate) {
+          return invalidMessage = translate;
+        });
+      }
       if (expression == null) {
         $log.debug("validator: " + validator + " not found");
       }
@@ -667,7 +686,7 @@
         success: function() {
           _validFunc(scope, element, validMessage, validator, scope.validCallback, ctrl);
           if (leftValidation.length) {
-            return _checkValidation(scope, element, attrs, ctrl, leftValidation);
+            return _checkValidation(scope, element, attrs, ctrl, leftValidation, customValidationRules);
           } else {
             return true;
           }
@@ -677,9 +696,9 @@
         }
       };
       if (expression === undefined) {
-        console.error("You are using undefined validator \"%s\"", validator);
+        $log.debug("You are using undefined validator \"%s\"", validator);
         if (leftValidation.length) {
-          return _checkValidation(scope, element, attrs, ctrl, leftValidation);
+          return _checkValidation(scope, element, attrs, ctrl, leftValidation, customValidationRules);
         }
       } else if (expression.constructor === Function) {
         return $q.all([expression(scope.model, scope, element, attrs)]).then((function(data) {
@@ -748,7 +767,7 @@
         validClass: '@',
         originInvalidClass: '@',
         validMethod: '@',
-        validatorRule: '=',
+        customValidator: '@',
         validTriggerEvent: '@',
         initialValidity: '=',
         validCallback: '&',
@@ -759,7 +778,7 @@
         /**
         Initialize scope from options
          */
-        var initialValidity, input, inputElement, inputFieldElement, inputTemplate, name, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+        var customRule, customValidationRules, initialValidity, input, inputElement, inputFieldElement, inputTemplate, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
         wrapper = $easyInput.getWrapper(scope.wrapper);
         wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper);
         input = $easyInput.getInput(scope.type);
@@ -822,22 +841,24 @@
         
         use watch() to destroy the $watch method
          */
-        watch = function() {};
+        watch = function() {
 
-        /**
-        validator
-        @type {Array}
-        
-        Convert validators and validatorRule to Array
-         */
+          /**
+          validator
+          @type {Array}
+          
+          Convert validators and validatorRule to Array
+           */
+        };
         validation = [];
-        if (scope.validatorRule != null) {
-          _ref2 = scope.validatorRule;
+        customValidationRules = {};
+        if (scope.customValidator != null) {
+          _ref2 = scope.customValidator.split(/[ ,]+/);
           for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-            name = _ref2[_i];
-            if (scope.validatorRule[name]) {
-              validation.push(scope.validatorRule[name]);
-            }
+            v = _ref2[_i];
+            customRule = $parse(v)(scope.$parent);
+            customValidationRules[customRule.name] = customRule;
+            validation.push(customRule.name);
           }
         }
         if (scope.validator != null) {
@@ -878,17 +899,17 @@
           /**
           set and watch model $pristine and $dirty
            */
-          scope.$pristine = true;
-          scope.$dirty = false;
+          scope.$pristine = ctrl.$pristine = true;
+          scope.$dirty = ctrl.$dirty = false;
           inputElement.bind("change", function() {
-            scope.$pristine = false;
-            return scope.$dirty = true;
+            scope.$pristine = ctrl.$pristine = false;
+            return scope.$dirty = ctrl.$dirty = true;
           });
 
           /**
           Do the initial validation
            */
-          _checkValidation(scope, element, attrs, ctrl, validation);
+          _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
 
           /**
           Use default validMethod if there is no value
@@ -930,7 +951,7 @@
               dirty, pristine, viewValue control here
                */
               if (ctrl.$pristine && ctrl.$viewValue && ctrl.$invalid) {
-                return _checkValidation(scope, element, attrs, ctrl, validation);
+                return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
               }
             });
           }
@@ -941,7 +962,7 @@
              */
             inputElement.bind("blur", function() {
               return scope.$apply(function() {
-                return _checkValidation(scope, element, attrs, ctrl, validation);
+                return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
               });
             });
           }
@@ -953,7 +974,7 @@
             scope.$on(ctrl.$name + "-submit-" + uid, function() {
               scope.$pristine = false;
               scope.$dirty = true;
-              return _checkValidation(scope, element, attrs, ctrl, validation);
+              return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
             });
           }
           if (scope.validTriggerEvent != null) {
@@ -964,7 +985,7 @@
             return scope.$on(scope.validTriggerEvent, function() {
               scope.$pristine = false;
               scope.$dirty = true;
-              return _checkValidation(scope, element, attrs, ctrl, validation);
+              return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
             });
           }
         }
@@ -1118,7 +1139,7 @@
         invalid: "This should be required.",
         valid: "It's Required"
       },
-      translate: true
+      translate: false
     });
     $easyValidationProvider.register('url', {
       expression: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
@@ -1126,7 +1147,7 @@
         invalid: "This should be url.",
         valid: "It's Url"
       },
-      translate: true
+      translate: false
     });
     $easyValidationProvider.register('email', {
       expression: /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
@@ -1134,7 +1155,7 @@
         invalid: "This should be email",
         valid: "It's email"
       },
-      translate: true
+      translate: false
     });
     return $easyValidationProvider.register('number', {
       expression: /^\d+$/,
@@ -1142,7 +1163,7 @@
         invalid: "This should be number",
         valid: "It's number"
       },
-      translate: true
+      translate: false
     });
   }]);
 

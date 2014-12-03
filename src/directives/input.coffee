@@ -27,7 +27,7 @@
 ###
 
 angular.module('easy.form.directives')
-.directive "easyInput", ($log, $q, $timeout, $compile, $easyInput, $easyValidation) ->
+.directive "easyInput", ($log, $parse, $injector, $q, $timeout, $compile, $easyInput, $easyValidation) ->
 
   ###
   Compile dynamic template in runtime
@@ -54,7 +54,7 @@ angular.module('easy.form.directives')
     ctrl.$setValidity ctrl.$name, true
     if scope.$dirty is true
       element.removeClass('has-error')
-      callback()  if callback
+      callback() if callback
     true
 
   ###*
@@ -71,7 +71,7 @@ angular.module('easy.form.directives')
     ctrl.$setValidity ctrl.$name, false
     if scope.$dirty is true
       element.addClass('has-error')
-      scope.invalidMessage = if $easyValidation.showInvalidMessage then $easyValidation.getInvalidMessage(validator) else null
+      scope.invalidMessage = if $easyValidation.showInvalidMessage then invalidMessage else null
       callback()  if callback
     false
 
@@ -81,6 +81,15 @@ angular.module('easy.form.directives')
   private variable
   ###
   _isFocusElement = false
+
+
+  ###*
+  If translate module exsited, and inject a $translate object
+  @type {boolean}
+  private variable
+  ###
+  _isTranslateEnable = $injector.has '$translate'
+  $translate = $injector.get '$translate' if _isTranslateEnable
 
   ###*
   Check Validation with Function or RegExp
@@ -92,28 +101,35 @@ angular.module('easy.form.directives')
   @param value
   @returns {}
   ###
-  _checkValidation = (scope, element, attrs, ctrl, validation) ->
+  _checkValidation = (scope, element, attrs, ctrl, validation, customValidationRules) ->
     validator = validation[0]
     leftValidation = validation.slice(1)
     invalidMessage = $easyValidation.getInvalidMessage(validator)
     validMessage = ''
     errorMessage = validation + "ErrorMessage"
     expression = $easyValidation.getExpression(validator)
+    if not expression? and customValidationRules[validator]
+      expression = customValidationRules[validator].expression
+      invalidMessage = customValidationRules[validator].messages.invalid
+
+    if _isTranslateEnable
+      $translate(invalidMessage).then (translate) ->
+        invalidMessage = translate
     $log.debug "validator: #{validator} not found" unless expression?
     valid =
       success: ->
         _validFunc scope, element, validMessage, validator, scope.validCallback, ctrl
         if leftValidation.length
-          _checkValidation scope, element, attrs, ctrl, leftValidation
+          _checkValidation scope, element, attrs, ctrl, leftValidation, customValidationRules
         else
           true
       error: ->
         _invalidFunc scope, element, invalidMessage, validator, scope.invalidCallback, ctrl
 
     if expression is `undefined`
-      console.error "You are using undefined validator \"%s\"", validator
+      $log.debug "You are using undefined validator \"%s\"", validator
       if leftValidation.length
-        _checkValidation scope, element, attrs, ctrl, leftValidation
+        _checkValidation scope, element, attrs, ctrl, leftValidation, customValidationRules
     else if expression.constructor is Function
       $q.all([expression(scope.model, scope, element, attrs)]).then ((data) ->
         if data and data.length > 0 and data[0]
@@ -155,26 +171,26 @@ angular.module('easy.form.directives')
       model: '=ngModel'
       name: '@'
       options: '='
-      # template
+    # template
       type: '@'
       wrapper: '@'
-      # native behaviour
+    # native behaviour
       ngDisabled: '='
       ngChange: '&'
-      # label & placeholder
+    # label & placeholder
       label: '='
       placeholder: '='
       hint: '='
-      # style
+    # style
       labelClass: '@'
       controlClass: '@'
       wrapperClass: '@'
-      # validation
+    # validation
       validator: '@'
       validClass: '@'
       originInvalidClass: '@'
       validMethod: '@'
-      validatorRule: '='
+      customValidator: '@'
       validTriggerEvent: '@'
       initialValidity: '='
       validCallback: '&'
@@ -210,8 +226,8 @@ angular.module('easy.form.directives')
       ###*
       recognition if label and placeholder a string or a object
       ###
-#      scope.label = attrs.label if angular.isUndefined(scope.label) and angular.isString(attrs.label)
-#      scope.placeholder = attrs.placeholder if angular.isUndefined(scope.placeholder) and angular.isString(attrs.placeholder)
+      #      scope.label = attrs.label if angular.isUndefined(scope.label) and angular.isString(attrs.label)
+      #      scope.placeholder = attrs.placeholder if angular.isUndefined(scope.placeholder) and angular.isString(attrs.placeholder)
 
       ###*
       Set labelClass
@@ -248,15 +264,21 @@ angular.module('easy.form.directives')
       ###
       watch = ->
 
-      ###*
-      validator
-      @type {Array}
+        ###*
+        validator
+        @type {Array}
 
-      Convert validators and validatorRule to Array
-      ###
-#      validationRule = { name: 'name', expression: /^\d+$/, messages: {invalid: 'error!'}, translate: true }
+        Convert validators and validatorRule to Array
+        ###
+        # customValidator = { name: 'name', expression: /^\d+$/, messages: {invalid: 'error!'}, translate: true }
       validation = []
-      validation.push scope.validatorRule[name] for name in scope.validatorRule when scope.validatorRule[name] if scope.validatorRule?
+      customValidationRules = {}
+      if scope.customValidator?
+        for v in scope.customValidator.split((/[ ,]+/))
+          customRule = $parse(v)(scope.$parent)
+          customValidationRules[customRule.name] = customRule
+          validation.push customRule.name
+
       validation.push v for v in scope.validator.split((/[ ,]+/)) if scope.validator?
 
       unless validation.length is 0
@@ -291,17 +313,17 @@ angular.module('easy.form.directives')
         ###*
         set and watch model $pristine and $dirty
         ###
-        scope.$pristine = true
-        scope.$dirty = false
+        scope.$pristine = ctrl.$pristine = true
+        scope.$dirty = ctrl.$dirty  = false
 
         inputElement.bind "change", ->
-          scope.$pristine = false
-          scope.$dirty = true
+          scope.$pristine = ctrl.$pristine = false
+          scope.$dirty = ctrl.$dirty = true
 
         ###*
         Do the initial validation
         ###
-        _checkValidation scope, element, attrs, ctrl, validation
+        _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
         ###*
         Use default validMethod if there is no value
@@ -341,7 +363,7 @@ angular.module('easy.form.directives')
             dirty, pristine, viewValue control here
             ###
             if ctrl.$pristine and ctrl.$viewValue and ctrl.$invalid
-              _checkValidation scope, element, attrs, ctrl, validation
+              _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
         if 'blur' in validMethod
           ###*
@@ -349,27 +371,25 @@ angular.module('easy.form.directives')
           ###
           inputElement.bind "blur", ->
             scope.$apply ->
-              _checkValidation scope, element, attrs, ctrl, validation
+              _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
         if 'submit' in validMethod
           ###*
           Click submit form, check the validity when submit
           ###
-          scope.$on ctrl.$name + "-submit-" + uid,  ->
+          scope.$on ctrl.$name + "-submit-" + uid, ->
             scope.$pristine = false
             scope.$dirty = true
-            _checkValidation scope, element, attrs, ctrl, validation
-
-
+            _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
 
         if scope.validTriggerEvent?
           ###*
           Do validation when receive a given event command
           ###
-          scope.$on scope.validTriggerEvent,  ->
+          scope.$on scope.validTriggerEvent, ->
             scope.$pristine = false
             scope.$dirty = true
-            _checkValidation scope, element, attrs, ctrl, validation
+            _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
   )

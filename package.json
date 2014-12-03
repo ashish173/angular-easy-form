@@ -1,57 +1,59 @@
 {
-  "name": "angular-easy-form",
-  "version": "0.0.0",
-  "description": "AngularJS Form Builder Tools.",
-  "homepage": "https://github.com/n-iq/angular-easy-form",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/n-iq/angular-easy-form"
-  },
-  "keywords": [
-    "AngularJS",
-    "CoffeeScript",
-    "Form"
-  ],
-  "author": {
-    "name": "Everett Qin",
-    "url": "https://github.com/everettqin"
-  },
-  "contributors": [
-    {
-      "name": "others",
-      "url": ""
+    "name": "angular-easy-form",
+    "version": "0.0.0",
+    "description": "AngularJS Form Builder Tools.",
+    "homepage": "https://github.com/n-iq/angular-easy-form",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/n-iq/angular-easy-form"
+    },
+    "keywords": [
+        "AngularJS",
+        "CoffeeScript",
+        "Form"
+    ],
+    "author": {
+        "name": "Everett Qin",
+        "url": "https://github.com/everettqin"
+    },
+    "contributors": [
+        {
+            "name": "others",
+            "url": ""
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "bugs": {
+        "url": "https://github.com/n-iq/angular-easy-form/issues"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-autoprefixer": "^0.7.3",
+        "grunt-concurrent": "^0.5.0",
+        "grunt-contrib-clean": "~0.6.0",
+        "grunt-contrib-coffee": "^0.11.1",
+        "grunt-contrib-compass": "^1.0.1",
+        "grunt-contrib-concat": "^0.5.0",
+        "grunt-contrib-connect": "^0.8.0",
+        "grunt-contrib-jade": "^0.12.0",
+        "grunt-contrib-uglify": "^0.5.1",
+        "grunt-contrib-watch": "~0.6.1",
+        "grunt-html2js": "^0.2.9",
+        "grunt-karma": "^0.8.3",
+        "grunt-ng-annotate": "^0.4.0",
+        "grunt-ngdocs": "^0.2.5",
+        "grunt-wiredep": "^1.9.0",
+        "karma": "^0.12.16",
+        "karma-coffee-preprocessor": "~0.2.1",
+        "karma-jasmine": "^0.2.2",
+        "karma-phantomjs-launcher": "^0.1.4",
+        "karma-script-launcher": "~0.1.0",
+        "load-grunt-tasks": "~0.6.0",
+        "time-grunt": "~1.0.0"
     }
-  ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://opensource.org/licenses/mit-license.php"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/n-iq/angular-easy-form/issues"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-clean": "~0.6.0",
-    "grunt-contrib-coffee": "^0.11.1",
-    "grunt-contrib-compass": "^1.0.1",
-    "grunt-contrib-concat": "^0.5.0",
-    "grunt-contrib-connect": "^0.8.0",
-    "grunt-contrib-jade": "^0.12.0",
-    "grunt-contrib-uglify": "^0.5.1",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-html2js": "^0.2.9",
-    "grunt-karma": "^0.8.3",
-    "grunt-ng-annotate": "^0.4.0",
-    "grunt-ngdocs": "^0.2.5",
-    "grunt-wiredep": "^1.9.0",
-    "karma": "^0.12.16",
-    "karma-coffee-preprocessor": "~0.2.1",
-    "karma-jasmine": "^0.2.2",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "karma-script-launcher": "~0.1.0",
-    "load-grunt-tasks": "~0.6.0",
-    "time-grunt": "~1.0.0"
-  }
 }

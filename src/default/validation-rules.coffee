@@ -11,7 +11,7 @@ angular.module 'easy.form.default'
     messages:
       invalid: "This should be required."
       valid: "It's Required"
-    translate: true
+    translate: false
 
 
   # ----------------------------------------
@@ -22,7 +22,7 @@ angular.module 'easy.form.default'
     messages:
       invalid: "This should be url."
       valid: "It's Url"
-    translate: true
+    translate: false
 
   # ----------------------------------------
   # email
@@ -32,7 +32,7 @@ angular.module 'easy.form.default'
     messages:
       invalid: "This should be email"
       valid: "It's email"
-    translate: true
+    translate: false
 
   # ----------------------------------------
   # number
@@ -42,4 +42,4 @@ angular.module 'easy.form.default'
     messages:
       invalid: "This should be number"
       valid: "It's number"
-    translate: true
+    translate: false
