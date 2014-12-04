@@ -316,7 +316,7 @@ angular.module('easy.form.directives')
         scope.$pristine = ctrl.$pristine = true
         scope.$dirty = ctrl.$dirty  = false
 
-        inputElement.bind "change", ->
+        scope.$watch 'model', ->
           scope.$pristine = ctrl.$pristine = false
           scope.$dirty = ctrl.$dirty = true
 
