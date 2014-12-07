@@ -352,7 +352,7 @@
            */
           scope.$pristine = ctrl.$pristine = true;
           scope.$dirty = ctrl.$dirty = false;
-          inputElement.bind("change", function() {
+          scope.$watch('model', function() {
             scope.$pristine = ctrl.$pristine = false;
             return scope.$dirty = ctrl.$dirty = true;
           });

@@ -901,7 +901,7 @@
            */
           scope.$pristine = ctrl.$pristine = true;
           scope.$dirty = ctrl.$dirty = false;
-          inputElement.bind("change", function() {
+          scope.$watch('model', function() {
             scope.$pristine = ctrl.$pristine = false;
             return scope.$dirty = ctrl.$dirty = true;
           });
@@ -1220,7 +1220,7 @@ angular.module("easy-form/templates/form-wrappers/default.html", []).run(["$temp
 angular.module("easy-form/templates/input-wrappers/horizontal-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/horizontal-form.html",
     "<label class=\"control-label\" ng-class=\"labelClassArr\" ng-bind-html=\"label\"></label>\n" +
-    "<div ng-class=\"controlClassArr\">\n" +
+    "<div class='form-control-wrapper' ng-class=\"controlClassArr\">\n" +
     "    <easy-input-field></easy-input-field>\n" +
     "    <span class=\"help-block\" ng-bind-html=\"hint\" ng-show=\"hint && !invalidMessage\"></span>\n" +
     "    <span class=\"help-block\" ng-bind-html=\"invalidMessage\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
