@@ -1,5 +1,5 @@
 <label class="control-label" ng-class="labelClassArr" ng-bind-html="label"></label>
-<div ng-class="controlClassArr">
+<div class='form-control-wrapper' ng-class="controlClassArr">
     <easy-input-field></easy-input-field>
     <span class="help-block" ng-bind-html="hint" ng-show="hint && !invalidMessage"></span>
     <span class="help-block" ng-bind-html="invalidMessage" ng-hide="hint && !invalidMessage"></span>
