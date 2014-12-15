@@ -232,7 +232,6 @@ module.exports = (grunt) ->
       dist: [
         "coffee"
         "jade"
-        "compass:dist"
       ]
   # -----------------------------------
   # register task
