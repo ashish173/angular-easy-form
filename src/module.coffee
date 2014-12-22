@@ -16,6 +16,7 @@ angular.module 'easy.form', [
   'monospaced.elastic'
   'ui.bootstrap'
   'ngTagsInput'
+  'pascalprecht.translate'
 
   'easy.form.directives'
   'easy.form.providers'

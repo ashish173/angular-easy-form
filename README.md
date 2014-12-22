@@ -1,1 +1,7 @@
 #angular-easy-form [![Build Status](https://travis-ci.org/n-iq/angular-form.svg?branch=develop)](https://travis-ci.org/n-iq/angular-easy-form)
+
+# Grunt command
+ 1. `grunt build` build the src
+ 2. `grunt dev` compile the source & demo, start dev server
+ 3. `grunt docs` generate docs file (incomplete)
+ 4. `grunt test` run test suit

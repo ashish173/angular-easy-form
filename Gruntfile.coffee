@@ -20,8 +20,8 @@ module.exports = (grunt) ->
   grunt.config.init
     compass:
       options:
-        sassDir: "#{appConfig.paths.demo}/styles"
-        cssDir: "#{appConfig.paths.tmp}/styles"
+        sassDir: "demo/styles"
+        cssDir: ".tmp/styles"
         generatedImagesDir: "#{appConfig.paths.tmp}/images/generated"
         imagesDir: "#{appConfig.paths.demo}/images"
         javascriptsDir: "#{appConfig.paths.demo}/scripts"
@@ -41,6 +41,7 @@ module.exports = (grunt) ->
       server:
         options:
           debugInfo: true
+          watch: false
 
       dev:
         options:
@@ -125,11 +126,6 @@ module.exports = (grunt) ->
           'dist/angular-easy-form.min.js': 'dist/angular-easy-form.js'
 
     watch:
-      compass:
-        files: ['demo/*.scss']
-        tasks: ['compass']
-        options:
-          spawn: no
       coffee:
         files: ['src/**/*.coffee', 'demo/**/*.coffee']
         tasks: ['coffee']
@@ -173,8 +169,8 @@ module.exports = (grunt) ->
           middleware: (connect) ->
             [
               connect.static(".tmp")
-              connect().use("/bower_components", connect.static("./bower_components"))
               connect.static('demo')
+              connect().use("/bower_components", connect.static("./bower_components"))
             ]
 
     karma:

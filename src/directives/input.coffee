@@ -169,33 +169,34 @@ angular.module('easy.form.directives')
     restrict: 'AE'
     scope:
       model: '=ngModel'
-      name: '@'
-      options: '='
-    # template
-      type: '@'
-      wrapper: '@'
-    # native behaviour
-      ngDisabled: '='
-      ngChange: '&'
-    # label & placeholder
-      label: '='
-      placeholder: '='
-      hint: '='
-    # style
-      labelClass: '@'
-      controlClass: '@'
-      wrapperClass: '@'
-    # validation
-      validator: '@'
-      validClass: '@'
-      originInvalidClass: '@'
-      validMethod: '@'
-      customValidator: '@'
-      validTriggerEvent: '@'
-      initialValidity: '='
-      validCallback: '&'
-      invalidCallback: '&'
+#      name: '@'
+#      options: '='
+#    # template
+#      type: '@'
+#      wrapper: '@'
+#    # native behaviour
+#      ngDisabled: '='
+#      ngChange: '&'
+#    # label & placeholder
+#      label: '='
+#      placeholder: '='
+#      hint: '='
+#    # style
+#      labelClass: '@'
+#      controlClass: '@'
+#      wrapperClass: '@'
+#    # validation
+#      validator: '@'
+#      validClass: '@'
+#      originInvalidClass: '@'
+#      validMethod: '@'
+#      customValidator: '@'
+#      validTriggerEvent: '@'
+#      initialValidity: '='
+#      validCallback: '&'
+#      invalidCallback: '&'
     link: (scope, element, attrs, ctrl) ->
+      return
       ###*
       Initialize scope from options
       ###
@@ -316,7 +317,8 @@ angular.module('easy.form.directives')
         scope.$pristine = ctrl.$pristine = true
         scope.$dirty = ctrl.$dirty  = false
 
-        scope.$watch 'model', ->
+        scope.$watch 'model', (newVal, oldVal)->
+          return if newVal is oldVal
           scope.$pristine = ctrl.$pristine = false
           scope.$dirty = ctrl.$dirty = true
 
