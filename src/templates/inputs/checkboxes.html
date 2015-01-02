@@ -1,9 +1,9 @@
 <div class="checkbox" ng-repeat="item in options.checkboxes.collection" ng-if="!options.checkboxes.inline">
     <label>
-        <input type="checkbox" checklist-model="model" checklist-value="item" ng-disabled="ngDisabled"> {{item.text}}
+        <input type="checkbox" checklist-model="model" checklist-value="item" ng-disabled="ngDisabled" ng-bind="::item.text">
     </label>
 </div>
 
 <label class="checkbox-inline" ng-repeat="item in options.checkboxes.collection" ng-if="options.checkboxes.inline">
-    <input type="checkbox" checklist-model="model" checklist-value="item" ng-disabled="ngDisabled"> {{item.text}}
+    <input type="checkbox" checklist-model="model" checklist-value="item" ng-disabled="ngDisabled" ng-bind="::item.text">
 </label>

@@ -4,15 +4,23 @@ app = angular.module 'demoApp', [
 ]
 
 app.config ($translateProvider) ->
-  translations =
+  translationsEN =
     custom_validate_error_2: 'This should be greater then model 1.'
+    LABEL: 'translated label'
+    PLACEHOLDER: 'translated placeholder'
+
+  translationsDE =
+    custom_validate_error_2: 'This should be greater then model 1.(DE)'
+    LABEL: 'translated label(DE)'
+    PLACEHOLDER: 'translated placeholder(DE)'
 
   $translateProvider
-  .translations('en', translations)
+  .translations('en', translationsEN)
+  .translations('de', translationsDE)
   .preferredLanguage('en');
 
 
-app.controller 'DemoCtrl', ($scope, $http) ->
+app.controller 'DemoCtrl', ($scope, $http, $translate) ->
   $scope.disabled = undefined
 
   $scope.checkboxOptions =
@@ -195,6 +203,9 @@ app.controller 'DemoCtrl', ($scope, $http) ->
     model2 = $scope.customValidateForm.model2
     if model2.$invalid and model2.$dirty
       $scope.$broadcast 'trigger-model2-validate'
+
+  $scope.changeLanguage = (langKey) ->
+    $translate.use(langKey)
 
 app.config ($easyInputProvider) ->
   $easyInputProvider.registerInput 'custom-input',

@@ -134,6 +134,9 @@ module.exports = (grunt) ->
       jade:
         files: ["demo/index.jade"]
         tasks: ["jade"]
+      html2js:
+        files: ['src/templates/**/*.html']
+        tasks: ['html2js']
       livereload:
         options:
           livereload: "<%= connect.options.livereload %>"

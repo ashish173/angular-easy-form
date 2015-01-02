@@ -208,9 +208,9 @@
         wrapper: '@',
         ngDisabled: '=',
         ngChange: '&',
-        label: '=',
-        placeholder: '=',
-        hint: '=',
+        label: '@',
+        placeholder: '@',
+        hint: '@',
         labelClass: '@',
         controlClass: '@',
         wrapperClass: '@',
@@ -220,7 +220,7 @@
         validMethod: '@',
         customValidator: '@',
         validTriggerEvent: '@',
-        initialValidity: '=',
+        initialValidity: '@',
         validCallback: '&',
         invalidCallback: '&'
       },
@@ -352,7 +352,10 @@
            */
           scope.$pristine = ctrl.$pristine = true;
           scope.$dirty = ctrl.$dirty = false;
-          scope.$watch('model', function() {
+          scope.$watch('model', function(newVal, oldVal) {
+            if (newVal === oldVal) {
+              return;
+            }
             scope.$pristine = ctrl.$pristine = false;
             return scope.$dirty = ctrl.$dirty = true;
           });

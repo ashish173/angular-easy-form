@@ -35,15 +35,15 @@ body(ng-controller='DemoCtrl')
                 ng-form
                   .form-group
                     easy-input(type='text', ng-model='demo.controls.inputs.text',
-                    label='"text"', placeholder='"please enter text"', ng-disabled='disabled')
+                    label='text', placeholder='please enter text', ng-disabled='disabled')
 
                   .form-group
                     easy-input(type='password', ng-model='demo.controls.inputs.password',
-                    label='"password"', placeholder='"please enter password"', ng-disabled='disabled')
+                    label='password', placeholder='please enter password', ng-disabled='disabled')
 
                   .form-group
                     easy-input(type='datetime', ng-model='demo.controls.inputs.datetime',
-                    label='"datetime"', placeholder='"please enter datetime"', ng-disabled='disabled')
+                    label='"datetime"', placeholder='please enter datetime', ng-disabled='disabled')
 
                   .form-group
                     easy-input(type='datetime-local', ng-model='demo.controls.inputs.datetimeLocal',
@@ -319,6 +319,12 @@ body(ng-controller='DemoCtrl')
         .bs-docs-section
           h3#i18n.page-header I18n
           .bs-example
+            .row
+              .col-md-8
+                ng-form
+                  .form-group
+                    easy-input(type='text', ng-model='demo.i18n.inputs.text',
+                    label='LABEL', placeholder='PLACEHOLDER', ng-disabled='disabled')
       .col-md-3
         .bs-docs-sidebar.hidden-print.hidden-xs.hidden-sm
           ul.nav.bs-docs-sidenav(data-spy="affix", data-offset-top="60", data-offset-bottom="200")
@@ -339,6 +345,10 @@ body(ng-controller='DemoCtrl')
               a(href='#buttons') Buttons
             li
               a(href='#i18n') I18n
+            li
+              button.btn.btn-xs.btn-primary(ng-click="changeLanguage('de')") DE
+              button.btn.btn-xs.btn-default(ng-click="changeLanguage('en')") EN
+
   // bower:js
   script(src='bower_components/angular/angular.js')
   script(src='bower_components/checklist-model/checklist-model.js')

@@ -169,34 +169,33 @@ angular.module('easy.form.directives')
     restrict: 'AE'
     scope:
       model: '=ngModel'
-#      name: '@'
-#      options: '='
-#    # template
-#      type: '@'
-#      wrapper: '@'
-#    # native behaviour
-#      ngDisabled: '='
-#      ngChange: '&'
-#    # label & placeholder
-#      label: '='
-#      placeholder: '='
-#      hint: '='
-#    # style
-#      labelClass: '@'
-#      controlClass: '@'
-#      wrapperClass: '@'
-#    # validation
-#      validator: '@'
-#      validClass: '@'
-#      originInvalidClass: '@'
-#      validMethod: '@'
-#      customValidator: '@'
-#      validTriggerEvent: '@'
-#      initialValidity: '='
-#      validCallback: '&'
-#      invalidCallback: '&'
+      name: '@'
+      options: '='
+      # template
+      type: '@'
+      wrapper: '@'
+      # native behaviour
+      ngDisabled: '='
+      ngChange: '&'
+      # label & placeholder
+      label: '@'
+      placeholder: '@'
+      hint: '@'
+      # style
+      labelClass: '@'
+      controlClass: '@'
+      wrapperClass: '@'
+      # validation
+      validator: '@'
+      validClass: '@'
+      originInvalidClass: '@'
+      validMethod: '@'
+      customValidator: '@'
+      validTriggerEvent: '@'
+      initialValidity: '@'
+      validCallback: '&'
+      invalidCallback: '&'
     link: (scope, element, attrs, ctrl) ->
-      return
       ###*
       Initialize scope from options
       ###

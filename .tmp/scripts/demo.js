@@ -4,14 +4,21 @@
   app = angular.module('demoApp', ['pascalprecht.translate', 'easy.form']);
 
   app.config(function($translateProvider) {
-    var translations;
-    translations = {
-      custom_validate_error_2: 'This should be greater then model 1.'
+    var translationsDE, translationsEN;
+    translationsEN = {
+      custom_validate_error_2: 'This should be greater then model 1.',
+      LABEL: 'translated label',
+      PLACEHOLDER: 'translated placeholder'
     };
-    return $translateProvider.translations('en', translations).preferredLanguage('en');
+    translationsDE = {
+      custom_validate_error_2: 'This should be greater then model 1.(DE)',
+      LABEL: 'translated label(DE)',
+      PLACEHOLDER: 'translated placeholder(DE)'
+    };
+    return $translateProvider.translations('en', translationsEN).translations('de', translationsDE).preferredLanguage('en');
   });
 
-  app.controller('DemoCtrl', function($scope, $http) {
+  app.controller('DemoCtrl', function($scope, $http, $translate) {
     $scope.disabled = void 0;
     $scope.checkboxOptions = {
       checkbox: {
@@ -289,13 +296,16 @@
       },
       translate: true
     };
-    return $scope.$watch('demo.validation.customize1', function(newVal, oldVal) {
+    $scope.$watch('demo.validation.customize1', function(newVal, oldVal) {
       var model2;
       model2 = $scope.customValidateForm.model2;
       if (model2.$invalid && model2.$dirty) {
         return $scope.$broadcast('trigger-model2-validate');
       }
     });
+    return $scope.changeLanguage = function(langKey) {
+      return $translate.use(langKey);
+    };
   });
 
   app.config(function($easyInputProvider) {
