@@ -1,9 +1,11 @@
 <div class="radio" ng-repeat="item in options.radios.collection" ng-if="!options.radios.inline">
     <label>
-        <input type="radio" ng-value="{{item}}" ng-model="$parent.model" ng-disabled="ngDisabled" translate="::item.text">
+        <input type="radio" name="inputIn" value="{{item.key}}" ng-model="$parent.model" ng-disabled="ngDisabled">
+        <span translate="{{item.text}}"></span>
     </label>
 </div>
 
-<label class="radio-inline" ng-repeat="item in options.radios.collection" ng-if="options.radios.inline" translate="::item.text">
-    <input type="radio" ng-value="{{item}}" ng-model="$parent.model" ng-disabled="ngDisabled">
+<label class="radio-inline" ng-repeat="item in options.radios.collection" ng-if="options.radios.inline">
+    <input type="radio" name="inputIn" value="{{item.key}}" ng-model="$parent.model" ng-disabled="ngDisabled">
+    <span translate="{{item.text}}"></span>
 </label>

@@ -50,8 +50,9 @@ angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(
 angular.module("easy-form/templates/inputs/checkbox.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/checkbox.html",
     "<div class=\"checkbox\">\n" +
-    "    <label ng-bind=\"::options.checkbox.text\">\n" +
-    "        <input type=\"checkbox\" ng-model=\"model\" ng-disabled=\"ngDisabled\">\n" +
+    "    <label>\n" +
+    "        <input type=\"checkbox\" name=\"inputIn\" ng-model=\"model\" ng-disabled=\"ngDisabled\">\n" +
+    "        <span translate=\"{{options.checkbox.text}}\"></span>\n" +
     "    </label>\n" +
     "</div>");
 }]);
@@ -60,12 +61,15 @@ angular.module("easy-form/templates/inputs/checkboxes.html", []).run(["$template
   $templateCache.put("easy-form/templates/inputs/checkboxes.html",
     "<div class=\"checkbox\" ng-repeat=\"item in options.checkboxes.collection\" ng-if=\"!options.checkboxes.inline\">\n" +
     "    <label>\n" +
-    "        <input type=\"checkbox\" checklist-model=\"model\" checklist-value=\"item\" ng-disabled=\"ngDisabled\" ng-bind=\"::item.text\">\n" +
+    "        <input type=\"checkbox\" name=\"inputIn\" checklist-model=\"model\" checklist-value=\"item.key\"\n" +
+    "               ng-disabled=\"ngDisabled\">\n" +
+    "        <span translate=\"{{item.text}}\"></span>\n" +
     "    </label>\n" +
     "</div>\n" +
     "\n" +
     "<label class=\"checkbox-inline\" ng-repeat=\"item in options.checkboxes.collection\" ng-if=\"options.checkboxes.inline\">\n" +
-    "    <input type=\"checkbox\" checklist-model=\"model\" checklist-value=\"item\" ng-disabled=\"ngDisabled\" ng-bind=\"::item.text\">\n" +
+    "    <input type=\"checkbox\" name=\"inputIn\" checklist-model=\"model\" checklist-value=\"item.key\" ng-disabled=\"ngDisabled\">\n" +
+    "    <span translate=\"{{item.text}}\"></span>\n" +
     "</label>\n" +
     "");
 }]);
@@ -152,12 +156,14 @@ angular.module("easy-form/templates/inputs/radios.html", []).run(["$templateCach
   $templateCache.put("easy-form/templates/inputs/radios.html",
     "<div class=\"radio\" ng-repeat=\"item in options.radios.collection\" ng-if=\"!options.radios.inline\">\n" +
     "    <label>\n" +
-    "        <input type=\"radio\" ng-value=\"{{item}}\" ng-model=\"$parent.model\" ng-disabled=\"ngDisabled\" translate=\"::item.text\">\n" +
+    "        <input type=\"radio\" name=\"inputIn\" value=\"{{item.key}}\" ng-model=\"$parent.model\" ng-disabled=\"ngDisabled\">\n" +
+    "        <span translate=\"{{item.text}}\"></span>\n" +
     "    </label>\n" +
     "</div>\n" +
     "\n" +
-    "<label class=\"radio-inline\" ng-repeat=\"item in options.radios.collection\" ng-if=\"options.radios.inline\" translate=\"::item.text\">\n" +
-    "    <input type=\"radio\" ng-value=\"{{item}}\" ng-model=\"$parent.model\" ng-disabled=\"ngDisabled\">\n" +
+    "<label class=\"radio-inline\" ng-repeat=\"item in options.radios.collection\" ng-if=\"options.radios.inline\">\n" +
+    "    <input type=\"radio\" name=\"inputIn\" value=\"{{item.key}}\" ng-model=\"$parent.model\" ng-disabled=\"ngDisabled\">\n" +
+    "    <span translate=\"{{item.text}}\"></span>\n" +
     "</label>");
 }]);
 
