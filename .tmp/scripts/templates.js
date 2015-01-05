@@ -14,12 +14,14 @@ angular.module("easy-form/templates/form-wrappers/default.html", []).run(["$temp
 
 angular.module("easy-form/templates/input-wrappers/horizontal-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/horizontal-form.html",
-    "<label class=\"control-label\" ng-class=\"::labelClassArr\" translate=\"{{::label}}\"></label>\n" +
+    "<label class=\"control-label\" ng-class=\"::labelClassArr\" translate=\"{{label}}\"></label>\n" +
+    "\n" +
     "<div class='form-control-wrapper' ng-class=\"::controlClassArr\">\n" +
     "    <easy-input-field></easy-input-field>\n" +
-    "    <span class=\"help-block\" translate=\"{{::hint}}\" ng-show=\"hint && !invalidMessage\"></span>\n" +
-    "    <span class=\"help-block\" translate=\"{{::invalidMessage}}\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
-    "</div>");
+    "    <span class=\"help-block\" translate=\"{{hint}}\" ng-show=\"hint && !invalidMessage\"></span>\n" +
+    "    <span class=\"help-block\" translate=\"{{invalidMessage}}\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("easy-form/templates/input-wrappers/inline-form.html", []).run(["$templateCache", function($templateCache) {
@@ -37,11 +39,10 @@ angular.module("easy-form/templates/input-wrappers/none.html", []).run(["$templa
 
 angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/input-wrappers/vertical-form.html",
-    "<label ng-class=\"::labelClassArr\" translate=\"{{::label}}\"></label>\n" +
+    "<label ng-class=\"::labelClassArr\" translate=\"{{label}}\"></label>\n" +
     "<easy-input-field ng-class=\"::controlClassArr\"></easy-input-field>\n" +
-    "<span class=\"help-block\" translate=\"{{::hint}}\" ng-show=\"hint && !invalidMessage\"></span>\n" +
-    "<span class=\"help-block\" translate=\"{{::invalidMessage}}\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
-    "\n" +
+    "<span class=\"help-block\" translate=\"{{hint}}\" ng-show=\"hint && !invalidMessage\"></span>\n" +
+    "<span class=\"help-block\" translate=\"{{invalidMessage}}\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
     "\n" +
     "\n" +
     "");
@@ -156,13 +157,13 @@ angular.module("easy-form/templates/inputs/radios.html", []).run(["$templateCach
   $templateCache.put("easy-form/templates/inputs/radios.html",
     "<div class=\"radio\" ng-repeat=\"item in options.radios.collection\" ng-if=\"!options.radios.inline\">\n" +
     "    <label>\n" +
-    "        <input type=\"radio\" name=\"inputIn\" value=\"{{item.key}}\" ng-model=\"$parent.model\" ng-disabled=\"ngDisabled\">\n" +
+    "        <input type=\"radio\" name=\"{{name}}\" ng-value=\"item.key\" ng-model=\"$parent.$parent.model\" ng-disabled=\"ngDisabled\">\n" +
     "        <span translate=\"{{item.text}}\"></span>\n" +
     "    </label>\n" +
     "</div>\n" +
     "\n" +
     "<label class=\"radio-inline\" ng-repeat=\"item in options.radios.collection\" ng-if=\"options.radios.inline\">\n" +
-    "    <input type=\"radio\" name=\"inputIn\" value=\"{{item.key}}\" ng-model=\"$parent.model\" ng-disabled=\"ngDisabled\">\n" +
+    "    <input type=\"radio\" name=\"{{name}}\" ng-value=\"item.key\" ng-model=\"$parent.$parent.model\" ng-disabled=\"ngDisabled\">\n" +
     "    <span translate=\"{{item.text}}\"></span>\n" +
     "</label>");
 }]);

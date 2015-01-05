@@ -1,6 +1,7 @@
-<label class="control-label" ng-class="::labelClassArr" translate="{{::label}}"></label>
+<label class="control-label" ng-class="::labelClassArr" translate="{{label}}"></label>
+
 <div class='form-control-wrapper' ng-class="::controlClassArr">
     <easy-input-field></easy-input-field>
-    <span class="help-block" translate="{{::hint}}" ng-show="hint && !invalidMessage"></span>
-    <span class="help-block" translate="{{::invalidMessage}}" ng-hide="hint && !invalidMessage"></span>
+    <span class="help-block" translate="{{hint}}" ng-show="hint && !invalidMessage"></span>
+    <span class="help-block" translate="{{invalidMessage}}" ng-hide="hint && !invalidMessage"></span>
 </div>

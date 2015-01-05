@@ -121,10 +121,10 @@
                     <easy-input type="checkboxes" ng-model="demo.controls.checkboxes.checkboxesInline" label="checkboxes inline" options="checkboxesInlineOptions" ng-disabled="disabled"></easy-input>
                   </div>
                   <div class="form-group">
-                    <easy-input type="radios" ng-model="demo.controls.checkboxes.radios" label="radios" options="radiosOptions" ng-disabled="disabled"></easy-input>
+                    <easy-input type="radios" name="checkboxesRadios" ng-model="demo.controls.checkboxes.radios" label="radios" options="radiosOptions" ng-disabled="disabled"></easy-input>
                   </div>
                   <div class="form-group">
-                    <easy-input type="radios" ng-model="demo.controls.checkboxes.radiosInline" label="radios inline" options="radiosInlineOptions" ng-disabled="disabled"></easy-input>
+                    <easy-input type="radios" name="checkboxesInlineRadios" ng-model="demo.controls.checkboxes.radiosInline" label="radios inline" options="radiosInlineOptions" ng-disabled="disabled"></easy-input>
                   </div>
                 </ng-form>
               </div>
@@ -171,9 +171,10 @@
                   <div class="form-group">
                     <easy-input type="ui-select" ng-model="demo.controls.uiSelect.remote" label="Remote Data Basic" options="uiSelectRemoteOptions" ng-disabled="disabled"></easy-input>
                   </div>
-                  <!--.form-group-->
-                  <!--    easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.remoteMultiple',-->
-                  <!--    label='"Remote Data Multiple"', options='uiSelectRemoteOptions')-->
+                  <div class="form-group">
+                    <!--easy-input(type='ui-select-multiple', ng-model='demo.controls.uiSelect.remoteMultiple',-->
+                    <!--label='"Remote Data Multiple"', options='uiSelectRemoteOptions')-->
+                  </div>
                 </ng-form>
               </div>
               <div class="col-md-4">
