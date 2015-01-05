@@ -29,7 +29,10 @@
     $easyInputProvider.registerWrapper('inline-form', {
       templateUrl: 'easy-form/templates/input-wrappers/inline-form.html'
     });
-    $easyInputProvider.registerWrapper('none', {
+    $easyInputProvider.registerWrapper('no-label', {
+      templateUrl: 'easy-form/templates/input-wrappers/no-label.html'
+    });
+    $easyInputProvider.registerWrapper('no-label', {
       templateUrl: 'easy-form/templates/input-wrappers/none.html'
     });
     return $easyInputProvider.setDefaultWrapper('vertical-form');
