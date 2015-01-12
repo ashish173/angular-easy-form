@@ -1,4 +1,4 @@
-angular.module('easy.form.templates', ['easy-form/templates/form-wrappers/default.html', 'easy-form/templates/input-wrappers/horizontal-form.html', 'easy-form/templates/input-wrappers/inline-form.html', 'easy-form/templates/input-wrappers/no-label.html', 'easy-form/templates/input-wrappers/none.html', 'easy-form/templates/input-wrappers/vertical-form.html', 'easy-form/templates/inputs/checkbox.html', 'easy-form/templates/inputs/checkboxes.html', 'easy-form/templates/inputs/color.html', 'easy-form/templates/inputs/date.html', 'easy-form/templates/inputs/datepicker.html', 'easy-form/templates/inputs/datetime-local.html', 'easy-form/templates/inputs/datetime.html', 'easy-form/templates/inputs/datetimepicker.html', 'easy-form/templates/inputs/email.html', 'easy-form/templates/inputs/month.html', 'easy-form/templates/inputs/number.html', 'easy-form/templates/inputs/password.html', 'easy-form/templates/inputs/radios.html', 'easy-form/templates/inputs/search.html', 'easy-form/templates/inputs/select.html', 'easy-form/templates/inputs/switch.html', 'easy-form/templates/inputs/tag.html', 'easy-form/templates/inputs/tel.html', 'easy-form/templates/inputs/text-angular.html', 'easy-form/templates/inputs/text.html', 'easy-form/templates/inputs/textarea-autosize.html', 'easy-form/templates/inputs/textarea.html', 'easy-form/templates/inputs/time.html', 'easy-form/templates/inputs/timepicker.html', 'easy-form/templates/inputs/ui-select.html', 'easy-form/templates/inputs/url.html', 'easy-form/templates/inputs/week.html', 'easy-form/templates/messages/default.html']);
+angular.module('easy.form.templates', ['easy-form/templates/form-wrappers/default.html', 'easy-form/templates/input-wrappers/horizontal-form.html', 'easy-form/templates/input-wrappers/inline-form.html', 'easy-form/templates/input-wrappers/no-label.html', 'easy-form/templates/input-wrappers/none.html', 'easy-form/templates/input-wrappers/vertical-form.html', 'easy-form/templates/inputs/checkbox.html', 'easy-form/templates/inputs/checkboxes.html', 'easy-form/templates/inputs/color.html', 'easy-form/templates/inputs/date.html', 'easy-form/templates/inputs/datepicker.html', 'easy-form/templates/inputs/datetime-local.html', 'easy-form/templates/inputs/datetime.html', 'easy-form/templates/inputs/datetimepicker.html', 'easy-form/templates/inputs/email.html', 'easy-form/templates/inputs/money-mask.html', 'easy-form/templates/inputs/month.html', 'easy-form/templates/inputs/number-mask.html', 'easy-form/templates/inputs/number.html', 'easy-form/templates/inputs/password.html', 'easy-form/templates/inputs/percentage-mask.html', 'easy-form/templates/inputs/radios.html', 'easy-form/templates/inputs/search.html', 'easy-form/templates/inputs/select.html', 'easy-form/templates/inputs/switch.html', 'easy-form/templates/inputs/tag.html', 'easy-form/templates/inputs/tel.html', 'easy-form/templates/inputs/text-angular.html', 'easy-form/templates/inputs/text.html', 'easy-form/templates/inputs/textarea-autosize.html', 'easy-form/templates/inputs/textarea.html', 'easy-form/templates/inputs/time.html', 'easy-form/templates/inputs/timepicker.html', 'easy-form/templates/inputs/ui-select.html', 'easy-form/templates/inputs/url.html', 'easy-form/templates/inputs/week.html', 'easy-form/templates/messages/default.html']);
 
 angular.module("easy-form/templates/form-wrappers/default.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/form-wrappers/default.html",
@@ -146,10 +146,24 @@ angular.module("easy-form/templates/inputs/email.html", []).run(["$templateCache
     "");
 }]);
 
+angular.module("easy-form/templates/inputs/money-mask.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("easy-form/templates/inputs/money-mask.html",
+    "<input type=\"text\" name=\"inputIn\" class=\"form-control\"\n" +
+    "       ng-model=\"model\" ng-disabled=\"ngDisabled\" ui-money-mask\n" +
+    "       placeholder=\"{{placeholder | translate}}\">");
+}]);
+
 angular.module("easy-form/templates/inputs/month.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/month.html",
     "<input name=\"inputIn\" type=\"month\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\"  ng-disabled=\"ngDisabled\"/>\n" +
     "");
+}]);
+
+angular.module("easy-form/templates/inputs/number-mask.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("easy-form/templates/inputs/number-mask.html",
+    "<input type=\"text\" name=\"inputIn\" class=\"form-control\"\n" +
+    "       ng-model=\"model\" ng-disabled=\"ngDisabled\" ui-number-mask\n" +
+    "       placeholder=\"{{placeholder | translate}}\">");
 }]);
 
 angular.module("easy-form/templates/inputs/number.html", []).run(["$templateCache", function($templateCache) {
@@ -164,19 +178,29 @@ angular.module("easy-form/templates/inputs/password.html", []).run(["$templateCa
     "");
 }]);
 
+angular.module("easy-form/templates/inputs/percentage-mask.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("easy-form/templates/inputs/percentage-mask.html",
+    "<input type=\"text\" name=\"inputIn\" class=\"form-control\"\n" +
+    "       ng-model=\"model\" ng-disabled=\"ngDisabled\" ui-percentage-mask\n" +
+    "       placeholder=\"{{placeholder | translate}}\">");
+}]);
+
 angular.module("easy-form/templates/inputs/radios.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/radios.html",
-    "<div class=\"radio\" ng-repeat=\"item in options.radios.collection\" ng-if=\"!options.radios.inline\">\n" +
-    "    <label>\n" +
-    "        <input type=\"radio\" name=\"{{name}}\" ng-value=\"item.key\" ng-model=\"$parent.$parent.model\" ng-disabled=\"ngDisabled\">\n" +
+    "<form name=\"formIn\">\n" +
+    "    <div class=\"radio\" ng-repeat=\"item in options.radios.collection\" ng-if=\"!options.radios.inline\">\n" +
+    "        <label>\n" +
+    "            <input type=\"radio\" name=\"inputIn\" ng-value=\"item.key\" ng-model=\"$parent.$parent.model\" ng-disabled=\"ngDisabled\">\n" +
+    "            <span translate=\"{{item.text}}\"></span>\n" +
+    "        </label>\n" +
+    "    </div>\n" +
+    "\n" +
+    "    <label class=\"radio-inline\" ng-repeat=\"item in options.radios.collection\" ng-if=\"options.radios.inline\">\n" +
+    "        <input type=\"radio\" name=\"inputIn\" ng-value=\"item.key\" ng-model=\"$parent.$parent.model\" ng-disabled=\"ngDisabled\">\n" +
     "        <span translate=\"{{item.text}}\"></span>\n" +
     "    </label>\n" +
-    "</div>\n" +
-    "\n" +
-    "<label class=\"radio-inline\" ng-repeat=\"item in options.radios.collection\" ng-if=\"options.radios.inline\">\n" +
-    "    <input type=\"radio\" name=\"{{name}}\" ng-value=\"item.key\" ng-model=\"$parent.$parent.model\" ng-disabled=\"ngDisabled\">\n" +
-    "    <span translate=\"{{item.text}}\"></span>\n" +
-    "</label>");
+    "</form>\n" +
+    "");
 }]);
 
 angular.module("easy-form/templates/inputs/search.html", []).run(["$templateCache", function($templateCache) {
@@ -258,7 +282,9 @@ angular.module("easy-form/templates/inputs/text-angular.html", []).run(["$templa
 
 angular.module("easy-form/templates/inputs/text.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/text.html",
-    "<input name=\"inputIn\" type=\"text\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\" ng-disabled=\"ngDisabled\"/>\n" +
+    "<input name=\"inputIn\" type=\"text\" class=\"form-control\"\n" +
+    "       placeholder=\"{{placeholder | translate}}\"\n" +
+    "       ng-model=\"model\" ng-disabled=\"ngDisabled\"/>\n" +
     "");
 }]);
 

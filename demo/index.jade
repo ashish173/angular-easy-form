@@ -218,16 +218,24 @@ body(ng-controller='DemoCtrl')
                 ng-form.form(name='validateMethodBasicForm')
                   .form-group
                     easy-input(type='text', name='required', ng-model='demo.validation.basic.required',
-                    label='"Required"', placeholder='"Required"', validator='required', ng-disabled='disabled')
+                    label='Required', placeholder='Required', validator='required', ng-disabled='disabled')
                   .form-group
                     easy-input(type='text', name='url', ng-model='demo.validation.basic.url',
-                    label='"URL"', placeholder='"URL"', validator='url', ng-disabled='disabled')
+                    label='URL', placeholder='URL', validator='url', ng-disabled='disabled')
                   .form-group
                     easy-input(type='text', name='email', ng-model='demo.validation.basic.email',
-                    label='"Email"', placeholder='"Email"', validator='email', ng-disabled='disabled')
+                    label='Email', placeholder='Email', validator='email', ng-disabled='disabled')
                   .form-group
                     easy-input(type='text', name='number', ng-model='demo.validation.basic.number',
-                    label='"Number"', placeholder='"Number"', validator='number', ng-disabled='disabled')
+                    label='Number', placeholder='Number', validator='number', ng-disabled='disabled')
+                  .form-group
+                    easy-input(type='checkboxes', name='checkbox', ng-model='demo.validation.basic.checkbox',
+                    label='Checkbox', validator='required', ng-disabled='disabled', options='checkboxesOptions')
+                  .form-group
+                    easy-input(type='radios', name='radios', ng-model='demo.validation.basic.radios',
+                    label='Radios', validator='required', ng-disabled='disabled', options='radiosOptions')
+                  .form-group
+                    button.btn.btn-primary(easy-submit='validateMethodBasicForm') Submit
               .col-md-4
                 pre {{demo.validation.basic | json}}
                 pre
@@ -360,6 +368,9 @@ body(ng-controller='DemoCtrl')
   script(src='bower_components/ng-tags-input/ng-tags-input.min.js')
   script(src='bower_components/angular-touch/angular-touch.js')
   script(src='bower_components/venturocket-angular-slider/build/angular-slider.js')
+  script(src='bower_components/br-validations/releases/br-validations.js')
+  script(src='bower_components/string-mask/src/string-mask.js')
+  script(src='bower_components/angular-input-masks/releases/masks.min.js')
   // endbower
 
   script(src='bower_components/jquery/dist/jquery.js')

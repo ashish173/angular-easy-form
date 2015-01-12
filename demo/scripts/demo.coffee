@@ -170,6 +170,8 @@ app.controller 'DemoCtrl', ($scope, $http, $translate) ->
           }
     validation: {}
 
+
+
   $scope.enable = ->
     $scope.disabled = false
 
