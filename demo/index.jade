@@ -232,7 +232,10 @@ body(ng-controller='DemoCtrl')
                     easy-input(type='checkboxes', name='checkbox', ng-model='demo.validation.basic.checkbox',
                     label='Checkbox', validator='required', ng-disabled='disabled', options='checkboxesOptions')
                   .form-group
-                    easy-input(type='radios', name='radios', ng-model='demo.validation.basic.radios',
+                    easy-input(type='radios', name='radios1', ng-model='demo.validation.basic.radios1',
+                    label='Radios', validator='required', ng-disabled='disabled', options='radiosOptions')
+                  .form-group
+                    easy-input(type='radios', name='radios2', ng-model='demo.validation.basic.radios2',
                     label='Radios', validator='required', ng-disabled='disabled', options='radiosOptions')
                   .form-group
                     button.btn.btn-primary(easy-submit='validateMethodBasicForm') Submit
