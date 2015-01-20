@@ -5,3 +5,11 @@
  2. `grunt dev` compile the source & demo, start dev server
  3. `grunt docs` generate docs file (incomplete)
  4. `grunt test` run test suit
+ 
+# Todo list 
+
+- [ ] move out depends third-party's input to separately project
+- [ ] improve translate method
+- [ ] add a controller layer for input 
+- [ ] move validation to a validation service layer 
+- [ ] etc ... 
