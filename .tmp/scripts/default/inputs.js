@@ -45,15 +45,6 @@
     $easyInputProvider.registerInput('color', {
       templateUrl: 'easy-form/templates/inputs/color.html'
     });
-    $easyInputProvider.registerInput('number-mask', {
-      templateUrl: 'easy-form/templates/inputs/number-mask.html'
-    });
-    $easyInputProvider.registerInput('money-mask', {
-      templateUrl: 'easy-form/templates/inputs/money-mask.html'
-    });
-    $easyInputProvider.registerInput('percentage-mask', {
-      templateUrl: 'easy-form/templates/inputs/percentage-mask.html'
-    });
     $easyInputProvider.registerInput('textarea', {
       templateUrl: 'easy-form/templates/inputs/textarea.html'
     });

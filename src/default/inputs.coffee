@@ -50,18 +50,6 @@ angular.module 'easy.form.default'
     templateUrl: 'easy-form/templates/inputs/color.html'
 
   # ----------------------------------------
-  # input mask
-  # ----------------------------------------
-  $easyInputProvider.registerInput 'number-mask',
-    templateUrl: 'easy-form/templates/inputs/number-mask.html'
-
-  $easyInputProvider.registerInput 'money-mask',
-    templateUrl: 'easy-form/templates/inputs/money-mask.html'
-
-  $easyInputProvider.registerInput 'percentage-mask',
-    templateUrl: 'easy-form/templates/inputs/percentage-mask.html'
-
-  # ----------------------------------------
   # textarea
   # ----------------------------------------
   $easyInputProvider.registerInput 'textarea',

@@ -118,11 +118,11 @@ body(ng-controller='DemoCtrl')
                     label='Boolean', options='checkboxOptions', ng-disabled='disabled')
 
                   .form-group
-                    easy-input(type='checkboxes', ng-model='demo.controls.checkboxes.checkboxes',
+                    easy-input(type='checkboxes', name='checkboxesCheckboxes1', ng-model='demo.controls.checkboxes.checkboxes',
                     label='checkboxes', options='checkboxesOptions', ng-disabled='disabled')
 
                   .form-group
-                    easy-input(type='checkboxes', ng-model='demo.controls.checkboxes.checkboxesInline',
+                    easy-input(type='checkboxes', name='checkboxesCheckboxes2', ng-model='demo.controls.checkboxes.checkboxesInline',
                     label='checkboxes inline', options='checkboxesInlineOptions', ng-disabled='disabled')
 
                   .form-group
@@ -371,9 +371,6 @@ body(ng-controller='DemoCtrl')
   script(src='bower_components/ng-tags-input/ng-tags-input.min.js')
   script(src='bower_components/angular-touch/angular-touch.js')
   script(src='bower_components/venturocket-angular-slider/build/angular-slider.js')
-  script(src='bower_components/br-validations/releases/br-validations.js')
-  script(src='bower_components/string-mask/src/string-mask.js')
-  script(src='bower_components/angular-input-masks/releases/masks.min.js')
   // endbower
 
   script(src='bower_components/jquery/dist/jquery.js')
