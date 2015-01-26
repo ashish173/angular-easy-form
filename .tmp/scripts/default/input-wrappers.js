@@ -32,7 +32,7 @@
     $easyInputProvider.registerWrapper('no-label', {
       templateUrl: 'easy-form/templates/input-wrappers/no-label.html'
     });
-    $easyInputProvider.registerWrapper('no-label', {
+    $easyInputProvider.registerWrapper('none', {
       templateUrl: 'easy-form/templates/input-wrappers/none.html'
     });
     return $easyInputProvider.setDefaultWrapper('vertical-form');
