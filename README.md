@@ -10,6 +10,12 @@
 
 - [ ] move out depends third-party's input to separately project
 - [ ] improve translate method
+- [ ] better to translate placehold (not use filter)
 - [ ] add a controller layer for input 
 - [ ] move validation to a validation service layer 
+- [ ] documentation 
 - [ ] etc ... 
+
+# Hints
+ 1. form element do not support radios
+ 2. ng-form do not support `<button type='submit'>`

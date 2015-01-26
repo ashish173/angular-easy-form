@@ -66,7 +66,7 @@ angular.module 'easy.form.default'
   # ----------------------------------------
   # blank
   # ----------------------------------------
-  $easyInputProvider.registerWrapper 'no-label',
+  $easyInputProvider.registerWrapper 'none',
     templateUrl: 'easy-form/templates/input-wrappers/none.html'
 
   # ----------------------------------------
