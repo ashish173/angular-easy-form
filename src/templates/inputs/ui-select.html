@@ -3,7 +3,7 @@
            ng-disabled="ngDisabled"
            search-enabled="{{options.uiSelect.searchEnabled != false}}"
            ng-if="!options.uiSelect.multiple && !options.uiSelect.bindProperty">
-    <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
+    <ui-select-match placeholder="{{placeholder | translate}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
     <ui-select-choices repeat="item in options.uiSelect.collection | filter: $select.search"
                        refresh="options.uiSelect.refresh($select.search)"
                        refresh-delay="0">
@@ -17,7 +17,7 @@
            search-enabled="{{options.uiSelect.searchEnabled != false}}"
            ng-if="options.uiSelect.multiple && !options.uiSelect.bindProperty"
            multiple>
-    <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($item)}}</ui-select-match>
+    <ui-select-match placeholder="{{placeholder | translate}}">{{options.uiSelect.formatResult($item)}}</ui-select-match>
     <ui-select-choices repeat="item in options.uiSelect.collection | filter:$search.search"
                        refresh="options.uiSelect.refresh($select.search)"
                        refresh-delay="0">
@@ -30,7 +30,7 @@
            ng-disabled="ngDisabled"
            search-enabled="{{options.uiSelect.searchEnabled != false}}"
            ng-if="!options.uiSelect.multiple && options.uiSelect.bindProperty">
-    <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
+    <ui-select-match placeholder="{{placeholder | translate}}">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>
     <ui-select-choices repeat="item[options.uiSelect.bindProperty] as item in options.uiSelect.collection | filter: $select.search"
                        refresh="options.uiSelect.refresh($select.search)"
                        refresh-delay="0">
@@ -44,7 +44,7 @@
            search-enabled="{{options.uiSelect.searchEnabled != false}}"
            ng-if="options.uiSelect.multiple && options.uiSelect.bindProperty"
            multiple>
-    <ui-select-match placeholder="{{placeholder}}">{{options.uiSelect.formatResult($item)}}</ui-select-match>
+    <ui-select-match placeholder="{{placeholder | translate}}">{{options.uiSelect.formatResult($item)}}</ui-select-match>
     <ui-select-choices repeat="item[options.uiSelect.bindProperty] in options.uiSelect.collection | filter: $search.search"
                        refresh="options.uiSelect.refresh($select.search)"
                        refresh-delay="0">

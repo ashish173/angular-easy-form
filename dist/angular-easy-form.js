@@ -1468,7 +1468,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "           ng-disabled=\"ngDisabled\"\n" +
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"!options.uiSelect.multiple && !options.uiSelect.bindProperty\">\n" +
-    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
+    "    <ui-select-match placeholder=\"{{placeholder | translate}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
     "    <ui-select-choices repeat=\"item in options.uiSelect.collection | filter: $select.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
@@ -1482,7 +1482,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"options.uiSelect.multiple && !options.uiSelect.bindProperty\"\n" +
     "           multiple>\n" +
-    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($item)}}</ui-select-match>\n" +
+    "    <ui-select-match placeholder=\"{{placeholder | translate}}\">{{options.uiSelect.formatResult($item)}}</ui-select-match>\n" +
     "    <ui-select-choices repeat=\"item in options.uiSelect.collection | filter:$search.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
@@ -1495,7 +1495,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "           ng-disabled=\"ngDisabled\"\n" +
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"!options.uiSelect.multiple && options.uiSelect.bindProperty\">\n" +
-    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
+    "    <ui-select-match placeholder=\"{{placeholder | translate}}\">{{options.uiSelect.formatResult($select.selected)}}</ui-select-match>\n" +
     "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] as item in options.uiSelect.collection | filter: $select.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
@@ -1509,7 +1509,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "           search-enabled=\"{{options.uiSelect.searchEnabled != false}}\"\n" +
     "           ng-if=\"options.uiSelect.multiple && options.uiSelect.bindProperty\"\n" +
     "           multiple>\n" +
-    "    <ui-select-match placeholder=\"{{placeholder}}\">{{options.uiSelect.formatResult($item)}}</ui-select-match>\n" +
+    "    <ui-select-match placeholder=\"{{placeholder | translate}}\">{{options.uiSelect.formatResult($item)}}</ui-select-match>\n" +
     "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] in options.uiSelect.collection | filter: $search.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
