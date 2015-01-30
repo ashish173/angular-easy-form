@@ -252,6 +252,12 @@
                     <easy-input type="radios" name="radios2" ng-model="demo.validation.basic.radios2" label="Radios" validator="required" ng-disabled="disabled" options="radiosOptions"></easy-input>
                   </div>
                   <div class="form-group">
+                    <easy-input type="ui-select" name="uiSelectSingleBasic" ng-model="demo.validation.basic.uiSelect.basic" label="single ui-select" validator="required" options="uiSelectOptions" ng-disabled="disabled"></easy-input>
+                  </div>
+                  <div class="form-group">
+                    <easy-input type="ui-select" name="uiSelectSingleProperty" ng-model="demo.validation.basic.uiSelect.singleProperty" label="single property ui-select" validator="required" options="uiSelectSinglePropertyOptions" ng-disabled="disabled"></easy-input>
+                  </div>
+                  <div class="form-group">
                     <button easy-submit="validateMethodBasicForm" class="btn btn-primary">Submit</button>
                   </div>
                 </ng-form>
@@ -399,13 +405,19 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/checklist-model/checklist-model.js"></script>
   <script src="bower_components/angular-ui-select/dist/select.js"></script>
-  <script src="bower_components/textAngular/dist/textAngular.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/rangy/rangy-core.min.js"></script>
+  <script src="bower_components/rangy/rangy-cssclassapplier.min.js"></script>
+  <script src="bower_components/rangy/rangy-selectionsaverestore.min.js"></script>
+  <script src="bower_components/rangy/rangy-serializer.min.js"></script>
+  <script src="bower_components/textAngular/src/textAngular.js"></script>
+  <script src="bower_components/textAngular/src/textAngular-sanitize.js"></script>
+  <script src="bower_components/textAngular/src/textAngularSetup.js"></script>
+  <script src="bower_components/rangy-official/rangy-selectionsaverestore.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="bower_components/angular-elastic/elastic.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
-  <script src="bower_components/angular-touch/angular-touch.js"></script>
-  <script src="bower_components/venturocket-angular-slider/build/angular-slider.js"></script>
   <!-- endbower-->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/jquery-ui/jquery-ui.js"></script>
