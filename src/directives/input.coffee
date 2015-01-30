@@ -112,10 +112,6 @@ angular.module('easy.form.directives')
       expression = customValidationRules[validator].expression
       invalidMessage = customValidationRules[validator].messages.invalid
 
-    if _isTranslateEnable
-      $translate(invalidMessage).then (translate) ->
-        invalidMessage = translate
-    $log.debug "validator: #{validator} not found" unless expression?
     valid =
       success: ->
         _validFunc scope, element, validMessage, validator, scope.validCallback, ctrl

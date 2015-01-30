@@ -125,14 +125,6 @@
         expression = customValidationRules[validator].expression;
         invalidMessage = customValidationRules[validator].messages.invalid;
       }
-      if (_isTranslateEnable) {
-        $translate(invalidMessage).then(function(translate) {
-          return invalidMessage = translate;
-        });
-      }
-      if (expression == null) {
-        $log.debug("validator: " + validator + " not found");
-      }
       valid = {
         success: function() {
           _validFunc(scope, element, validMessage, validator, scope.validCallback, ctrl);

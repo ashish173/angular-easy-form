@@ -1,4 +1,4 @@
 <easy-input-field ng-class="::controlClassArr"></easy-input-field>
 <span class="help-block" translate="{{hint}}" ng-show="hint && !invalidMessage"></span>
-<span class="help-block" translate="{{invalidMessage}}" ng-hide="hint && !invalidMessage"></span>
+<span class="help-block" translate ng-hide="hint && !invalidMessage">{{invalidMessage}}</span>
 
