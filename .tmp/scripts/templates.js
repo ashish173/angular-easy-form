@@ -53,7 +53,7 @@ angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(
     "<label ng-class=\"::labelClassArr\" translate=\"{{label}}\"></label>\n" +
     "<easy-input-field ng-class=\"::controlClassArr\"></easy-input-field>\n" +
     "<span class=\"help-block\" translate=\"{{hint}}\" ng-show=\"hint && !invalidMessage\"></span>\n" +
-    "<span class=\"help-block\" translate ng-hide=\"hint && !invalidMessage\">{{invalidMessage}}</span>\n" +
+    "<span class=\"help-block\" translate=\"{{invalidMessage}}\" ng-show=\"invalidMessage\"></span>\n" +
     "\n" +
     "\n" +
     "");
