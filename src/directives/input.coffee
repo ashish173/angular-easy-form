@@ -80,7 +80,7 @@ angular.module('easy.form.directives')
   @type {boolean}
   private variable
   ###
-  _isFocusElement = false
+  _isFocusElement = true
 
 
   ###*
@@ -374,11 +374,13 @@ angular.module('easy.form.directives')
           ###*
           Click submit form, check the validity when submit
           ###
-          scope.$on ctrl.$name + "-submit-" + uid, ->
+          scope.$on ctrl.$name + "-submit-" + uid, (event, index)->
             scope.$pristine = false
             scope.$dirty = true
-            _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
+            isValid = false
+
+            isValid = _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
         if scope.validTriggerEvent?
           ###*

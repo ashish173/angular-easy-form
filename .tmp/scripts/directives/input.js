@@ -91,7 +91,7 @@
     @type {boolean}
     private variable
      */
-    _isFocusElement = false;
+    _isFocusElement = true;
 
     /**
     If translate module exsited, and inject a $translate object
@@ -417,10 +417,12 @@
             /**
             Click submit form, check the validity when submit
              */
-            scope.$on(ctrl.$name + "-submit-" + uid, function() {
+            scope.$on(ctrl.$name + "-submit-" + uid, function(event, index) {
+              var isValid;
               scope.$pristine = false;
               scope.$dirty = true;
-              return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
+              isValid = false;
+              return isValid = _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
             });
           }
           if (scope.validTriggerEvent != null) {

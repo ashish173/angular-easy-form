@@ -432,9 +432,16 @@
         return deferred.promise;
       };
       $timeout(function() {
+        var firstInvalidElement, firstInvalidElementInput;
         if (_this.checkValid(form)) {
           deferred.resolve("success");
         } else {
+          firstInvalidElement = $(".has-error");
+          if (firstInvalidElement != null) {
+            window.scrollTo(0, firstInvalidElement.offset().top - 100);
+          }
+          firstInvalidElementInput = firstInvalidElement.find('input[type=text], textarea, select').filter(':visible:first');
+          firstInvalidElementInput.focus();
           deferred.reject("error");
         }
       });
@@ -640,7 +647,7 @@
     @type {boolean}
     private variable
      */
-    _isFocusElement = false;
+    _isFocusElement = true;
 
     /**
     If translate module exsited, and inject a $translate object
@@ -966,10 +973,12 @@
             /**
             Click submit form, check the validity when submit
              */
-            scope.$on(ctrl.$name + "-submit-" + uid, function() {
+            scope.$on(ctrl.$name + "-submit-" + uid, function(event, index) {
+              var isValid;
               scope.$pristine = false;
               scope.$dirty = true;
-              return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
+              isValid = false;
+              return isValid = _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
             });
           }
           if (scope.validTriggerEvent != null) {

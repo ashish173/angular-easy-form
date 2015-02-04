@@ -159,9 +159,16 @@
         return deferred.promise;
       };
       $timeout(function() {
+        var firstInvalidElement, firstInvalidElementInput;
         if (_this.checkValid(form)) {
           deferred.resolve("success");
         } else {
+          firstInvalidElement = $(".has-error");
+          if (firstInvalidElement != null) {
+            window.scrollTo(0, firstInvalidElement.offset().top - 100);
+          }
+          firstInvalidElementInput = firstInvalidElement.find('input[type=text], textarea, select').filter(':visible:first');
+          firstInvalidElementInput.focus();
           deferred.reject("error");
         }
       });
