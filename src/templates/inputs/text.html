@@ -1,3 +1,4 @@
 <input name="inputIn" type="text" class="form-control"
        placeholder="{{placeholder | translate}}"
-       ng-model="model" ng-disabled="ngDisabled"/>
+       ng-model="model" ng-disabled="ngDisabled"
+       ng-model-options="{ updateOn: 'blur' }"/>

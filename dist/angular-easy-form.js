@@ -1318,7 +1318,7 @@ angular.module("easy-form/templates/inputs/datetimepicker.html", []).run(["$temp
 
 angular.module("easy-form/templates/inputs/email.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/email.html",
-    "<input name=\"inputIn\" type=\"email\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\" ng-disabled=\"ngDisabled\"/>\n" +
+    "<input name=\"inputIn\" type=\"email\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\" ng-disabled=\"ngDisabled\" ng-model-options=\"{ updateOn: 'blur' }\"/>\n" +
     "\n" +
     "");
 }]);
@@ -1337,7 +1337,7 @@ angular.module("easy-form/templates/inputs/number.html", []).run(["$templateCach
 
 angular.module("easy-form/templates/inputs/password.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/password.html",
-    "<input name=\"inputIn\" type=\"password\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\"  ng-disabled=\"ngDisabled\"/>\n" +
+    "<input name=\"inputIn\" type=\"password\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\"  ng-disabled=\"ngDisabled\" ng-model-options=\"{ updateOn: 'blur' }\"/>\n" +
     "");
 }]);
 
@@ -1427,33 +1427,34 @@ angular.module("easy-form/templates/inputs/tag.html", []).run(["$templateCache",
 
 angular.module("easy-form/templates/inputs/tel.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/tel.html",
-    "<input name=\"inputIn\" type=\"tel\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\" ng-disabled=\"ngDisabled\"/>\n" +
+    "<input name=\"inputIn\" type=\"tel\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\" ng-disabled=\"ngDisabled\" ng-model-options=\"{ updateOn: 'blur' }\"/>\n" +
     "");
 }]);
 
 angular.module("easy-form/templates/inputs/text-angular.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/text-angular.html",
-    "<div text-angular ng-model=\"model\" ta-disabled=\"ngDisabled\"></div>");
+    "<div text-angular ng-model=\"model\" ta-disabled=\"ngDisabled\" ng-model-options=\"{ updateOn: 'blur' }\"></div>");
 }]);
 
 angular.module("easy-form/templates/inputs/text.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/text.html",
     "<input name=\"inputIn\" type=\"text\" class=\"form-control\"\n" +
     "       placeholder=\"{{placeholder | translate}}\"\n" +
-    "       ng-model=\"model\" ng-disabled=\"ngDisabled\"/>\n" +
+    "       ng-model=\"model\" ng-disabled=\"ngDisabled\"\n" +
+    "       ng-model-options=\"{ updateOn: 'blur' }\"/>\n" +
     "");
 }]);
 
 angular.module("easy-form/templates/inputs/textarea-autosize.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/textarea-autosize.html",
     "<textarea name=\"inputIn\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\"\n" +
-    "          ng-model=\"model\" ng-disabled=\"ngDisabled\" msd-elastic></textarea>");
+    "          ng-model=\"model\" ng-disabled=\"ngDisabled\" msd-elastic ng-model-options=\"{ updateOn: 'blur' }\"></textarea>");
 }]);
 
 angular.module("easy-form/templates/inputs/textarea.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/textarea.html",
     "<textarea name=\"inputIn\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\"\n" +
-    "          ng-model=\"model\" ng-disabled=\"ngDisabled\" maxlength=\"5000\"></textarea>");
+    "          ng-model=\"model\" ng-disabled=\"ngDisabled\" maxlength=\"5000\" ng-model-options=\"{ updateOn: 'blur' }\"></textarea>");
 }]);
 
 angular.module("easy-form/templates/inputs/time.html", []).run(["$templateCache", function($templateCache) {
@@ -1530,7 +1531,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
 
 angular.module("easy-form/templates/inputs/url.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/url.html",
-    "<input name=\"inputIn\" type=\"url\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\" ng-disabled=\"ngDisabled\"/>\n" +
+    "<input name=\"inputIn\" type=\"url\" class=\"form-control\" placeholder=\"{{placeholder | translate}}\" ng-model=\"model\" ng-disabled=\"ngDisabled\" ng-model-options=\"{ updateOn: 'blur' }\"/>\n" +
     "");
 }]);
 
