@@ -325,7 +325,7 @@ angular.module('easy.form.directives')
         ###*
         Use default validMethod if there is no value
         ###
-        validMethod = if scope.validMethod then scope.validMethod.split(/[ ,]+/) else ['watch', 'blur', 'submit']
+        validMethod = if scope.validMethod then scope.validMethod.split(/[ ,]+/) else ['watch', 'submit']
 
         ###*
         Reset the validation for specific form
@@ -360,14 +360,6 @@ angular.module('easy.form.directives')
             dirty, pristine, viewValue control here
             ###
             if !ctrl.$pristine and ctrl.$viewValue and ctrl.$invalid
-              _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
-
-        if 'blur' in validMethod
-          ###*
-          Validate blur method
-          ###
-          inputElement.bind "blur", ->
-            scope.$apply ->
               _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
         if 'submit' in validMethod

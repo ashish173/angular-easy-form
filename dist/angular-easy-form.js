@@ -916,7 +916,7 @@
           /**
           Use default validMethod if there is no value
            */
-          validMethod = scope.validMethod ? scope.validMethod.split(/[ ,]+/) : ['watch', 'blur', 'submit'];
+          validMethod = scope.validMethod ? scope.validMethod.split(/[ ,]+/) : ['watch', 'submit'];
 
           /**
           Reset the validation for specific form
@@ -955,17 +955,6 @@
               if (!ctrl.$pristine && ctrl.$viewValue && ctrl.$invalid) {
                 return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
               }
-            });
-          }
-          if (__indexOf.call(validMethod, 'blur') >= 0) {
-
-            /**
-            Validate blur method
-             */
-            inputElement.bind("blur", function() {
-              return scope.$apply(function() {
-                return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
-              });
             });
           }
           if (__indexOf.call(validMethod, 'submit') >= 0) {
