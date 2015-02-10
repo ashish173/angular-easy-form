@@ -952,7 +952,7 @@
               /**
               dirty, pristine, viewValue control here
                */
-              if (ctrl.$pristine && ctrl.$viewValue && ctrl.$invalid) {
+              if (!ctrl.$pristine && ctrl.$viewValue && ctrl.$invalid) {
                 return _checkValidation(scope, element, attrs, ctrl, validation, customValidationRules);
               }
             });
