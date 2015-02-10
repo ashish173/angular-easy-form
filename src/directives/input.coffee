@@ -359,7 +359,7 @@ angular.module('easy.form.directives')
             ###*
             dirty, pristine, viewValue control here
             ###
-            if ctrl.$pristine and ctrl.$viewValue and ctrl.$invalid
+            if !ctrl.$pristine and ctrl.$viewValue and ctrl.$invalid
               _checkValidation scope, element, attrs, ctrl, validation, customValidationRules
 
         if 'blur' in validMethod

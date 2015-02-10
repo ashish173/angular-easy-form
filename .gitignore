@@ -14,5 +14,5 @@ bower_components
 .sass-cache
 .project
 
-# tmp
-tmp
+# tmp 
+.tmp
