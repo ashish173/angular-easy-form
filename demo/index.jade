@@ -229,8 +229,9 @@ body(ng-controller='DemoCtrl')
                     easy-input(type='text', name='number', ng-model='demo.validation.basic.number',
                     label='Number', placeholder='Number', validator='number', ng-disabled='disabled')
                   .form-group
-                    easy-input(type='checkboxes', name='checkbox', ng-model='demo.validation.basic.checkbox',
+                    easy-input(type='checkboxes', name='checkboxes', ng-model='demo.validation.basic.checkboxes',
                     label='Checkbox', validator='required', ng-disabled='disabled', options='checkboxesOptions')
+                    pre {{demo.validation.basic.checkboxes}}
                   .form-group
                     easy-input(type='radios', name='radios1', ng-model='demo.validation.basic.radios1',
                     label='Radios', validator='required', ng-disabled='disabled', options='radiosOptions')
@@ -238,8 +239,11 @@ body(ng-controller='DemoCtrl')
                     easy-input(type='radios', name='radios2', ng-model='demo.validation.basic.radios2',
                     label='Radios', validator='required', ng-disabled='disabled', options='radiosOptions')
                   .form-group
-                    easy-input(type='ui-select', name='uiSelectSingleBasic', ng-model='demo.validation.basic.uiSelect.basic',
+                    easy-input(type='ui-select', name='uiSelectSingleBasic', ng-model='demo.validation.basic.select.basic',
                     label='single ui-select', validator='required', options='uiSelectOptions', ng-disabled='disabled')
+                  .form-group
+                    easy-input(type='select', name='selectSingleBasic', ng-model='demo.validation.basic.select.basic',
+                    label='single select', validator='required', options='selectSingleNumeberOptions', ng-disabled='disabled')
                   .form-group
                     easy-input(type='ui-select', name='uiSelectSingleProperty', ng-model='demo.validation.basic.uiSelect.singleProperty',
                     label='single property ui-select', validator='required', options='uiSelectSinglePropertyOptions', ng-disabled='disabled')

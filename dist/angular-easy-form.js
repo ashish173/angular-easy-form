@@ -671,6 +671,9 @@
      */
     _checkValidation = function(scope, element, attrs, ctrl, validation, customValidationRules) {
       var errorMessage, expression, invalidMessage, leftValidation, valid, validMessage, validator;
+      if (scope.type === 'checkboxes') {
+        console.log(scope.model);
+      }
       validator = validation[0];
       leftValidation = validation.slice(1);
       invalidMessage = $easyValidation.getInvalidMessage(validator);
@@ -1129,7 +1132,11 @@
   angular.module('easy.form.default').config(['$easyValidationProvider', function($easyValidationProvider) {
     $easyValidationProvider.register('required', {
       expression: function(value) {
-        return !!value;
+        if (angular.isArray(value) || angular.isString(value)) {
+          return value.length > 0;
+        } else {
+          return !(value == null);
+        }
       },
       messages: {
         invalid: "This should be required.",

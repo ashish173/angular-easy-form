@@ -75,6 +75,9 @@ app.controller 'DemoCtrl', ($scope, $http, $translate) ->
         {key: 'key2', text: 'option 2'}
         {key: 'key3', text: 'option 3'}
       ]
+  $scope.selectSingleNumeberOptions =
+    select:
+      collection: [ 0, 1, 2]
 
   $scope.selectMultipleOptions =
     select:
@@ -168,7 +171,9 @@ app.controller 'DemoCtrl', ($scope, $http, $translate) ->
             name: "Sudan",
             code: "SD"
           }
-    validation: {}
+    validation:
+      basic:
+        checkboxes:[]
 
 
 
@@ -182,7 +187,7 @@ app.controller 'DemoCtrl', ($scope, $http, $translate) ->
     alert 'submitting'
 
   $scope.trigValidation = ->
-    $scope.$broadcast 'trigge-validate'
+    $scope.$broadcast 'trigger-validate'
 
   $scope.validCallback = ->
     alert('valid')

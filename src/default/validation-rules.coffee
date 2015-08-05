@@ -7,7 +7,10 @@ angular.module 'easy.form.default'
   # ----------------------------------------
   $easyValidationProvider.register 'required',
     expression: (value) ->
-      !!value
+      if angular.isArray(value) or angular.isString(value)
+        value.length > 0
+      else
+        !!value?
     messages:
       invalid: "This should be required."
       valid: "It's Required"

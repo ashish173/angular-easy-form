@@ -102,6 +102,7 @@ angular.module('easy.form.directives')
   @returns {}
   ###
   _checkValidation = (scope, element, attrs, ctrl, validation, customValidationRules) ->
+    console.log scope.model if scope.type is 'checkboxes'
     validator = validation[0]
     leftValidation = validation.slice(1)
     invalidMessage = $easyValidation.getInvalidMessage(validator)
