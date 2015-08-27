@@ -1478,7 +1478,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "    <ui-select-choices repeat=\"item in options.uiSelect.collection | filter: $select.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
-    "        <div ng-bind-html=\"options.uiSelect.formatSelection(item) | highlight: $select.search\"></div>\n" +
+    "        <div translate=\"{{options.uiSelect.formatSelection(item)}}\"></div>\n" +
     "    </ui-select-choices>\n" +
     "</ui-select>\n" +
     "\n" +
@@ -1492,7 +1492,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "    <ui-select-choices repeat=\"item in options.uiSelect.collection | filter:$search.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
-    "        <div ng-bind-html=\"options.uiSelect.formatSelection(item)\"></div>\n" +
+    "        <div translate=\"{{options.uiSelect.formatSelection(item)}}\"></div>\n" +
     "    </ui-select-choices>\n" +
     "</ui-select>\n" +
     "\n" +
@@ -1505,7 +1505,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] as item in options.uiSelect.collection | filter: $select.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
-    "        <div ng-bind-html=\"options.uiSelect.formatSelection(item) | highlight: $select.search\"></div>\n" +
+    "        <div translate=\"{{options.uiSelect.formatSelection(item)}}\"></div>\n" +
     "    </ui-select-choices>\n" +
     "</ui-select>\n" +
     "\n" +
@@ -1519,7 +1519,7 @@ angular.module("easy-form/templates/inputs/ui-select.html", []).run(["$templateC
     "    <ui-select-choices repeat=\"item[options.uiSelect.bindProperty] in options.uiSelect.collection | filter: $search.search\"\n" +
     "                       refresh=\"options.uiSelect.refresh($select.search)\"\n" +
     "                       refresh-delay=\"0\">\n" +
-    "        <div ng-bind-html=\"options.uiSelect.formatSelection(item)\"></div>\n" +
+    "        <div translate=\"{{options.uiSelect.formatSelection(item)}}\"></div>\n" +
     "    </ui-select-choices>\n" +
     "</ui-select>\n" +
     "");
