@@ -787,6 +787,15 @@
         inputTemplate = $easyInput.getInputTemplate(scope.type);
 
         /**
+        Remove the search string when option is selected in the ui-select
+         */
+        scope.optionSelected = function($select) {
+          return setTimeout((function() {
+            $select.search = '';
+          }), 1000);
+        };
+
+        /**
         Watch the model change and trigger matched callback
          */
         scope.$watch('model', function(newVal, oldVal) {
