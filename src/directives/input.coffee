@@ -214,6 +214,18 @@ angular.module('easy.form.directives')
       inputTemplate = $easyInput.getInputTemplate(scope.type)
 
       ###*
+      Remove the search string when option is selected in the ui-select
+      ###
+      scope.optionSelected = ($select) ->
+        # BUG since simply removing the search string deselects the option
+        # so timeout is used to let model values be assigned and then string
+        # is removed.
+        setTimeout (->
+          $select.search = ''
+          return
+        ), 1000
+
+      ###*
       Watch the model change and trigger matched callback
       ###
       scope.$watch 'model', (newVal, oldVal)->
