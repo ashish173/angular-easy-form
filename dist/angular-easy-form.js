@@ -594,6 +594,9 @@
      */
     var $translate, guid, s4, uniqueArray, _checkValidation, _invalidFunc, _isFocusElement, _isTranslateEnable, _setElementTemplate, _validFunc;
     _setElementTemplate = function(element, scope, template) {
+      if (scope.type === 'month-select') {
+        console.log("template ", template);
+      }
       element.html(template);
       return $compile(element.contents())(scope);
     };
@@ -755,6 +758,7 @@
         model: '=ngModel',
         name: '@',
         options: '=',
+        tab: '=tabIndex',
         type: '@',
         wrapper: '@',
         ngDisabled: '=',
@@ -776,11 +780,14 @@
         invalidCallback: '&'
       },
       link: function(scope, element, attrs, ctrl) {
+        var customRule, customValidationRules, initialValidity, input, inputElement, inputFieldElement, inputTemplate, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+        if (scope.type === 'month-select') {
+          console.log("tabIndex is", scope.tab);
+        }
 
         /**
         Initialize scope from options
          */
-        var customRule, customValidationRules, initialValidity, input, inputElement, inputFieldElement, inputTemplate, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
         wrapper = $easyInput.getWrapper(scope.wrapper);
         wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper);
         input = $easyInput.getInput(scope.type);
@@ -1438,15 +1445,14 @@ angular.module("easy-form/templates/inputs/tel.html", []).run(["$templateCache",
 
 angular.module("easy-form/templates/inputs/text-angular.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/text-angular.html",
-    "<div text-angular ng-model=\"model\" ta-disabled=\"ngDisabled\" ng-model-options=\"{ updateOn: 'blur' }\"></div>");
+    "<div text-angular ng-model=\"model\" ta-disabled=\"ngDisabled\"></div>");
 }]);
 
 angular.module("easy-form/templates/inputs/text.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("easy-form/templates/inputs/text.html",
     "<input name=\"inputIn\" type=\"text\" class=\"form-control\"\n" +
     "       placeholder=\"{{placeholder | translate}}\"\n" +
-    "       ng-model=\"model\" ng-disabled=\"ngDisabled\"\n" +
-    "       ng-model-options=\"{ updateOn: 'blur' }\"/>\n" +
+    "       ng-model=\"model\" ng-disabled=\"ngDisabled\"/>\n" +
     "");
 }]);
 
