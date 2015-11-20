@@ -594,9 +594,6 @@
      */
     var $translate, guid, s4, uniqueArray, _checkValidation, _invalidFunc, _isFocusElement, _isTranslateEnable, _setElementTemplate, _validFunc;
     _setElementTemplate = function(element, scope, template) {
-      if (scope.type === 'month-select') {
-        console.log("template ", template);
-      }
       element.html(template);
       return $compile(element.contents())(scope);
     };
@@ -674,9 +671,6 @@
      */
     _checkValidation = function(scope, element, attrs, ctrl, validation, customValidationRules) {
       var errorMessage, expression, invalidMessage, leftValidation, valid, validMessage, validator;
-      if (scope.type === 'checkboxes') {
-        console.log(scope.model);
-      }
       validator = validation[0];
       leftValidation = validation.slice(1);
       invalidMessage = $easyValidation.getInvalidMessage(validator);
@@ -758,7 +752,6 @@
         model: '=ngModel',
         name: '@',
         options: '=',
-        tab: '=tabIndex',
         type: '@',
         wrapper: '@',
         ngDisabled: '=',
@@ -780,14 +773,11 @@
         invalidCallback: '&'
       },
       link: function(scope, element, attrs, ctrl) {
-        var customRule, customValidationRules, initialValidity, input, inputElement, inputFieldElement, inputTemplate, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
-        if (scope.type === 'month-select') {
-          console.log("tabIndex is", scope.tab);
-        }
 
         /**
         Initialize scope from options
          */
+        var customRule, customValidationRules, initialValidity, input, inputElement, inputFieldElement, inputTemplate, uid, v, validMethod, validation, watch, wrapper, wrapperTemplate, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
         wrapper = $easyInput.getWrapper(scope.wrapper);
         wrapperTemplate = $easyInput.getWrapperTemplate(scope.wrapper);
         input = $easyInput.getInput(scope.type);
