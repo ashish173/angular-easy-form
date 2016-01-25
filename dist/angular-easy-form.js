@@ -767,6 +767,7 @@
         originInvalidClass: '@',
         validMethod: '@',
         customValidator: '@',
+        customValidatorMessage: '@',
         validTriggerEvent: '@',
         initialValidity: '@',
         validCallback: '&',
@@ -1198,7 +1199,7 @@ angular.module("easy-form/templates/input-wrappers/horizontal-form.html", []).ru
     "<div class='form-control-wrapper' ng-class=\"::controlClassArr\">\n" +
     "    <easy-input-field></easy-input-field>\n" +
     "    <span class=\"help-block\" translate=\"{{hint}}\" ng-show=\"hint && !invalidMessage\"></span>\n" +
-    "    <span class=\"help-block\" translate ng-hide=\"hint && !invalidMessage\">{{invalidMessage}}</span>\n" +
+    "    <span class=\"help-block\" translate=\"{{customValidatorMessage}}\" ng-hide=\"hint && !invalidMessage\"></span>\n" +
     "</div>\n" +
     "");
 }]);
@@ -1215,7 +1216,7 @@ angular.module("easy-form/templates/input-wrappers/no-label.html", []).run(["$te
   $templateCache.put("easy-form/templates/input-wrappers/no-label.html",
     "<easy-input-field ng-class=\"::controlClassArr\"></easy-input-field>\n" +
     "<span class=\"help-block\" translate=\"{{hint}}\" ng-show=\"hint && !invalidMessage\"></span>\n" +
-    "<span class=\"help-block\" translate ng-hide=\"hint && !invalidMessage\">{{invalidMessage}}</span>\n" +
+    "<span class=\"help-block\" translate=\"{{customValidatorMessage}}\" ng-hide=\"hint && !invalidMessage\">{{invalidMessage}}</span>\n" +
     "\n" +
     "");
 }]);
@@ -1232,7 +1233,7 @@ angular.module("easy-form/templates/input-wrappers/vertical-form.html", []).run(
     "<label ng-class=\"::labelClassArr\" translate=\"{{label}}\"></label>\n" +
     "<easy-input-field ng-class=\"::controlClassArr\"></easy-input-field>\n" +
     "<span class=\"help-block\" translate=\"{{hint}}\" ng-show=\"hint && !invalidMessage\"></span>\n" +
-    "<span class=\"help-block\" translate ng-show=\"invalidMessage\">{{invalidMessage}}</span>\n" +
+    "<span class=\"help-block\" translate=\"{{customValidatorMessage}}\" ng-show=\"invalidMessage\"></span>\n" +
     "\n" +
     "\n" +
     "");

@@ -1,6 +1,6 @@
 <label ng-class="::labelClassArr" translate="{{label}}"></label>
 <easy-input-field ng-class="::controlClassArr"></easy-input-field>
 <span class="help-block" translate="{{hint}}" ng-show="hint && !invalidMessage"></span>
-<span class="help-block" translate ng-show="invalidMessage">{{invalidMessage}}</span>
+<span class="help-block" translate="{{customValidatorMessage}}" ng-show="invalidMessage"></span>
 
 

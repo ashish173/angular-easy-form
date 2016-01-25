@@ -187,6 +187,7 @@ angular.module('easy.form.directives')
       originInvalidClass: '@'
       validMethod: '@'
       customValidator: '@'
+      customValidatorMessage: '@'
       validTriggerEvent: '@'
       initialValidity: '@'
       validCallback: '&'
